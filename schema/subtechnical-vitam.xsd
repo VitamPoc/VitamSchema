@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns="fr.gouv.vitam.technique" targetNamespace="fr.gouv.vitam.technique" 
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+    <xsd:annotation>
+        <xsd:documentation>This version is empty by intention. A version in study is in techdesc directory.</xsd:documentation>
+    </xsd:annotation>
+
+    
+    <!-- Metadata types -->
+    <xsd:complexType name="CoreMetadataType">
+        <xsd:choice>
+            <xsd:element name="Text" type="GenericDescriptiveTechnicalMetadataType"/>
+            <xsd:element name="Document" type="GenericDescriptiveTechnicalMetadataType"/>
+            <xsd:element name="Image" type="GenericDescriptiveTechnicalMetadataType"/>
+            <xsd:element name="Audio" type="GenericDescriptiveTechnicalMetadataType"/>
+            <xsd:element name="Video" type="GenericDescriptiveTechnicalMetadataType"/>
+            <xsd:element name="Undefined"/>
+            <!-- could be extended: database, 3D, program, proprietary formats -->
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="DescriptiveTechnicalMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Contains all descriptive technical metadata in a schema defined by the producer or the transferring agency</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="technicalDescription" type="GenericDescriptiveTechnicalMetadataType"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GenericDescriptiveTechnicalMetadataType">
+        <xsd:sequence>
+            <xsd:element name="Scheme" type="xsd:anyURI"/>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="DimensionsType">
+        <xsd:annotation>
+            <xsd:documentation>Express the basic dimension measures</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BaseDimensionsType">
+                <xsd:sequence>
+                    <xsd:element name="Width" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Height" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Depth" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Shape" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Diameter" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Length" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Thickness" type="MeasurementType" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="Weight" type="MeasurementWeightType" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BaseDimensionsType" abstract="true"/>
+    <xsd:complexType name="MeasurementType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+                <xsd:attribute name="unit" type="MeasurementUnitsType" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="MeasurementUnitsType">
+        <xsd:annotation><xsd:documentation>See UNECE_MeasurementUnitCommonCode_8.xsd</xsd:documentation></xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="micrometre"/>
+            <xsd:enumeration value="4H"/>
+            <xsd:enumeration value="millimetre"/>
+            <xsd:enumeration value="MMT"/>
+            <xsd:enumeration value="centimetre"/>
+            <xsd:enumeration value="CMT"/>
+            <xsd:enumeration value="metre"/>
+            <xsd:enumeration value="inch"/>
+            <xsd:enumeration value="INH"/>
+            <xsd:enumeration value="foot"/>
+            <xsd:enumeration value="FOT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="MeasurementWeightType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+                <xsd:attribute name="unit" type="MeasurementWeightUnitsType" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="MeasurementWeightUnitsType">
+        <xsd:annotation><xsd:documentation>See UNECE_MeasurementUnitCommonCode_8.xsd</xsd:documentation></xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="microgram"/>
+            <xsd:enumeration value="MC"/>
+            <xsd:enumeration value="milligram"/>
+            <xsd:enumeration value="MGM"/>
+            <xsd:enumeration value="gram"/>
+            <xsd:enumeration value="GRM"/>
+            <xsd:enumeration value="kilogram"/>
+            <xsd:enumeration value="KGM"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

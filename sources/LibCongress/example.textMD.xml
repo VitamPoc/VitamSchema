@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<textMD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="info:lc/xmlns/textMD-v3" xsi:schemaLocation="info:lc/xmlns/textMD-v3 http://www.loc.gov/standards/textMD/textMD-v3.01a.xsd">
+    <encoding QUALITY="good">
+        <encoding_platform linebreak="LF">Apple iMac, 2.33 GHz Intel Core 2 Duo, 2 GB 667 MHz DDR2 SDRAM, Mac OS X Version 10.4.11, Phase One P45 digital back, Contax 645 camera.</encoding_platform>
+        <encoding_software version="0.1.1">OCRopus</encoding_software>
+        <encoding_software version="8.2">oXygen XML Editor text editor</encoding_software>
+        <encoding_agent role="MARKUP">John Q. Doe</encoding_agent>
+    </encoding>
+    <character_info>
+        <charset>UTF-8</charset>
+        <byte_order>little</byte_order>
+        <byte_size>8</byte_size>
+        <character_size encoding="UTF-8">variable</character_size>
+        <linebreak>LF</linebreak>
+    </character_info>
+    <language>alb/sqi</language>
+    <alt_language authority="ethnologue">als</alt_language>
+    <font_script>Monaco</font_script>
+    <markup_basis version="1.0">XML</markup_basis>
+    <markup_language version="P5">
+        <!-- TEI P5 all modules -->
+        http://memory.loc.gov/natlib/cred/tei_p5/tei_allPlus.xsd</markup_language>
+    <processingNote>general note about the processing of the file</processingNote>
+    <printRequirements>special requirements for printing the item</printRequirements>
+    <viewingRequirements>Any special hardware or software requirements for viewing the item</viewingRequirements>
+    <textNote>general note on material</textNote>
+    <!--  /////////////////////////////////////////  -->
+    <!-- Begin newly added elements for textMD v3.01a -->
+    <!--                                             -->
+    <pageOrder>left-to-right</pageOrder>
+    <representationSequence>reading-order</representationSequence>
+    <lineOrientation>horizontal</lineOrientation>
+    <lineLayout>top-to-bottom</lineLayout>
+    <characterFlow>left-to-right</characterFlow>
+    <!--                                             -->
+    <!-- End newly added elements  for textMD v3.01a  -->
+    <!-- /////////////////////////////////////////// -->
+</textMD>

@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+<!-- ===== 67273_TransportServiceRequirementCode - Code List Schema Module ===== -->
+<!-- ====================================================================== -->
+<!--
+Schema agency:      UN/CEFACT
+Schema version:     1.1
+Schema date:        22 August 2013
+
+Code list name:     Transport Service Requirement Code
+Code list agency:   UNECE
+Code list version:  D12B
+
+Copyright (C) UN/CEFACT (2013). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not be modified in any way, such as by removing the copyright notice or references to UN/CEFACT, except as needed for the purpose of developing UN/CEFACT specifications, in which case the procedures for copyrights defined in the UN/CEFACT Intellectual Property Rights document must be followed, or as required to translate it into languages other than English.
+
+The limited permissions granted above are perpetual and will not be revoked by UN/CEFACT or its successors or assigns.
+
+This document and the information contained herein is provided on an "AS IS" basis and UN/CEFACT DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:clm67273TransportServiceRequirementCode="urn:un:unece:uncefact:codelist:standard:UNECE:TransportServiceRequirementCode:D12B" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" targetNamespace="urn:un:unece:uncefact:codelist:standard:UNECE:TransportServiceRequirementCode:D12B" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+<!-- ======================================================================= -->
+<!-- ===== Element Declarations                                        ===== -->
+<!-- ======================================================================= -->
+<!-- ===== Root Element                                                ===== -->
+<!-- ======================================================================= -->
+  <xsd:element name="TransportServiceRequirementCode" type="clm67273TransportServiceRequirementCode:TransportServiceRequirementCodeContentType"/>
+<!-- ================================================================== -->
+<!-- ===== Type Definitions                                       ===== -->
+<!-- ================================================================== -->
+<!-- ===== Type Definition: TransportServiceRequirementCodeContentType ===== -->
+<!-- ================================================================== -->
+  <xsd:simpleType name="TransportServiceRequirementCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="1">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Carrier loads</ccts:Name>
+            <ccts:Description>The cargo is loaded in the equipment by the carrier.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Full loads</ccts:Name>
+            <ccts:Description>Container to be stuffed or stripped under responsibility and for account of the shipper or the consignee.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Less than full loads</ccts:Name>
+            <ccts:Description>Container to be stuffed and stripped for account and risk of the carrier.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Shipper loads</ccts:Name>
+            <ccts:Description>The cargo is loaded in the equipment by the shipper.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>To be delivered</ccts:Name>
+            <ccts:Description>The cargo is to be delivered as instructed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="6">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>To be kept</ccts:Name>
+            <ccts:Description>The cargo is to be retained awaiting further instructions.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="7">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transhipment allowed</ccts:Name>
+            <ccts:Description>Transhipment of goods is allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transhipment not allowed</ccts:Name>
+            <ccts:Description>Transhipment of goods is not allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="9">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Partial shipment allowed</ccts:Name>
+            <ccts:Description>Partial shipment is allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="10">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Partial shipment not allowed</ccts:Name>
+            <ccts:Description>Partial shipment is not allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="11">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Partial shipment and/or drawing allowed</ccts:Name>
+            <ccts:Description>Partial shipment and/or drawing is allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Partial shipment and/or drawing not allowed</ccts:Name>
+            <ccts:Description>Partial shipment and/or drawing is not allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Carrier unloads</ccts:Name>
+            <ccts:Description>The cargo is to be unloaded from the equipment by the carrier.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Shipper unloads</ccts:Name>
+            <ccts:Description>The cargo is to be unloaded from the equipment by the shipper.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="15">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Consignee unloads</ccts:Name>
+            <ccts:Description>The cargo is to be unloaded from the equipment by the consignee.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Consignee loads</ccts:Name>
+            <ccts:Description>The cargo is to be loaded in the equipment by the consignee.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Exclusive usage of equipment</ccts:Name>
+            <ccts:Description>Usage of the equipment is reserved for exclusive use.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="18">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Non exclusive usage of equipment</ccts:Name>
+            <ccts:Description>Usage of the equipment is not reserved for exclusive use.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="19">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Direct delivery</ccts:Name>
+            <ccts:Description>Consignment for direct delivery to the consignee.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="20">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Direct pick-up</ccts:Name>
+            <ccts:Description>Consignment for direct pick-up from the consignee.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for delivery advice services</ccts:Name>
+            <ccts:Description>The service provider is requested to advise about delivery.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Do not arrange customs clearance</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is not to arrange customs clearance.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Arrange customs clearance</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is to arrange customs clearance.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="24">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Check container condition</ccts:Name>
+            <ccts:Description>Condition of the container is to be checked.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="25">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Damaged containers allowed</ccts:Name>
+            <ccts:Description>Damaged containers are allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="26">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Dirty containers allowed</ccts:Name>
+            <ccts:Description>Dirty containers are allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="27">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Fork lift holes not required</ccts:Name>
+            <ccts:Description>Container needs not to be equipped with pocket holes, but they are allowed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="28">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Fork lift holes required</ccts:Name>
+            <ccts:Description>Container must be equipped with pocket holes.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="29">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Insure goods during transport</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is to insure the goods during transport.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="30">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Arrange main-carriage</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is to arrange the main-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="31">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Arrange on-carriage</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is to arrange the on-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="32">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Arrange pre-carriage</ccts:Name>
+            <ccts:Description>Indication that the recipient of the message is to arrange the pre-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="33">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Report container safety convention information</ccts:Name>
+            <ccts:Description>Indication that the information on the Container Safety Convention plate (CSC-plate) should be reported.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="34">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Check seals</ccts:Name>
+            <ccts:Description>Sealing up of the container is to be checked.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="35">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Container must be clean</ccts:Name>
+            <ccts:Description>Container is to be released or delivered clean.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="36">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for proof of delivery</ccts:Name>
+            <ccts:Description>The service provider is requested to provide proof of delivery.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="37">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for Customs procedure</ccts:Name>
+            <ccts:Description>The service provider is requested to perform Customs procedure.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="38">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for administration services</ccts:Name>
+            <ccts:Description>The service provider is requested to perform administration services.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="39">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport insulated under Intercontainer INTERFRIGO conditions</ccts:Name>
+            <ccts:Description>Insulated transport under Intercontainer INTERFRIGO (joint European railways agreement) conditions.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="40">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport mechanically refrigerated under Intercontainer INTERFRIGO conditions</ccts:Name>
+            <ccts:Description>Mechanically refrigerated transport under Intercontainer INTERFRIGO (joint European railways agreement) conditions.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="41">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Cool or freeze service, not under Intercontainer INTERFRIGO conditions</ccts:Name>
+            <ccts:Description>Cool or freeze service not under Intercontainer INTERFRIGO (joint European railways agreement) conditions.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="42">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transhipment overseas</ccts:Name>
+            <ccts:Description>Transport equipment is to be transferred overseas.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="43">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Station delivery</ccts:Name>
+            <ccts:Description>The specified equipment destination station is also the place of delivery of the goods.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="44">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Non station delivery</ccts:Name>
+            <ccts:Description>The specified equipment destination station is not the place of delivery of the goods.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="45">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Cleaning or disinfecting</ccts:Name>
+            <ccts:Description>The service required is cleaning or disinfection.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="46">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Close ventilation valve</ccts:Name>
+            <ccts:Description>The ventilation valve of the equipment must be closed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="47">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Consignment held for pick-up</ccts:Name>
+            <ccts:Description>The consignment is to be held until it is picked up.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="48">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Refrigeration unit check</ccts:Name>
+            <ccts:Description>Refrigeration unit has to be checked.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="49">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Customs clearance at arrival country by carrier</ccts:Name>
+            <ccts:Description>The carrier is to arrange customs clearance in the arrival country.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="50">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Customs clearance at departure country by carrier</ccts:Name>
+            <ccts:Description>The carrier is to arrange customs clearance in the departure country.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="51">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Heating for live animals</ccts:Name>
+            <ccts:Description>Heating for live animals has to be provided.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="52">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Goods humidification</ccts:Name>
+            <ccts:Description>Humidification of the goods has to be performed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="53">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Ensure load is secure</ccts:Name>
+            <ccts:Description>The load must be checked for correct stowage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="54">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Open ventilation valve</ccts:Name>
+            <ccts:Description>The ventilation valve of the equipment must be opened.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="55">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Phytosanitary control</ccts:Name>
+            <ccts:Description>Phytosanitary control to be performed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="56">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Tare check by carrier</ccts:Name>
+            <ccts:Description>Carrier must check the tare of the equipment and attached items.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="57">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Temperature check</ccts:Name>
+            <ccts:Description>The temperature must be checked.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="58">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Weighing of goods</ccts:Name>
+            <ccts:Description>The goods have to be weighed.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="59">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Escort</ccts:Name>
+            <ccts:Description>An escort is required.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="60">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>No escort</ccts:Name>
+            <ccts:Description>An escort is not required.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="61">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for berthing services</ccts:Name>
+            <ccts:Description>Request for berthing services at a specific berth in the port area.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="62">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for planned berth consideration</ccts:Name>
+            <ccts:Description>Request to take into account the planned next berth(s) in the port area.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="63">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for inbound passing services through port area</ccts:Name>
+            <ccts:Description>Request for passing services through port area for an inbound voyage (from sea to hinterland) without requesting berth in the port area.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="64">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Request for outbound passing services through port area</ccts:Name>
+            <ccts:Description>Request for passing services through port area for an outbound voyage (from hinterland to sea) without requesting berth in the port area.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

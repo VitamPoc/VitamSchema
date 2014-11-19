@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with oXygen 8.2 (http://www.oxygenxml.com) by Clay Redding, Library of Congress Network Development and MARC Standards Office, cred@loc.gov -->
+<!-- textMD Schema Version 3.01 alpha -->
+<!-- Clay Redding, Library of Congress -->
+<!-- Modifications: August 7, 2009 1) Made all elements optional via minOccurs="0" so as to let best practices guide implementation. 2) Decoupled enumerated 
+    values on languages that represented cases where ISO639-2 has two codes (bibliographic and terminology). Kept original code (e.g., alb/sqi), but also added 
+    alb and sqi for each case. 3) Added the following values used by Java class java.nio.charset.Charset onto <charset>: EUC-JP x-JIS0208 windows-31j ISO-8859-9 
+    ISO-8859-7 ISO-8859-8 ISO-8859-5 ISO-8859-6 ISO-8859-3 ISO-8859-4 ISO-8859-1 ISO-8859-2 ISO-2022-JP US-ASCII -->
+<!-- Minimal version for VITAM 14/02/2014 Frederic Bregier -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="3.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified"
+    xmlns:charset="urn:un:unece:uncefact:codelist:standard:IANA:CharacterSetCode:2013-01-08">
+    <xsd:annotation>
+        <xsd:documentation>xmlns="info:lc/xmlns/textMD-v3" targetNamespace="info:lc/xmlns/textMD-v3"
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:include schemaLocation="vitam-techtypes.xsd"/>
+    <xsd:import schemaLocation="http://www.unece.org/uncefact/codelist/standard/IANA_CharacterSetCode_2013-01-08.xsd" namespace="urn:un:unece:uncefact:codelist:standard:IANA:CharacterSetCode:2013-01-08"/>
+    <xsd:complexType name="TextMD">
+        <xsd:sequence>
+            <xsd:element name="Charset" type="charset:CharacterSetCodeContentType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The character set employed by the text. Controlled vocab
+                        using IANA names for character sets. See
+                        http://www.iana.org/assignments/character-sets for details.
+                        http://www.iana.org/assignments/character-sets/character-sets.xml
+                        
+                        One should find a way to make it cleaner: based directly on IANA file for instance.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <!--
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="ANSI_X3.4-1968"/>
+                        <xsd:enumeration value="ISO-10646-UTF-1"/>
+                        <xsd:enumeration value="ISO_646.basic:1983"/>
+                        <xsd:enumeration value="INVARIANT"/>
+                        <xsd:enumeration value="ISO_646.irv:1983"/>
+                        <xsd:enumeration value="BS_4730"/>
+                        <xsd:enumeration value="NATS-SEFI"/>
+                        <xsd:enumeration value="NATS-SEFI-ADD"/>
+                        <xsd:enumeration value="NATS-DANO"/>
+                        <xsd:enumeration value="NATS-DANO-ADD"/>
+                        <xsd:enumeration value="SEN_850200_B"/>
+                        <xsd:enumeration value="SEN_850200_C"/>
+                        <xsd:enumeration value="KS_C_5601-1987"/>
+                        <xsd:enumeration value="ISO-2022-KR"/>
+                        <xsd:enumeration value="EUC-KR"/>
+                        <xsd:enumeration value="ISO-2022-JP"/>
+                        <xsd:enumeration value="ISO-2022-JP-2"/>
+                        <xsd:enumeration value="ISO-2022-CN"/>
+                        <xsd:enumeration value="ISO-2022-CN-EXT"/>
+                        <xsd:enumeration value="JIS_C6220-1969-jp"/>
+                        <xsd:enumeration value="JIS_C6220-1969-ro"/>
+                        <xsd:enumeration value="IT"/>
+                        <xsd:enumeration value="PT"/>
+                        <xsd:enumeration value="ES"/>
+                        <xsd:enumeration value="greek7-old"/>
+                        <xsd:enumeration value="latin-greek"/>
+                        <xsd:enumeration value="DIN_66003"/>
+                        <xsd:enumeration value="NF_Z_62-010_(1973)"/>
+                        <xsd:enumeration value="latin-greek-1"/>
+                        <xsd:enumeration value="ISO_5427"/>
+                        <xsd:enumeration value="JIS_C6226-1978"/>
+                        <xsd:enumeration value="BS_viewdata"/>
+                        <xsd:enumeration value="INIS"/>
+                        <xsd:enumeration value="INIS-8"/>
+                        <xsd:enumeration value="INIS-cyrillic"/>
+                        <xsd:enumeration value="ISO_5427:1981"/>
+                        <xsd:enumeration value="ISO_5428:1980"/>
+                        <xsd:enumeration value="GB_1988-80"/>
+                        <xsd:enumeration value="GB_2312-80"/>
+                        <xsd:enumeration value="NS_4551-1"/>
+                        <xsd:enumeration value="NS_4551-2"/>
+                        <xsd:enumeration value="NF_Z_62-010"/>
+                        <xsd:enumeration value="videotex-suppl"/>
+                        <xsd:enumeration value="PT2"/>
+                        <xsd:enumeration value="ES2"/>
+                        <xsd:enumeration value="MSZ_7795.3"/>
+                        <xsd:enumeration value="JIS_C6226-1983"/>
+                        <xsd:enumeration value="greek7"/>
+                        <xsd:enumeration value="ASMO_449"/>
+                        <xsd:enumeration value="iso-ir-90"/>
+                        <xsd:enumeration value="JIS_C6229-1984-a"/>
+                        <xsd:enumeration value="JIS_C6229-1984-b"/>
+                        <xsd:enumeration value="JIS_C6229-1984-b-add"/>
+                        <xsd:enumeration value="JIS_C6229-1984-hand"/>
+                        <xsd:enumeration value="JIS_C6229-1984-hand-add"/>
+                        <xsd:enumeration value="JIS_C6229-1984-kana"/>
+                        <xsd:enumeration value="ISO_2033-1983"/>
+                        <xsd:enumeration value="ANSI_X3.110-1983"/>
+                        <xsd:enumeration value="ISO_8859-1:1987"/>
+                        <xsd:enumeration value="ISO_8859-2:1987"/>
+                        <xsd:enumeration value="ISO_8859-3:1988"/>
+                        <xsd:enumeration value="ISO_8859-4:1988"/>
+                        <xsd:enumeration value="T.61-7bit"/>
+                        <xsd:enumeration value="ECMA-cyrillic"/>
+                        <xsd:enumeration value="CSA_Z243.4-1985-1"/>
+                        <xsd:enumeration value="CSA_Z243.4-1985-2"/>
+                        <xsd:enumeration value="CSA_Z243.4-1985-gr"/>
+                        <xsd:enumeration value="ISO_8859-6:1987"/>
+                        <xsd:enumeration value="ISO_8859-6-E"/>
+                        <xsd:enumeration value="ISO_8859-6-I"/>
+                        <xsd:enumeration value="ISO_8859-7:1987"/>
+                        <xsd:enumeration value="T.101-G2"/>
+                        <xsd:enumeration value="ISO_8859-8:1988"/>
+                        <xsd:enumeration value="ISO_8859-8-E"/>
+                        <xsd:enumeration value="ISO_8859-8-I"/>
+                        <xsd:enumeration value="CSN_369103"/>
+                        <xsd:enumeration value="JUS_I.B1.002"/>
+                        <xsd:enumeration value="ISO_6937-2-add"/>
+                        <xsd:enumeration value="IEC_P27-1"/>
+                        <xsd:enumeration value="ISO_8859-5:1988"/>
+                        <xsd:enumeration value="JUS_I.B1.003-serb"/>
+                        <xsd:enumeration value="JUS_I.B1.003-mac"/>
+                        <xsd:enumeration value="ISO_8859-9:1989"/>
+                        <xsd:enumeration value="greek-ccitt"/>
+                        <xsd:enumeration value="NC_NC00-10:81"/>
+                        <xsd:enumeration value="ISO_6937-2-25"/>
+                        <xsd:enumeration value="GOST_19768-74"/>
+                        <xsd:enumeration value="ISO_8859-supp"/>
+                        <xsd:enumeration value="ISO_10367-box"/>
+                        <xsd:enumeration value="ISO-8859-10"/>
+                        <xsd:enumeration value="latin-lap"/>
+                        <xsd:enumeration value="JIS_X0212-1990"/>
+                        <xsd:enumeration value="DS_2089"/>
+                        <xsd:enumeration value="us-dk"/>
+                        <xsd:enumeration value="dk-us"/>
+                        <xsd:enumeration value="JIS_X0201"/>
+                        <xsd:enumeration value="KSC5636"/>
+                        <xsd:enumeration value="ISO-10646-UCS-2"/>
+                        <xsd:enumeration value="ISO-10646-UCS-4"/>
+                        <xsd:enumeration value="DEC-MCS"/>
+                        <xsd:enumeration value="hp-roman8"/>
+                        <xsd:enumeration value="macintosh"/>
+                        <xsd:enumeration value="IBM037"/>
+                        <xsd:enumeration value="IBM038"/>
+                        <xsd:enumeration value="IBM273"/>
+                        <xsd:enumeration value="IBM274"/>
+                        <xsd:enumeration value="IBM275"/>
+                        <xsd:enumeration value="IBM277"/>
+                        <xsd:enumeration value="IBM278"/>
+                        <xsd:enumeration value="IBM280"/>
+                        <xsd:enumeration value="IBM281"/>
+                        <xsd:enumeration value="IBM284"/>
+                        <xsd:enumeration value="IBM285"/>
+                        <xsd:enumeration value="IBM290"/>
+                        <xsd:enumeration value="IBM297"/>
+                        <xsd:enumeration value="IBM420"/>
+                        <xsd:enumeration value="IBM423"/>
+                        <xsd:enumeration value="IBM424"/>
+                        <xsd:enumeration value="IBM437"/>
+                        <xsd:enumeration value="IBM500"/>
+                        <xsd:enumeration value="IBM775"/>
+                        <xsd:enumeration value="IBM850"/>
+                        <xsd:enumeration value="IBM851"/>
+                        <xsd:enumeration value="IBM852"/>
+                        <xsd:enumeration value="IBM855"/>
+                        <xsd:enumeration value="IBM857"/>
+                        <xsd:enumeration value="IBM860"/>
+                        <xsd:enumeration value="IBM861"/>
+                        <xsd:enumeration value="IBM862"/>
+                        <xsd:enumeration value="IBM863"/>
+                        <xsd:enumeration value="IBM864"/>
+                        <xsd:enumeration value="IBM865"/>
+                        <xsd:enumeration value="IBM866"/>
+                        <xsd:enumeration value="IBM869"/>
+                        <xsd:enumeration value="IBM870"/>
+                        <xsd:enumeration value="IBM871"/>
+                        <xsd:enumeration value="IBM880"/>
+                        <xsd:enumeration value="IBM891"/>
+                        <xsd:enumeration value="IBM903"/>
+                        <xsd:enumeration value="IBM904"/>
+                        <xsd:enumeration value="IBM905"/>
+                        <xsd:enumeration value="IBM918"/>
+                        <xsd:enumeration value="IBM1026"/>
+                        <xsd:enumeration value="EBCDIC-AT-DE"/>
+                        <xsd:enumeration value="EBCDIC-AT-DE-A"/>
+                        <xsd:enumeration value="EBCDIC-CA-FR"/>
+                        <xsd:enumeration value="EBCDIC-DK-NO"/>
+                        <xsd:enumeration value="EBCDIC-DK-NO-A"/>
+                        <xsd:enumeration value="EBCDIC-FI-SE"/>
+                        <xsd:enumeration value="EBCDIC-FI-SE-A"/>
+                        <xsd:enumeration value="EBCDIC-FR"/>
+                        <xsd:enumeration value="EBCDIC-IT"/>
+                        <xsd:enumeration value="EBCDIC-PT"/>
+                        <xsd:enumeration value="EBCDIC-ES"/>
+                        <xsd:enumeration value="EBCDIC-ES-A"/>
+                        <xsd:enumeration value="EBCDIC-ES-S"/>
+                        <xsd:enumeration value="EBCDIC-UK"/>
+                        <xsd:enumeration value="EBCDIC-US"/>
+                        <xsd:enumeration value="UNKNOWN-8BIT"/>
+                        <xsd:enumeration value="MNEMONIC"/>
+                        <xsd:enumeration value="MNEM"/>
+                        <xsd:enumeration value="VISCII"/>
+                        <xsd:enumeration value="VIQR"/>
+                        <xsd:enumeration value="KOI8-R"/>
+                        <xsd:enumeration value="KOI8-U"/>
+                        <xsd:enumeration value="IBM00858"/>
+                        <xsd:enumeration value="IBM00924"/>
+                        <xsd:enumeration value="IBM01140"/>
+                        <xsd:enumeration value="IBM01141"/>
+                        <xsd:enumeration value="IBM01142"/>
+                        <xsd:enumeration value="IBM01143"/>
+                        <xsd:enumeration value="IBM01144"/>
+                        <xsd:enumeration value="IBM01145"/>
+                        <xsd:enumeration value="IBM01146"/>
+                        <xsd:enumeration value="IBM01147"/>
+                        <xsd:enumeration value="IBM01148"/>
+                        <xsd:enumeration value="IBM01149"/>
+                        <xsd:enumeration value="Big5-HKSCS"/>
+                        <xsd:enumeration value="UNICODE-1-1"/>
+                        <xsd:enumeration value="SCSU"/>
+                        <xsd:enumeration value="UTF-7"/>
+                        <xsd:enumeration value="UTF-16BE"/>
+                        <xsd:enumeration value="UTF-16LE"/>
+                        <xsd:enumeration value="UTF-16"/>
+                        <xsd:enumeration value="CESU-8"/>
+                        <xsd:enumeration value="UTF-32"/>
+                        <xsd:enumeration value="UTF-32BE"/>
+                        <xsd:enumeration value="UTF-32LE"/>
+                        <xsd:enumeration value="UNICODE-1-1-UTF-7"/>
+                        <xsd:enumeration value="UTF-8"/>
+                        <xsd:enumeration value="ISO-8859-13"/>
+                        <xsd:enumeration value="ISO-8859-14"/>
+                        <xsd:enumeration value="ISO-8859-15"/>
+                        <xsd:enumeration value="ISO-8859-16"/>
+                        <xsd:enumeration value="JIS_Encoding"/>
+                        <xsd:enumeration value="Shift_JIS"/>
+                        <xsd:enumeration value="Extended_UNIX_Code_Packed_Format_for_Japanese"/>
+                        <xsd:enumeration value="Extended_UNIX_Code_Fixed_Width_for_Japanese"/>
+                        <xsd:enumeration value="ISO-10646-UCS-Basic"/>
+                        <xsd:enumeration value="ISO-10646-Unicode-Latin1"/>
+                        <xsd:enumeration value="ISO-10646-J-1"/>
+                        <xsd:enumeration value="ISO-Unicode-IBM-1268"/>
+                        <xsd:enumeration value="ISO-Unicode-IBM-1276"/>
+                        <xsd:enumeration value="ISO-Unicode-IBM-1264"/>
+                        <xsd:enumeration value="ISO-Unicode-IBM-1265"/>
+                        <xsd:enumeration value="ISO-8859-1-Windows-3.0-Latin-1"/>
+                        <xsd:enumeration value="ISO-8859-1-Windows-3.1-Latin-1"/>
+                        <xsd:enumeration value="ISO-8859-2-Windows-Latin-2"/>
+                        <xsd:enumeration value="ISO-8859-9-Windows-Latin-5"/>
+                        <xsd:enumeration value="Adobe-Standard-Encoding"/>
+                        <xsd:enumeration value="Ventura-US"/>
+                        <xsd:enumeration value="Ventura-International"/>
+                        <xsd:enumeration value="PC8-Danish-Norwegian"/>
+                        <xsd:enumeration value="PC8-Turkish"/>
+                        <xsd:enumeration value="IBM-Symbols"/>
+                        <xsd:enumeration value="IBM-Thai"/>
+                        <xsd:enumeration value="HP-Legal"/>
+                        <xsd:enumeration value="HP-Pi-font"/>
+                        <xsd:enumeration value="HP-Math8"/>
+                        <xsd:enumeration value="Adobe-Symbol-Encoding"/>
+                        <xsd:enumeration value="HP-DeskTop"/>
+                        <xsd:enumeration value="Ventura-Math"/>
+                        <xsd:enumeration value="Microsoft-Publishing"/>
+                        <xsd:enumeration value="Windows-31J"/>
+                        <xsd:enumeration value="GB2312"/>
+                        <xsd:enumeration value="Big5"/>
+                        <xsd:enumeration value="windows-1250"/>
+                        <xsd:enumeration value="windows-1251"/>
+                        <xsd:enumeration value="windows-1252"/>
+                        <xsd:enumeration value="windows-1253"/>
+                        <xsd:enumeration value="windows-1254"/>
+                        <xsd:enumeration value="windows-1255"/>
+                        <xsd:enumeration value="windows-1256"/>
+                        <xsd:enumeration value="windows-1257"/>
+                        <xsd:enumeration value="windows-1258"/>
+                        <xsd:enumeration value="TIS-620"/>
+                        <xsd:enumeration value="HZ-GB-2312"/>
+                        -->
+                        <!-- BEGIN CHANGE 2009/08/06 Addition of preferred MIME names -->
+                <!--
+                        <xsd:enumeration value="US-ASCII"/>
+                        <xsd:enumeration value="X-JIS0208"/>
+                        <xsd:enumeration value="ISO-8859-1"/>
+                        <xsd:enumeration value="ISO-8859-2"/>
+                        <xsd:enumeration value="ISO-8859-3"/>
+                        <xsd:enumeration value="ISO-8859-4"/>
+                        <xsd:enumeration value="ISO-8859-6"/>
+                        <xsd:enumeration value="ISO-8859-7"/>
+                        <xsd:enumeration value="ISO-8859-8"/>
+                        <xsd:enumeration value="ISO-8859-5"/>
+                        <xsd:enumeration value="ISO-8859-9"/>
+                        <xsd:enumeration value="EUC-JP"/>
+                        <xsd:enumeration value="WINDOWS-31J"/>
+                        -->
+                        <!-- END CHANGE 2009/08/06 Addition of preferred MIME names -->
+                <!--
+                    </xsd:restriction>
+                </xsd:simpleType> -->
+            </xsd:element>
+            <xsd:element name="ByteOrder" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Byte order, primarily useful for cases where it’s not clear
+                        just by specifying an IANA character set. Uses a fixed list of ‘big,’
+                        ‘little,’ and ‘middle' endian. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="ByteOrderType"/>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="ByteSize" minOccurs="0" type="xsd:nonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation>The size of an individual byte within the expressed as a
+                        number of bits. This does not necessarily equal the character size, as a
+                        character may have more than one, or a variable number of bytes per
+                        character. </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CharacterSize" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The size of an individual character within the character set
+                        as a number of bytes of the size expressed in the byte_size. In the case of
+                        variable encodings, such as UTF-8 for Unicode, the character_size element
+                        should state "variable" and also identify the specific variable character
+                        set encoding in the encoding attribute. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="encoding" type="xsd:string" use="optional"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="LineBreak" minOccurs="0" type="LineBreakType">
+                <xsd:annotation>
+                    <xsd:documentation>How line breaks are represented in current file (which may
+                        differ from how they were originally encoded). Either carriage return, or
+                        carriage return/line feed. </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FontScript" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>The default font or script of the item </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MarkupBasis" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>The metalanguage used to create the markup language, that is,
+                        SGML, XML, GML (there’s gotta still be some other there), other.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="version" type="xsd:string" use="optional"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MarkupLanguage" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Markup language employed on the text (i.e., the specific
+                        schema or dtd). May be a URI for schema or dtd, but not mandatory.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="version" type="xsd:string" use="optional"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

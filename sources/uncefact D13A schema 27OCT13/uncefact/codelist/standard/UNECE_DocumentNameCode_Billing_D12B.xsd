@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+<!-- ===== 61001_Billing - Code List Schema Module                    ===== -->
+<!-- ====================================================================== -->
+<!--
+Schema agency:      UN/CEFACT
+Schema version:     1.1
+Schema date:        22 August 2013
+
+Code list name:     Document Name Code_Billing
+Code list agency:   UNECE
+Code list version:  D12B
+
+Copyright (C) UN/CEFACT (2013). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not be modified in any way, such as by removing the copyright notice or references to UN/CEFACT, except as needed for the purpose of developing UN/CEFACT specifications, in which case the procedures for copyrights defined in the UN/CEFACT Intellectual Property Rights document must be followed, or as required to translate it into languages other than English.
+
+The limited permissions granted above are perpetual and will not be revoked by UN/CEFACT or its successors or assigns.
+
+This document and the information contained herein is provided on an "AS IS" basis and UN/CEFACT DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:clm61001Billing="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode_Billing:D12B" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" targetNamespace="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode_Billing:D12B" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+<!-- ======================================================================= -->
+<!-- ===== Element Declarations                                        ===== -->
+<!-- ======================================================================= -->
+<!-- ===== Root Element                                                ===== -->
+<!-- ======================================================================= -->
+  <xsd:element name="DocumentNameCodeBilling" type="clm61001Billing:DocumentNameCodeBillingContentType"/>
+<!-- ================================================================== -->
+<!-- ===== Type Definitions                                       ===== -->
+<!-- ================================================================== -->
+<!-- ===== Type Definition: DocumentNameCodeBillingContentType    ===== -->
+<!-- ================================================================== -->
+  <xsd:simpleType name="DocumentNameCodeBillingContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="261">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Self billed credit note</ccts:Name>
+            <ccts:Description>A document which indicates that the customer is claiming credit in a self billing environment.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="262">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Consolidated credit note - goods and services</ccts:Name>
+            <ccts:Description>Credit note for goods and services that covers multiple transactions involving more than one invoice.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="265">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport equipment movement report</ccts:Name>
+            <ccts:Description>Report on one or more different movements of transport equipment.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="296">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Credit note for price variation</ccts:Name>
+            <ccts:Description>A credit note which is issued against a price variation invoice.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="324">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport emergency card</ccts:Name>
+            <ccts:Description>Official document specifying, for a given dangerous goods item, information such as nature of hazard, protective devices, actions to be taken in case of accident, spillage or fire and first aid to be given.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="326">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Partial invoice</ccts:Name>
+            <ccts:Description>Document/message specifying details of an incomplete invoice.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="380">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Commercial invoice</ccts:Name>
+            <ccts:Description>(1334) Document/message claiming payment for goods or services supplied under conditions agreed between seller and buyer.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="381">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Credit note</ccts:Name>
+            <ccts:Description>(1113) Document/message for providing credit information to the relevant party.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="383">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Debit note</ccts:Name>
+            <ccts:Description>Document/message for providing debit information to the relevant party.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="385">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Consolidated invoice</ccts:Name>
+            <ccts:Description>Commercial invoice that covers multiple transactions involving more than one vendor.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="386">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Prepayment invoice</ccts:Name>
+            <ccts:Description>An invoice to pay amounts for goods and services in advance; these amounts will be subtracted from the final invoice.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="389">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Self-billed invoice</ccts:Name>
+            <ccts:Description>An invoice the invoicee is producing instead of the seller.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

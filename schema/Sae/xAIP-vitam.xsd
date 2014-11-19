@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="fr.gouv.vitam.transport" xmlns="fr.gouv.vitam.transport" 
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xsd:include schemaLocation="vitam-types.xsd" />
+    <xsd:include schemaLocation="descriptive-vitam.xsd" />
+    <xsd:include schemaLocation="technical-vitam.xsd" />
+
+    <xsd:simpleType name="ObjectIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for identifying one MD Object</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ContractIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for identifying one Contract</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="RootType">
+        <xsd:annotation>
+            <xsd:documentation>Root of a DAG</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Id" type="ObjectIdType"/>
+            <xsd:element name="Management" type="LevelManagementMetadataContentType"
+                minOccurs="0"/>
+            <xsd:element name="DescriptiveMD" type="LevelDescriptiveMetadataContentType"/>
+            <xsd:element name="RestrictedDescriptiveMD"
+                type="LevelDescriptiveMetadataContentType" minOccurs="0"/>
+            <xsd:element name="Daip" type="DAIPType" maxOccurs="unbounded"/>
+            <xsd:element name="Store" type="StoreType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DAIPType">
+        <xsd:annotation>
+            <xsd:documentation>Primary release of future internal DAIP: Management + Descriptive (business and technical) MD</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Id" type="ObjectIdType"/>
+            <xsd:element name="Management" type="LevelManagementMetadataContentType"
+                minOccurs="0"/>
+            <xsd:element name="Freeze" type="FreezeType" minOccurs="0"/>
+            <xsd:element name="DescriptiveMD" type="LevelDescriptiveMetadataContentType"/>
+            <xsd:element name="RestrictedDescriptiveMD"
+                type="LevelDescriptiveMetadataContentType" minOccurs="0"/>
+            <xsd:element name="IdentityMD" type="TechnicalIdentityType" minOccurs="0"/>
+            <xsd:element name="TechMd" type="DescriptiveTechnicalMetadataType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>General technical description: might be in uncontroled form</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="Level" type="DAIPType" maxOccurs="unbounded"/>
+                <xsd:element name="Paip" type="PAIPType"/>
+            </xsd:choice>
+            <xsd:element name="Store" type="StoreType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FreezeType">
+        <xsd:annotation>
+            <xsd:documentation>To enable Freeze procedure</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="IsReadFrozen" type="xsd:boolean"/>
+            <xsd:element name="ContextFrozenRef" type="NonEmptyTokenType">
+                <xsd:annotation>
+                    <xsd:documentation>To allow to point to a reference where the cause and the detail of the Freeze is kept</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PAIPType">
+        <xsd:annotation>
+            <xsd:documentation>Primary release of future internal PAIP: Management only</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Id" type="ObjectIdType"/>
+            <xsd:element name="Management" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="LevelManagementMetadataContentType">
+                            <xsd:attribute name="contractRefId" type="ContractIdType">
+                                <xsd:annotation>
+                                    <xsd:documentation>To reflect the contract associated with this PAIP</xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Saip" type="SAIPType"/>
+            <xsd:element name="Store" type="StoreType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SAIPType">
+        <xsd:annotation>
+            <xsd:documentation>Primary release of future internal SAIP: Storage and Technical ids</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Id" type="ObjectIdType"/>
+            <xsd:element name="View" type="ViewType" maxOccurs="unbounded"/>
+            <xsd:element name="Store" type="StoreType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ViewObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Anonymous, Full, ...</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Anonymous"/>
+            <xsd:enumeration value="Full"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="ViewType">
+        <xsd:annotation>
+            <xsd:documentation>To have several views of the same object: anonymous, full</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Type" type="ViewObjectType"/>
+            <xsd:element name="Usage" type="UsageType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="UsageObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Should referenced usage code list as Conservation, Dissemination, Thumbnail, TXT</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Conservation"/>
+            <xsd:enumeration value="Dissemination"/>
+            <xsd:enumeration value="Thumbnail"/>
+            <xsd:enumeration value="TXT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="UsageType">
+        <xsd:annotation>
+            <xsd:documentation>To have several usages of the same object: conservation, dissemination, thumbnail, txt</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Type" type="UsageObjectType"/>
+            <xsd:element name="Version" type="VersionType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VersionType">
+        <xsd:annotation>
+            <xsd:documentation>To have several versions of the same object: following preservation process</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Version" type="xsd:nonNegativeInteger"/>
+            <xsd:element name="PrevVersion" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="Store" type="StoreType"/>
+            <xsd:element name="IdentityMd" type="TechnicalIdentityType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="StoreObjectType">
+        <xsd:annotation>
+            <xsd:documentation>MD (metadata) or BO (binary object)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MD"/>
+            <xsd:enumeration value="BO"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="StoreType">
+        <xsd:annotation>
+            <xsd:documentation>Storage localization</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Type" type="StoreObjectType">
+                <xsd:annotation>
+                    <xsd:documentation>MD (metadata) or BO (binary object)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Store" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="IdCcfn" type="NonEmptyTokenType"/>
+                        <xsd:element name="IdCont" type="NonEmptyTokenType"/>
+                        <xsd:element name="IdBo" type="NonEmptyTokenType"/>
+                        <xsd:element name="Date" type="xsd:dateTime"/>
+                        <xsd:element name="Digest" type="DigestType"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="TimeVersion" type="TimeVersionType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TimeVersionType">
+        <xsd:annotation>
+            <xsd:documentation>To keep trace of last change date and version</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Date" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>Last date of last update for MD, Date of creation for BO</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Version" type="xsd:nonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation>For BO valid value is 0, for MD could be from 1 to n</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="org:afnor:medona:1.0"
+    xmlns="org:afnor:medona:1.0" elementFormDefault="qualified"
+    attributeFormDefault="unqualified" version="1.0">
+    <xsd:include schemaLocation="vitam-types.xsd"/>
+
+    <xsd:complexType name="ObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Correspond à la classe Object ; contient tous les éléments nécessaires à la description d'un objet ; il est sensé être la racine du bloc des métadonnées de description pour la partie publique</xsd:documentation>
+        </xsd:annotation>
+        <xsd:group ref="ObjectGroup"/>
+    </xsd:complexType>
+    <xsd:group name="ObjectGroup">
+        <xsd:sequence>
+            <xsd:group ref="IdentifierGroup" minOccurs="0"/>
+            <xsd:group ref="TitleGroup" minOccurs="1"/>
+            <xsd:group ref="DescriptionGroup" minOccurs="0"/>
+            <xsd:group ref="LevelGroup" minOccurs="1"/>
+            <xsd:group ref="TypeGroup" minOccurs="0"/>
+            <xsd:group ref="LanguageGroup" minOccurs="0"/>
+            <xsd:group ref="StatusGroup" minOccurs="0"/>
+            <xsd:group ref="VersionGroup" minOccurs="0"/>
+            <xsd:group ref="KeywordsGroup" minOccurs="0"/>
+            <xsd:group ref="CoverageGroup" minOccurs="0"/>
+            <xsd:group ref="RecordsCreatorGroup" minOccurs="0"/>
+            <xsd:group ref="WriterGroup" minOccurs="0"/>
+            <xsd:group ref="AudienceGroup" minOccurs="0"/>
+            <xsd:group ref="SourceGroup" minOccurs="0"/>
+            <xsd:group ref="RelationGroup" minOccurs="0"/>
+            <xsd:element name="Signature" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:group ref="SignatureGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:group ref="DateGroup" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="AgentType">
+        <xsd:annotation>
+            <xsd:documentation>Correspond à la classe Agent ; contient tous les éléments nécessaires à la description d'un Agent (physique ou moral)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:group ref="PersonOrEntityGroup" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EventType">
+        <xsd:annotation>
+            <xsd:documentation>Correspond à la classe Event ; contient tous les éléments nécessaire à la description d'un événement</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Type" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Date" type="xsd:dateTime"/>
+            <xsd:element name="Details" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="IdentifierGroup">
+        <xsd:sequence>
+            <xsd:element name="Identifier" type="xsd:ID">
+                <xsd:annotation>
+                    <xsd:documentation>Identifiant fourni - identifie la ressource par une chaîne de caractère conforme à un système formel d'identification</xsd:documentation>
+                    <xsd:documentation>Références : DC.identifier</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FilePlanID" type="xsd:ID">
+                <xsd:annotation>
+                    <xsd:documentation>Position dans le plan de classement</xsd:documentation>
+                    <xsd:documentation>Références : ARMS.FilePlanID</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SystemID" type="xsd:ID">
+                <xsd:annotation>
+                    <xsd:documentation>Identifiant système attribué aux objets</xsd:documentation>
+                    <xsd:documentation>Références : ARMS</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="TitleGroup">
+        <xsd:sequence>
+            <xsd:element name="Title" type="xsd:string" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Titre</xsd:documentation>
+                    <xsd:documentation>Références : DC.Title ead.unittitle</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="subTitle" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>sous-titre</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="LevelGroup">
+        <xsd:sequence>
+            <xsd:element name="Level" type="LevelType" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Niveau de description</xsd:documentation>
+                    <xsd:documentation>Référence : ead.level</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="TypeGroup">
+        <xsd:sequence>
+            <xsd:element name="Type" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Nature ou genre du document</xsd:documentation>
+                    <xsd:documentation>Références : DC.Type ARMS.Type</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="DescriptionGroup">
+        <xsd:sequence>
+            <xsd:element name="Description" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Résumé</xsd:documentation>
+                    <xsd:documentation>Références : DC.Description</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="KeywordsGroup">
+        <xsd:sequence>
+            <xsd:element name="Keyword" type="xsd:token" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Mots-clés ou liste de mots-clés</xsd:documentation>
+                    <xsd:documentation>Références : DC.Subject ARMS.Subject</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="LanguageGroup">
+        <xsd:sequence>
+            <xsd:element name="Language" type="xsd:language" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Langue principale du contenu du document</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="AddresseeGroup">
+        <xsd:sequence>
+            <xsd:element name="Addressee" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Destinataire pour action</xsd:documentation>
+                    <xsd:documentation>Références : ARMS.Addressee, Interpares.Addressee</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:group ref="PersonOrEntityGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="RecipientGroup">
+        <xsd:sequence>
+            <xsd:element name="Recipient" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Destinataire pour information</xsd:documentation>
+                    <xsd:documentation>Références : Interpares.Recipient</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:group ref="PersonOrEntityGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="AudienceGroup">
+        <xsd:sequence>
+            <xsd:group ref="AddresseeGroup"/>
+            <xsd:group ref="RecipientGroup"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="CoverageType">
+        <xsd:all>
+            <xsd:element name="Spatial" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Couverture spatiale, couverture géographique</xsd:documentation>
+                    <xsd:documentation>Références: AGKRMS.spatialCoverage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Temporal" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Couverture temporelle</xsd:documentation>
+                    <xsd:documentation>Références: AGKRMS.temporalCoverage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Juridictional" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Juridiction administrative, ressort administratif</xsd:documentation>
+                    <xsd:documentation>Références: AGKRMS.juridictionalCoverage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:group name="CoverageGroup">
+        <xsd:annotation>
+            <xsd:documentation>Titre</xsd:documentation>
+            <xsd:documentation>Références: DC.Title ead.unittitle</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Coverage" type="CoverageType"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="RecordsCreatorGroup">
+        <xsd:annotation>
+            <xsd:documentation>Responsable juridique de l'objet d'archive</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="RecordsCreator">
+                <xsd:complexType>
+                    <xsd:group ref="PersonOrEntityGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="WriterGroup">
+        <xsd:sequence>
+            <xsd:element name="Writer">
+                <xsd:complexType>
+                    <xsd:group ref="PersonGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="ReferencedObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Contient la référence à l'objet signé (et son empreinte jusqu'à la fin de la phase de versement dans le SAE)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="SignedObjectId" type="xsd:token"/>
+            <xsd:element name="SignedObjectDigest" type="DigestType">
+                <xsd:annotation>
+                    <xsd:documentation>Cette empreinte est obligatoire jusqu'au processus de versement (d'entrée = ingest) mais le SAE ne la conservera pas car l'identification de l'objet intellectuel unique correspondant (DAIP) suffira. Ceci permettra notamment de résister au temps lorsque les instances binaires du DAIP seront converties au gré des opérations de préservation de la lisibilité des formats puisque l'identifiant ne changera pas, contrairement au format du fichier et donc à son empreinte.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="SignatureGroup">
+        <xsd:annotation>
+            <xsd:documentation>Ce groupe contient les éléments relatifs à la signature</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="DateSignature" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>Date de l'objet signature</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Signer">
+                <xsd:annotation>
+                    <xsd:documentation>Signataire</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:group ref="SignerGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Validator">
+                <xsd:annotation>
+                    <xsd:documentation>Validateur de la signature</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:group ref="ValidatorGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Referential" type="CodeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Référentiel des personnes et des organisations au moment de la vérification de la signature et sa validation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ReferencedObject" type="ReferencedObjectType">
+                <xsd:annotation>
+                    <xsd:documentation>Référence à l'objet signé</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SignerGroup">
+        <xsd:sequence>
+            <xsd:group ref="PersonOrEntityGroup"/>
+            <xsd:element name="SigningTime" type="xsd:dateTime"/>
+            <xsd:group ref="BusinessGroup"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="ValidatorGroup">
+        <xsd:sequence>
+            <xsd:group ref="PersonOrEntityGroup"/>
+            <xsd:element name="ValidationTime" type="xsd:dateTime"/>
+            <xsd:group ref="BusinessGroup"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="StatusGroup">
+        <xsd:sequence>
+            <xsd:element name="Status" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Statut du document</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="VersionGroup">
+        <xsd:sequence>
+            <xsd:element name="Version" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Version du document</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SourceGroup">
+        <xsd:sequence>
+            <xsd:element name="Source" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>En cas de substitution numérique =&gt; référence au papier</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="PersonGroup">
+        <xsd:sequence>
+            <xsd:element name="Firstname" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Prénom de la personne</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Givenname" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Nom d'usage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BirthName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Nom de naissance</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Gender" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Genre de la personne</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BirthDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de naissance de la personne</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BirthPlace" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:group ref="LocationGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="DeathDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de décès de la personne</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DeathPlace" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:group ref="LocationGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Nationality" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Nationalité de la personne</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:group name="EntityGroup">
+        <xsd:sequence>
+            <xsd:element name="Corpname" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Nom de l'entité</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="PersonOrEntityGroup">
+        <xsd:choice>
+            <xsd:group ref="PersonGroup"/>
+            <xsd:group ref="EntityGroup"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="DateGroup">
+        <xsd:sequence>
+            <xsd:element name="CreatedDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de création</xsd:documentation>
+                    <xsd:documentation>Références : ARKMS.DateCreated</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TransactedDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de l'opération</xsd:documentation>
+                    <xsd:documentation>Références : ARKMS.DateTransacted</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AcquiredDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de numérisation</xsd:documentation>
+                    <xsd:documentation>Références : ARKMS.DateAcquired</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SentDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date d'envoi</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ReceivedDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de réception</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RegistredDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date d'enregistrement</xsd:documentation>
+                    <xsd:documentation>Références : ARMS.DateDeclared</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="StartDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date d'ouverture / date de début</xsd:documentation>
+                    <xsd:documentation>Références : AGKRMS.StartDate</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="EndDate" type="DateType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date de fermeture / Date de fin</xsd:documentation>
+                    <xsd:documentation>Références : AGKRMS.EndDate</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:simpleType name="DateType">
+        <xsd:union memberTypes="xsd:date xsd:dateTime"/>
+    </xsd:simpleType>
+    <xsd:group name="BusinessGroup">
+        <xsd:annotation>
+            <xsd:documentation>Références : AGKRMS.Business</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Function" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>fonction</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Activity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>activité</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Position" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Position</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Role" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Rôle</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="LocationGroup">
+        <xsd:annotation>
+            <xsd:documentation>Localisation</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="Geogname" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Nom géographique</xsd:documentation>
+                    <xsd:documentation>Références : ead.geogname</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Address" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Adresse</xsd:documentation>
+                    <xsd:documentation>Références : ead.address</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PostalCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Code postal</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="City" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Ville</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Region" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Région</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Country" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Pays</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+    </xsd:group>
+    <xsd:group name="RelationGroup">
+        <xsd:sequence>
+            <xsd:element name="IsVersionOf" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est une version de (édition, adaptation, traduction): changement dans le contenu</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isVersionOf</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasVersions" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>a d'autres versions</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.hasVersion</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsReplacedBy" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est remplacé par</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isReplacedBy</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Replaces" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Remplace</xsd:documentation>
+                    <xsd:documentation>DC.Relation.replaces</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsRequiredBy" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est requis par</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isRequiredBy</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Requires" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>requiert</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.requires</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsPartOf" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Est une partie de</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isPartOf</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasPart" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>a comme partie</xsd:documentation>
+                    <xsd:documentation>DC.Relation.hasPart</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsReferencedBy" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est référencé par</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isReferenceBy</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="References" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Référence</xsd:documentation>
+                    <xsd:documentation>DC.Relation.references</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="isFormatOf" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est un autre format de (changement sur le format par sur le contenu)</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.isFormatOf</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasFormat" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>a pour autre format</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.hasFormat</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConformsTo" type="xsd:token" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>est conforme à</xsd:documentation>
+                    <xsd:documentation>Références : DC.Relation.conformsTo</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:simpleType name="LevelType">
+        <xsd:annotation>
+            <xsd:documentation>Références : descriptionlevel_code SEDA 1.0</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Fonds"/>
+            <xsd:enumeration value="Subfonds"/>
+            <xsd:enumeration value="Class"/>
+            <xsd:enumeration value="Collection"/>
+            <xsd:enumeration value="Series"/>
+            <xsd:enumeration value="Subseries"/>
+            <xsd:enumeration value="RecordGrp"/>
+            <xsd:enumeration value="SubGrp"/>
+            <xsd:enumeration value="File"/>
+            <xsd:enumeration value="Item"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="org:afnor:medona:1.0" xmlns="org:afnor:medona:1.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
+    <!-- Simple types -->
+    <xsd:simpleType name="NonEmptyTokenType">
+        <xsd:annotation>
+            <xsd:documentation>Token not empty</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <!-- ID -->
+    <xsd:simpleType name="IdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for DataObject items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:ID"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="RefIdType">
+        <xsd:annotation>
+            <xsd:documentation>Referenced ID used for DataObject items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:IDREF"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="GroupIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for DataObject Group items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType"/>
+    </xsd:simpleType>
+    
+    <!-- Size -->
+    <xsd:simpleType name="SizeInBytesType">
+        <xsd:annotation>
+            <xsd:documentation>Size of binary Data object in bytes</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:positiveInteger"/>
+    </xsd:simpleType>
+    
+    <!-- Binary encoding -->
+    <xsd:simpleType name="BinaryType">
+        <xsd:annotation>
+            <xsd:documentation>Binary representation: could be base64 or hexadecimal</xsd:documentation>
+        </xsd:annotation>
+        <xsd:union memberTypes="xsd:base64Binary xsd:hexBinary"/>
+    </xsd:simpleType>
+
+    <!-- Type to specify: to use with caution -->
+    <xsd:complexType name="OpenType" abstract="true">
+        <xsd:sequence>
+            <xsd:any namespace="##other" processContents="lax" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute ref="xlink:href" use="optional"/>
+    </xsd:complexType> 
+    
+    <!-- Identifiant -->
+    <xsd:complexType name="IdentifierType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:token">
+                <xsd:attribute name="schemeID" type="xsd:token" use="optional"/>
+                <xsd:attribute name="schemeName" type="xsd:string" use="optional"/>
+                <xsd:attribute name="schemeAgencyID" type="xsd:token" use="optional"/>
+                <xsd:attribute name="schemeAgencyName" type="xsd:string" use="optional"/>
+                <xsd:attribute name="schemeVersionID" type="xsd:token" use="optional"/>
+                <xsd:attribute name="schemeDataURI" type="xsd:anyURI" use="optional"/>
+                <xsd:attribute name="schemeURI" type="xsd:anyURI" use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <!-- CodeList: listID identifiant unique, tandis que name, versionID et schemaURI permettent de trouver la definition detaillee de la liste -->
+    <xsd:complexType name="CodeType">
+        <xsd:annotation>
+            <xsd:documentation>listID as unique ID for a list of values, other elements to detail if needed the content of this list or the version. Mainly from MEDONA 1.0</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="listID" type="NonEmptyTokenType">
+                <xsd:annotation>
+                    <xsd:documentation>ID of the list used in reference</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="listAgencyID" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="listAgencyName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="listName" type="NonEmptyTokenType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The optional name of this list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="listVersionID" type="NonEmptyTokenType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The optional version of the list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="languageID" type="xsd:language" minOccurs="0"/>
+            <xsd:element name="listURI" type="xsd:anyURI" minOccurs="0"/>
+            <xsd:element name="listSchemeURI" type="xsd:anyURI" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The optional URI that specifies this list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MinimalDataObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Minimal Data object: one ID used everywhere else</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Id" type="IdType">
+                <xsd:annotation>
+                    <xsd:documentation>ID of a Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Bloc d'identification d'un sous-fichier XML -->
+    <xsd:group name="SubXmlFileIdentifierGroup">
+        <xsd:annotation>
+            <xsd:documentation>Bloc to identifiy a sub-xml file (descriptive or technical) and to rattach it to the master transport file</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="MessageIdentifier" type="IdentifierType">
+                <xsd:annotation>
+                    <xsd:documentation>ID of this metadata file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ArchiveTransferMessageIdentifier" type="IdentifierType">
+                <xsd:annotation>
+                    <xsd:documentation>Associated archiveTransfer message (transport part) identifier</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    
+    <!-- Empreinte -->
+    <xsd:group name="DigestAlgorithmCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="MessageDigestAlgorithmCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>Digest Algorithm Code List used in the message</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:simpleType name="DigestAlgorithmCodeType">
+        <xsd:annotation>
+            <xsd:documentation>Digest Algorithm Code as specified in the DigestAlgorithmCodeList</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType"/>
+    </xsd:simpleType>
+    <xsd:complexType name="DigestType">
+        <xsd:annotation>
+            <xsd:documentation>A digest is made of a hash value in binary format according to an algorithm </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="MessageDigest" type="BinaryType">
+                <xsd:annotation>
+                    <xsd:documentation>value of the digest express in a format compatible with the algorithm</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MessageDigestAlgorithm" type="DigestAlgorithmCodeType">
+                <xsd:annotation>
+                    <xsd:documentation>algorithm used to compute the digest</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Objet de donnees binaire -->
+    <xsd:group name="BinaryDataObjectGroup">
+        <xsd:annotation>
+            <xsd:documentation>Binary data object: one uri, one digest, one size</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Uri" type="xsd:anyURI">
+                <xsd:annotation>
+                    <xsd:documentation>The URI that specifies where this Binary Data Object is. Might be a relative path as file://./path</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Digest" type="DigestType">
+                <xsd:annotation>
+                    <xsd:documentation>the Digest of this Binary Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Size" type="SizeInBytesType">
+                <xsd:annotation>
+                    <xsd:documentation>The size in bytes of this Binary Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="BinaryDataObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Binary data object: one uri, one digest, one size</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="MinimalDataObjectType">
+                <xsd:sequence>
+                    <xsd:group ref="BinaryDataObjectGroup"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- Objet de donnees physique -->
+    <xsd:complexType name="PhysicalDataObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Physical data object: one physical ID</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="MinimalDataObjectType">
+                <xsd:sequence>
+                    <xsd:element name="PhysicalID" type="IdentifierType">
+                        <xsd:annotation>
+                            <xsd:documentation>The Physical ID of this Physical Data Object: might be a barcode, a position or whatever that could identify it physically</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+</xsd:schema>

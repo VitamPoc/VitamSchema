@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="org:afnor:medona:1.0"
+    xmlns="org:afnor:medona:1.0" xmlns:tech="fr.gouv.vitam.technique" elementFormDefault="qualified"
+    attributeFormDefault="unqualified" version="1.0">
+    <xsd:include schemaLocation="vitam-types.xsd"/>
+    <xsd:import schemaLocation="subtechnical-vitam.xsd" namespace="fr.gouv.vitam.technique"/>
+
+    <xsd:complexType name="TechnicalMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Date and Message identifier of this message, the referenced archive transfer message id, the tools list used and a list of technical metadata items
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Date" type="xsd:dateTime" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date of the creation of this metadata file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="SubXmlFileIdentifierGroup" minOccurs="0"/>
+            <xsd:element name="CodeListVersions" type="TechnicalCodeListsType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeLists used in Technical description</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Tool" type="ToolType" maxOccurs="unbounded" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Tools used for the metadata extraction and identification</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TechnicalMetadataObject" type="TechnicalMetadataObjectType"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>List of technical metadata per item (per object/file)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="TechnicalMetadata" type="TechnicalMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Root of Technical Metadata</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+
+    <xsd:element name="TechnicalIdentity" type="TechnicalIdentityType">
+        <xsd:annotation>
+            <xsd:documentation>Where the selected technical information will be copied for AIP.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="TechnicalIdentityType">
+        <xsd:annotation>
+            <xsd:documentation>Will be the future information for each Binary object as AIP. All other will be stored as Metadata with no fixed schema.
+        </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="CodeListVersions" type="TechnicalCodeListsType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeLists used in Technical description</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Tool" type="ToolType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Tools used for the metadata extraction and identification</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:sequence>
+                    <xsd:group ref="BinaryTechnicalDescriptionGroup"/>
+                    <xsd:element name="Digest" type="DigestType">
+                        <xsd:annotation>
+                            <xsd:documentation>the Digest of this Binary Data Object</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:group ref="PhysicalTechnicalDescriptionGroup"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="TechnicalCodeListsType">
+        <xsd:annotation>
+            <xsd:documentation>CodeLists needed in Technical Description</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:group ref="MimeTypeCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="FileFormatCodeListGroup"/>
+            <xsd:group ref="DataObjectVersionCodeListGroup"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="DataObjectVersionCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="DataObjectVersionCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>To specify multiple versions for one "intellectual" object, as one version in conservation format, one in diffusion format, or one in TXT format (to allow full text search).
+                        Codes could be as : conservation, diffusion, thumbnail, txt
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:simpleType name="VersionIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for Version coding (conservation, diffusion, thumbnail, txt, ...)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+    </xsd:simpleType>
+
+    <!-- identification of format code -->
+    <xsd:simpleType name="MimeTypeType">
+        <xsd:restriction base="NonEmptyTokenType">
+            <xsd:annotation>
+                <xsd:documentation>MimeType code</xsd:documentation>
+            </xsd:annotation>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="FileFormatType">
+        <xsd:annotation>
+            <xsd:documentation>Format identification of a file</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType"/>
+    </xsd:simpleType>
+    <xsd:group name="MimeTypeCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="MimeTypeCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a MimeType code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="FileFormatCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="FileFormatCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a FormatId Code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:group name="DataObjectVersionGroup">
+        <xsd:annotation>
+            <xsd:documentation>Group to specify that one DataObject is par of the representation of the same "intellectual object"</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="DataObjectGroupReferenceId" type="GroupIdType">
+                <xsd:annotation>
+                    <xsd:documentation>ID of a Data Object Group which has several Data Object in this transfer (preservation, dissemination, thumbnails, raw versions for instance)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DataObjectVersion" type="VersionIdType">
+                <xsd:annotation>
+                    <xsd:documentation>To allow to specify the current version of the "intellectual" object, as one version in preservation, dissemination, thumbnails or raw format</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="TechnicalMetadataObjectType">
+        <xsd:annotation>
+            <xsd:documentation>the data object id in reference, the date of this technical identification, the identification module, the file info module, the file status module and the metadata module </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="TechnicalMetadataObjectFile" type="RefIdType">
+                <xsd:annotation>
+                    <xsd:documentation>The file containing the TechnicalMetadataType information (root = TechnicalMetadataObject of TechnicalMetadataObjectType type)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+                <xsd:element name="BinaryDataObjectReferenceId" type="RefIdType">
+                    <xsd:annotation>
+                        <xsd:documentation>ID of a Data Object</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:group ref="DataObjectVersionGroup" minOccurs="0"/>
+                <xsd:group ref="BinaryTechnicalDescriptionGroup"/>
+                <xsd:element name="DescriptiveTechnicalMetadata"
+                    type="tech:DescriptiveTechnicalMetadataType" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>Extra metadata for a Data Object. Could be a file containing an XML or directly XML</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:sequence>
+                <xsd:element name="PhysicalDataObjectReferenceId" type="RefIdType">
+                    <xsd:annotation>
+                        <xsd:documentation>ID of a Data Object</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:group ref="DataObjectVersionGroup" minOccurs="0"/>
+                <xsd:group ref="PhysicalTechnicalDescriptionGroup"/>
+            </xsd:sequence>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:group name="PhysicalTechnicalDescriptionGroup">
+        <xsd:annotation>
+            <xsd:documentation>For Physical DataObject</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="PhysicalDimensions" type="tech:DimensionsType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="BinaryTechnicalDescriptionGroup">
+        <xsd:annotation>
+            <xsd:documentation>For Binary DataObject</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="TechnicalIdentificationDate" type="xsd:dateTime" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date when this technical identification was done if different than the global date creation of this XML file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Identification" type="IdentificationType">
+                <xsd:annotation>
+                    <xsd:documentation>Identification of a Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FileInfo" type="FileInfoType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>General information of a Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CoreTechnicalMetadata" type="tech:CoreMetadataType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Core metadata for a Data Object. This should be minimal standard metadata... Some more works have to be done to filter the below types.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <!-- Simple and Complex types -->
+    <xsd:complexType name="ToolType">
+        <xsd:annotation>
+            <xsd:documentation>Tool identification: name, version and optional parameter version (for instance Pronom referential version) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Name" type="NonEmptyTokenType">
+                <xsd:annotation>
+                    <xsd:documentation>Name of the tool or its identification</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Version" type="NonEmptyTokenType">
+                <xsd:annotation>
+                    <xsd:documentation>Version of this tool</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParameterVersion" type="NonEmptyTokenType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Associated parameter version if any, may be multiple</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Identification elements -->
+    <xsd:complexType name="IdentificationType">
+        <xsd:annotation>
+            <xsd:appinfo>VITAM definition</xsd:appinfo>
+            <xsd:documentation>FormatLitteral exemple = Microsoft Word Document</xsd:documentation>
+            <xsd:documentation>MimeType exemple = application/msword</xsd:documentation>
+            <xsd:documentation>FormatId exemple (for VITAM = Pronom) = fmt/40</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="FormatLitteral" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Format in litteral form, possibly not stable in time</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MimeType" type="MimeTypeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Associated MimeType as defined in the MimeTypeCodeList: should be stable but not necessarily enough precise</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FormatId" type="FileFormatType">
+                <xsd:annotation>
+                    <xsd:documentation>Specific Format Type as defined in the FormatIdCodeList (for VITAM, shall be PRONOM id)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- File info elements -->
+    <xsd:complexType name="FileInfoType">
+        <xsd:annotation>
+            <xsd:documentation>Information on the file itself - not related to the content</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Size" type="SizeInBytesType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Size of the object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Filename" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Original filename - since it can be lost during the preparation of the transfer -</xsd:documentation>
+                </xsd:annotation>
+                <!-- necessary in case of renaming but could be empty -->
+            </xsd:element>
+            <xsd:element name="Created" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>Creation time of this file (before ingestion)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CreatingApplicationName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Application used to create this file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CreatingApplicationVersion" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Version of the application used to create this file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CreatingOs" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Operating System on which the application where runned</xsd:documentation>
+                </xsd:annotation>
+                <!-- OS used to create it -->
+            </xsd:element>
+            <xsd:element name="LastModified" type="xsd:dateTime" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Last time this file was modified (before ingestion)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

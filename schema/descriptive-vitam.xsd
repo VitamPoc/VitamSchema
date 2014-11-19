@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="org:afnor:medona:1.0"
+    xmlns="org:afnor:medona:1.0" elementFormDefault="qualified" attributeFormDefault="unqualified"
+    version="1.0">
+    <xsd:include schemaLocation="vitam-types.xsd"/>
+    <xsd:include schemaLocation="query-vitam.xsd"/>
+    <xsd:include schemaLocation="ontologie-vitam-v1.xsd"/>
+
+    <xsd:complexType name="DescriptiveMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Date and Message identifier of this message, the referenced archive transfer message id, the tools list used and the descriptive metadata dag
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Date" type="xsd:dateTime" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Date of the creation of this metadata file</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="SubXmlFileIdentifierGroup" minOccurs="0"/>
+            <xsd:element name="CodeListVersions" type="DescriptiveCodeListsType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeLists used in Management description</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="UnitDescriptiveMetadata" type="UnitDescriptiveMetadataType"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>List of descriptive metadata in tree format (multiple trees being a DAG)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="DescriptiveMetadata" type="DescriptiveMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Root of DescriptiveMetadata file
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="DescriptiveCodeListsType">
+        <xsd:annotation>
+            <xsd:documentation>CodeLists needed in Descriptive and Management Description</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:group ref="StorageRuleCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="AppraisalRuleCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="AccessRestrictionRuleCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="DisseminationRestrictionRuleCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="ReuseRestrictionRuleCodeListGroup" minOccurs="0"/>
+            <xsd:group ref="ClassificationRuleCodeListGroup" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VitamUnitManagementMetadataContentType">
+        <xsd:complexContent>
+            <xsd:extension base="UnitManagementMetadataContentType">
+                <xsd:sequence>
+                    <xsd:element name="UnitCreationControl" type="UnitCreationControlType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Control how this item (node) will have to be created, for those not already existing, ... Absence means creation at all time.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="UnitManagementMetadataContentType">
+        <xsd:annotation>
+            <xsd:documentation>This contains the management metadata from this Unit</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="StorageRule" type="StorageRuleType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Shall this item change of storage after a delay (restricted access, copied, transferred)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AppraisalRule" type="AppraisalRuleType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Shall this item be Keep or Detroy after the delay
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AccessRestrictionRule" type="AccessRestrictionRuleType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>How long the standard restriction access will act
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DisseminationRestrictionRule" type="DisseminationRestrictionRuleType"
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>How long the dissemination restriction access will act
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ReuseRestrictionRule" type="ReuseRestrictionRuleType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>How long the capacity of reusing this item will be limited 
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ClassificationRule" type="ClassificationRuleType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>How long this item shall be highly restricted in access
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Other" type="OtherManagementType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OtherManagementType">
+        <xsd:sequence>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Management list of codes -->
+    <xsd:group name="AccessRestrictionRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="AccessRestrictionRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a AccessRestriction Rule code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="DisseminationRestrictionRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="DisseminationRestrictionRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a DisseminationRestriction Rule code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="ReuseRestrictionRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="ReuseRestrictionRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a ReuseRestriction Rule code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="ClassificationRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="ClassificationRestrictionRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a ClassificationRestriction Rule code list</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="AppraisalRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="AppraisalRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a Appraisal Rule code list (Keep, Destroy)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="StorageRuleCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="StorageRuleCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>CodeList for a Storage Rule code list (Restricted Access, Transfer(reversibility), Copy)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:simpleType name="MeasurementDurationUnitsType">
+        <xsd:annotation>
+            <xsd:documentation>See UNECE_MeasurementUnitCommonCode_8.xsd</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="day"/>
+            <xsd:enumeration value="DAY"/>
+            <xsd:enumeration value="month"/>
+            <xsd:enumeration value="MON"/>
+            <xsd:enumeration value="year"/>
+            <xsd:enumeration value="ANN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="MeasurementDurationType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:nonNegativeInteger">
+                <xsd:attribute name="unit" type="MeasurementDurationUnitsType" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="DurationRuleType">
+        <xsd:annotation>
+            <xsd:documentation>To express a fix duration rule from a start date with an optional way of bypassing this rule</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="DurationRule">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="RuleId" type="RuleIdType"/>
+                        <xsd:element name="Value" type="MeasurementDurationType"/>
+                        <xsd:element name="NeedAuthorization" type="xsd:boolean" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Description" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="RuleIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for Rule items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="RefRuleIdType">
+        <xsd:annotation>
+            <xsd:documentation>Referenced ID used for Rule items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="RuleIdType"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="RuleType">
+        <xsd:annotation>
+            <xsd:documentation>Each constraint rule has a startDate and a referenced Rule ID of Duration Rule.
+            If no rule is specified, the corresponding restriction answer is "No restriction" if the current date is in the future of startDate.
+            If date is empty, the corresponding restriction answer is "Restricted" since there is no way to compute the end date.
+            If a rule and a date is specified, then the rule is valid (restriction applied) if the current date is in the future of startDate+duration from Rule
+        </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="StartDate" type="xsd:date" nillable="true" minOccurs="0"/>
+            <xsd:element name="RefRuleId" type="RefRuleIdType" minOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:group name="NegateRuleIdGroup">
+        <xsd:choice>
+            <xsd:element name="PreventInheritance" type="xsd:boolean" default="false" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>If this element is set and true, all rules inherited from parents will be ignored from this node.
+                    Equivalent to negate all parents RuleId.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RefNonRuleId" type="RefRuleIdType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>The rule id specified will be removed from the inheritance from this node.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="ConstraintRuleIdType">
+        <xsd:annotation>
+            <xsd:documentation>Specify the list of rule Id to apply and to ignore from this node.
+            Any being valid means the restriction does applied.
+        </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Rule" type="RuleType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="NegateRuleIdGroup" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="AccessRestrictionRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Simple Access Restriction end date rule 
+            - type of Rule could be the ones referenced in "seda:CodeAccessRestrictionType"
+            - Authorized context is allowed to bypass</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ConstraintRuleIdType">
+                <xsd:sequence>
+                    <xsd:element name="NeedAuthorization" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="DisseminationRestrictionRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Dissemination access restriction in addition to Simple Access Restriction end date rule
+            - Authorized context is allowed to bypass</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ConstraintRuleIdType">
+                <xsd:sequence>
+                    <xsd:element name="NeedAuthorization" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ReuseRestrictionRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Reuse (copy) right restriction apart to general Access Restriction end date rule</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ConstraintRuleIdType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ClassificationRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Classification restriction to status on classification level and status
+                - High Authorized context is allowed to bypass, depending of the configuration of the EAS</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ConstraintRuleIdType">
+                <xsd:sequence>
+                    <xsd:element name="ClassificationLevel" type="NonEmptyTokenType">
+                        <xsd:annotation>
+                            <xsd:documentation>Code describing the classification level</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Mention" type="NonEmptyTokenType">
+                        <xsd:annotation>
+                            <xsd:documentation>Mention France/xxx</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ClassificationOwner" type="NonEmptyTokenType">
+                        <xsd:annotation>
+                            <xsd:documentation>Propriétaire de la classification</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ClassificationReassessingDate" type="xsd:date" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Date de réévaluation d'une classification</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NeedReassessingAuthorization" type="xsd:boolean"
+                        minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="GeneralRetentionRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Final status starts when all Retention Durations are over.
+             
+             Retention durations are described as Start date and a rule.
+             
+             RefFinalActionRule refers to a Rule expressing the reason and the final action on this archive.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ConstraintRuleIdType">
+                <xsd:sequence>
+                    <xsd:element name="RefFinalActionRule" type="NonEmptyTokenType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                            Peut être: 
+                            - pour une DUA classique Conserver/Détruire
+                            - pour une durée de stockage (conservation) : Acces Réservé / Transférer(Réversibilité) / Copier
+                        </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NeedAuthorization" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="StorageRuleType">
+        <xsd:annotation>
+            <xsd:documentation>End of Storage starts when all Retention Durations are over.
+                
+                Retention durations are described as Start date and a rule.
+                
+                RefFinalActionRule refers to a Rule expressing the reason and the final action: 
+                durée de stockage (conservation) : Acces Réservé / Transférer(Réversibilité) / Copier
+                
+                If the system is an intermediary system (front of another EAS), Transfer means transferring the archive to another EAS, Copy means transfer without destruction, Restricted access means the access will be limited FROM this period (authorized session only).
+                
+                (concerns a full archive item - Storage AIP - or one View of a SAIP)
+
+                Ceci devrait être une DUA Courante (avant versement dans un SAE intermédiaire).
+                
+                Storage: vient de la traduction dans la directive informatique et liberté de durée de conservation au sens CNIL.
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="GeneralRetentionRuleType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="AppraisalRuleType">
+        <xsd:annotation>
+            <xsd:documentation>Appraisal starts when all Retention Durations are over.
+                Retention durations are described as Start date and a rule.
+                
+                RefFinalActionRule refers to an Appraisal Rule: DUA classique Conserver/Détruire
+                
+                (concerns a full archive item - Storage AIP - or one View of a SAIP)
+                See seda:CodeAppraisalType
+
+                Ceci devrait être une DUA Intermédiaire
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="GeneralRetentionRuleType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="UnitCreationControlType">
+        <xsd:annotation>
+            <xsd:documentation>If Valid, the Node creation/reusing is allowed. Else an error will occur.
+            Note: if an item is absent, the corresponding test is ignored (existence or not...).
+            If none are specified: creation at all time (never reusing).
+        </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ValidIfFound" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>If the node specify by the query is found, 
+                    1) is it valid (existence is allowed so reusing) 
+                    2) or is it invalid (existence is not allowed so an issue is raized as "already existing")</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ValidIfNotFound" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>If the node specify by the query is not found, 
+                    1) is it valid (absence is allowed so creation) 
+                    2) or is it invalid (absence is not allowed so an issue is raized as "missing")</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="UpdateIfFound" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>If the node specify by the query is found (and allowed), shall we update it using the current node definition</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BooleanQuery" type="BooleanQueryType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- ID -->
+    <xsd:simpleType name="DescriptiveIdType">
+        <xsd:annotation>
+            <xsd:documentation>ID used for UnitDescriptive items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:ID"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="RefDescriptiveIdType">
+        <xsd:annotation>
+            <xsd:documentation>Referenced ID used for UnitDescriptive items</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:IDREF"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="UnitDescriptiveMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>This describes one Unit in the hierarchy, one Node in the DAG (DAIP).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="XmlRefId" type="RefDescriptiveIdType">
+                <xsd:annotation>
+                    <xsd:documentation>Reference to another UnitDescription in the same transfer, to allow to not duplicate Unit and sharing subUnit</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="UnitDescriptiveMetadataFile" type="RefIdType">
+                <xsd:annotation>
+                    <xsd:documentation>The file containing the UnitDescriptiveMetadata information (root = UnitDescriptiveMetadata of UnitDescriptiveMetadataType type)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+                <xsd:group ref="SubXmlFileIdentifierGroup" minOccurs="0"/>
+                <xsd:element name="XmlId" type="DescriptiveIdType">
+                    <xsd:annotation>
+                        <xsd:documentation>Used for instance in multiple inheritance association and necessary to inform back of which node is containing an issue (specific id for feedback on one particular Unit)
+                    </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="UnitManagementMetadataContent"
+                    type="VitamUnitManagementMetadataContentType" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>Associated Management metadata</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="UnitDescriptiveMetadataContent"
+                    type="UnitDescriptiveMetadataContentType">
+                    <xsd:annotation>
+                        <xsd:documentation>Here will come any Business Metadata (publicly available)</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="UnitRestrictedDescriptiveMetadataContent"
+                    type="UnitDescriptiveMetadataRestrictedContentType" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>Here will come any Business Metadata but where access shall be restricted</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:choice>
+                    <xsd:choice maxOccurs="unbounded">
+                        <xsd:element name="UnitDescriptiveMetadata"
+                            type="UnitDescriptiveMetadataType">
+                            <xsd:annotation>
+                                <xsd:documentation>Here will come sub unit, at least one (recursivity of the model)</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="UnitDescriptiveMetadataReference"
+                            type="UnitDescriptiveMetadataReferenceType">
+                            <xsd:annotation>
+                                <xsd:documentation>Here will come ONE sub Unit at most, which must be a UnitDescriptiveMetadata from existing UnitDescriptiveMetadata in the EAS, a previous Node in the DAG coming from a previous transfer operation. If not found, this transfer operation will raised an error. 
+                                    (No creation, No update: Must exist already in the Electronic Archive System)</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="DataObjectReference" type="DataObjectRefType"
+                            maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Here will come ONE subUnit at most, which must be one ore more Data Object References, reference coming from the Transport description file. 
+                                    A Data object can be a Physical or a Binary Data object.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:choice>
+                    <xsd:element name="NullObject">
+                        <xsd:annotation>
+                            <xsd:documentation>Here will come ONE subUnit at most, which must be a NULL Object, to finish a Description tree with NO Object (used in empty schema transferring)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:choice>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="UnitDescriptiveMetadataReferenceType">
+        <xsd:annotation>
+            <xsd:documentation>Contains the queries as necessary to find out a UnitDescritptiveMetadata (Node in the DAG) to point to as next Unit.
+            Allows to reference an already existing node in a tree from a previous transfer.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="BooleanQuery" type="BooleanQueryType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SedaObjectType">
+        <xsd:annotation>
+            <xsd:documentation>Exemple of extension of ObjectType</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ObjectType">
+                <xsd:sequence>
+                    <xsd:element name="Owner" type="AgentType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="UnitDescriptiveMetadataContentType">
+        <xsd:annotation>
+            <xsd:documentation>Could be of ObjectType or an extension of it</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="UnitDescriptiveMetadataRestrictedContentType">
+        <xsd:sequence>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DataObjectRefType">
+        <xsd:annotation>
+            <xsd:documentation>This describes one Data Binary Node in the DAG (SAIP).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="XmlId" type="xsd:ID">
+                <xsd:annotation>
+                    <xsd:documentation>Used for instance in multiple inheritance association and necessary to inform back of which node is containing an issue. This Id is local to Descriptive file, such that it can be reused in RefId to refer somewhere else the same Object in this file.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="DataObjectId" type="RefIdType">
+                    <xsd:annotation>
+                        <xsd:documentation>Reference to a data object listed in transport file</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="DataObjectGroupId" type="GroupIdType">
+                    <xsd:annotation>
+                        <xsd:documentation>Reference to a data object group (multiple data objects intellectually unified) listed in technical file</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

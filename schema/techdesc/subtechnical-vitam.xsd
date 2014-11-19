@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns="fr.gouv.vitam.technique" targetNamespace="fr.gouv.vitam.technique" 
+    xmlns:aes60="urn:ebu:metadata-schema:ebuCore_2010"
+    xmlns:charset="urn:un:unece:uncefact:codelist:standard:IANA:CharacterSetCode:2013-01-08"
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+    <xsd:include schemaLocation="vitam-techtypes.xsd"/>
+    <!-- Include external schema (simplified) -->
+    <xsd:include schemaLocation="vitam-textMD-v3.01a.xsd"/>
+    <xsd:include schemaLocation="vitam-docmd.xsd"/>
+    <xsd:include schemaLocation="vitam-aes57-2011-08-27.xsd"/>
+    <xsd:include schemaLocation="vitam-digital-image-mix20.xsd"/>
+    <xsd:include schemaLocation="vitam-videoMD.xsd"/>
+    <xsd:import namespace="urn:ebu:metadata-schema:ebuCore_2010"
+        schemaLocation="http://www.aes.org/standards/schemas/aes60-2010.xsd"/>
+    <xsd:import
+        schemaLocation="http://www.unece.org/uncefact/codelist/standard/IANA_CharacterSetCode_2013-01-08.xsd"
+        namespace="urn:un:unece:uncefact:codelist:standard:IANA:CharacterSetCode:2013-01-08"/>
+
+    <xsd:annotation>
+        <xsd:documentation>Useful links:
+            http://www.jiscdigitalmedia.ac.uk/guide/putting-things-in-order-links-to-metadata-schemas-and-related-standards/
+            http://www.jiscdigitalmedia.ac.uk/guide/metadata-and-digital-video/
+            http://www.jiscdigitalmedia.ac.uk/guide/metadata-and-audio-resources/
+            http://www.jiscdigitalmedia.ac.uk/guide/metadata-and-digital-images/
+            http://www.loc.gov/standards/amdvmd/ (audio et video) http://www.loc.gov/mix/ (images)
+            http://www.loc.gov/standards/textMD/ (text) </xsd:documentation>
+    </xsd:annotation>
+
+    
+    <!-- File status elements -->
+    <xsd:complexType name="FileStatusType">
+        <xsd:annotation>
+            <xsd:documentation>Status of the file (valid, well formed) and optional associated
+                message</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="WellFormed" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Is this file well formed - mainly for XML, HTML or JSON files -</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Valid" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Is this file valid</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Associated information with the valid or well formed status</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Metadata types -->
+    <xsd:complexType name="CoreMetadataType">
+        <xsd:choice>
+            <xsd:element name="Text" type="CoreTextTechnicalMetadata"/>
+            <xsd:element name="Document" type="CoreDocumentTechnicalMetadata"/>
+            <xsd:element name="Image" type="CoreImageTechnicalMetadata"/>
+            <xsd:element name="Audio" type="CoreAudioTechnicalMetadata"/>
+            <xsd:element name="Video" type="CoreVideoTechnicalMetadata"/>
+            <xsd:element name="Undefined"/>
+            <!-- could be extended: database, 3D, program, proprietary formats -->
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:group name="MetadataTypeGroup">
+        <xsd:choice>
+            <xsd:element name="Text" type="TextTechnicalMetadata"/>
+            <xsd:element name="Document" type="DocumentTechnicalMetadata"/>
+            <xsd:choice>
+                <xsd:element name="Image" type="ImageTechnicalMetadata"/>
+                <xsd:element name="ImageMix" type="mixType"/>
+            </xsd:choice>
+            <xsd:choice>
+                <xsd:element name="Audio" type="AudioTechnicalMetadata"/>
+                <xsd:element name="AudioAes" type="audioObjectType"/>
+            </xsd:choice>
+            <xsd:choice>
+                <xsd:element name="Video" type="VideoTechnicalMetadata"/>
+                <xsd:element name="VideoMD" type="videoType"/>
+            </xsd:choice>
+            <xsd:element name="Other" type="OtherTechnicalMetadata"/>
+            <!-- could be extended: database, 3D, program, proprietary formats -->
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="GenericDescriptiveTechnicalMetadataType">
+        <xsd:sequence>
+            <xsd:element name="scheme" type="xsd:anyURI"/>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DescriptiveTechnicalMetadataType">
+        <xsd:annotation>
+            <xsd:documentation>Contains all descriptive technical metadata in a schema defined by the producer or the transferring agency</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:group ref="MetadataTypeGroup"/>
+                <xsd:element name="technicalDescription" type="GenericDescriptiveTechnicalMetadataType"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OtherTechnicalMetadata">
+        <xsd:sequence>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Text elements -->
+    <xsd:complexType name="TextTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See textMD-v3.01a.xsd</xsd:documentation>
+            <xsd:documentation>Technical Metadata for Text</xsd:documentation>
+            <xsd:documentation>http://www.loc.gov/standards/textMD/</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="TextMD"/>
+        </xsd:complexContent>
+        <!-- FITS 
+        <xsd:sequence>
+            <xsd:element name="charset" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="linebreak" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="markupBasis" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="markupBasisVersion" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="markupLanguage" type="UnknownType" minOccurs="0"/>
+        </xsd:sequence> -->
+    </xsd:complexType>
+    <xsd:complexType name="CoreTextTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See textMD-v3.01a.xsd</xsd:documentation>
+            <xsd:documentation>Technical Metadata for Text</xsd:documentation>
+            <xsd:documentation>http://www.loc.gov/standards/textMD/</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Charset" type="charset:CharacterSetCodeContentType"/>
+            <xsd:element name="LineBreak" type="LineBreakType"/>
+            <xsd:element name="ByteOrder">
+                <xsd:annotation>
+                    <xsd:documentation>Byte order, primarily useful for cases where it’s not clear
+                        just by specifying an IANA character set. Uses a fixed list of ‘big,’
+                        ‘little,’ and ‘middle' endian. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="ByteOrderType"/>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="MarkupBasis">
+                <xsd:annotation>
+                    <xsd:documentation>The metalanguage used to create the markup language, that is,
+                        SGML, XML, GML (there’s gotta still be some other there), other.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="version" type="xsd:string" use="optional"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="FileStatus" type="FileStatusType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>File status of a Data Object</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Document elements -->
+    <xsd:complexType name="DocumentTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See docmd.xsd et documentMD.pdf</xsd:documentation>
+            <xsd:documentation>http://fclaweb.fcla.edu/content/format-specific-metadata</xsd:documentation>
+            <xsd:documentation>Document Metadata: document technical metadata for digital
+                preservation</xsd:documentation>
+            <xsd:documentation>No specification for Spreadsheet? column and line numbers per table?
+                cell number?</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="DocMdType"> </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CoreDocumentTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See docmd.xsd and documentMD.pdf</xsd:documentation>
+            <xsd:documentation>http://fclaweb.fcla.edu/content/format-specific-metadata</xsd:documentation>
+            <xsd:documentation>Document Metadata: document technical metadata for digital
+                preservation</xsd:documentation>
+            <xsd:documentation>No specification for Spreadsheet? column and line numbers per table?
+                cell number?</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="CharacterCount" minOccurs="1" type="xsd:nonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation>Total number of characters in the document
+                </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="WordCount" minOccurs="1" type="xsd:nonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation>Total number of words in the document
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParagraphCount" minOccurs="1" type="xsd:nonNegativeInteger">
+                <xsd:annotation>
+                    <xsd:documentation>Total number of paragraph (sequences of words ending with CR/LF for instance) in the document
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Font" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>A list of fonts used in the document
+                </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="FontName" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:documentation>Name of a font
+                            </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="IsEmbedded" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>An indication of whether or not a font is embedded in a document.
+                            </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="HasOutline" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>behavior, appearance</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasLayers" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>appearance</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasAttachments" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>structure, behavior</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="UseTransparency" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>appearance</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasAudio" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>content</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasVideo" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>content</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="HasScripts" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>appearance, behavior</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsProtected" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Is this document protected by a password</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="KeyProtection" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>If the document is password protected, the password</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IsRightsManaged" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Is this document containing some DRM</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Audio information -->
+    <xsd:complexType name="AudioTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See
+                http://www.aes.org/publications/standards/search.cfm?docID=84</xsd:documentation>
+            <xsd:documentation>AES standard for audio metadata – Audio object structures for
+                preservation and restoration</xsd:documentation>
+            <xsd:documentation>See
+                http://www.loc.gov/standards/amdvmd/audiovideoMDschemas.html</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="AudioDataEncoding" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="AvgBitRate" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="AvgPacketSize" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BitDepth" type="xsd:positiveInteger" minOccurs="0"/>
+            <xsd:element name="BitRate" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BlockAlign" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BlockSizeMax" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BlockSizeMin" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ByteOrder" type="ByteOrderType" minOccurs="0"/>
+            <xsd:element name="Channels" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="Duration" type="aes60:editUnitNumberType" minOccurs="0"/>
+            <xsd:element name="MaxBitRate" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="MaxPacketSize" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="NumPackets" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="NumSamples" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Offset" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="SampleRate" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="Software" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SoundField" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Time" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="WordSize" type="xsd:positiveInteger" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CoreAudioTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See
+                http://www.aes.org/publications/standards/search.cfm?docID=84</xsd:documentation>
+            <xsd:documentation>AES standard for audio metadata – Audio object structures for
+                preservation and restoration</xsd:documentation>
+            <xsd:documentation>See
+                http://www.loc.gov/standards/amdvmd/audiovideoMDschemas.html</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="BitDepth" type="xsd:positiveInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>In general: 8, 16 or 24 (precision per sample)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SampleRate" type="xsd:double" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Ex: 44100 for 44 khz</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Channels" type="xsd:nonNegativeInteger" minOccurs="1"/>
+            <xsd:element name="Duration" type="aes60:editUnitNumberType" minOccurs="1"/>
+            <xsd:element name="Codec" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="CodecQuality" type="xsd:NMTOKEN" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>lossy lossless</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Image elements -->
+    <xsd:complexType name="GpsType">
+        <xsd:sequence>
+            <xsd:element name="GpsVersionID" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Should be 2.2.0.0</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GpsAltitude" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="GpsAltitudeRef" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>0 (Sea level) 1 (Sea level reference - negative value -)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GpsLatitude" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>N (North) S (South)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GpsLatitudeRef" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="GpsLongitude" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>E (East) W (West)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GpsLongitudeRef" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="GpsDateStamp" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ImageTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See digital-image-mix20.xsd et
+                data-dictionary-for-technical-md-digital-images.pdf</xsd:documentation>
+            <xsd:documentation>NISO Metadata for Images in XML Schema</xsd:documentation>
+            <xsd:documentation>http://www.loc.gov/standards/mix/</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ApertureValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BitsPerSample" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BrightnessValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ByteOrder" type="ByteOrderType" minOccurs="0"/>
+            <xsd:element name="CaptureDevice" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="CfaPattern" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="CfaPattern2" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ColorMap" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ColorSpace" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="CompressionScheme" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="DigitalCameraManufacturer" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="DigitalCameraModelName" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="DigitalCameraSerialNo" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExifVersion" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureBiasValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureIndex" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureProgram" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureTime" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExtraSamples" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Flash" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="FlashEnergy" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="FNumber" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="FocalLength" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAltitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAltitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAreaInformation" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDateStamp" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestBearing" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestBearingRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestDistance" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestDistanceRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLatitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLatitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLongitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLongitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDifferential" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDOP" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsImgDirection" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsImgDirectionRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLatitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLatitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLongitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLongitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsMapDatum" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsMeasureMode" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsProcessingMethod" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSatellites" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSpeed" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSpeedRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsStatus" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTimeStamp" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTrack" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTrackRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsVersionID" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GrayResponseUnit" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="IccProfileName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="IccProfileVersion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ImageHeight" type="xsd:positiveInteger" minOccurs="0"/>
+            <xsd:element name="ImageProducer" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ImageWidth" type="xsd:positiveInteger" minOccurs="0"/>
+            <xsd:element name="IsoSpeedRating" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="LightSource" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="MaxApertureValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="MeteringMode" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="OECF" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Orientation" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesBlueX" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesBlueY" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesGreenX" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesGreenY" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesRedX" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="PrimaryChromaticitiesRedY" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="QualityLayers" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ReferenceBlackWhite" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ResolutionLevels" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SamplesPerPixel" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SamplingFrequencyUnit" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScannerManufacturer" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScannerModelName" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScannerModelNumber" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScannerModelSerialNo" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScanningSoftwareName" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ScanningSoftwareVersionNo" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SensingMethod" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ShutterSpeedValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SpectralSensitivity" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SubjectDistance" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="TileHeight" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="TileWidth" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="WhitePointXValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="WhitePointYValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="XSamplingFrequency" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="YSamplingFrequency" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="YCbCrCoefficients" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="YCbCrPositioning" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="YCbCrSubSampling" type="UnknownType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CoreImageTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See digital-image-mix20.xsd et
+                data-dictionary-for-technical-md-digital-images.pdf</xsd:documentation>
+            <xsd:documentation>NISO Metadata for Images in XML Schema</xsd:documentation>
+            <xsd:documentation>http://www.loc.gov/standards/mix/</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ImageHeight" type="xsd:positiveInteger" minOccurs="1"/>
+            <xsd:element name="ImageWidth" type="xsd:positiveInteger" minOccurs="1"/>
+            <xsd:element name="ColorSpace" type="xsd:string" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>RGB CMYK YCbCr ICCBased ...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BitsPerSample" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>1 4 8 8,8,8 8,2,2 16,16,16 8,8,8,8</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SamplesPerPixel" type="xsd:positiveInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>From 1 to 3 in general</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Gps" type="GpsType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Video elements -->
+    <xsd:complexType name="VideoTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See
+                http://www.jisc.ac.uk/media/documents/programmes/preservation/spmovimages_report.pdf</xsd:documentation>
+            <xsd:documentation>See
+                http://www.loc.gov/standards/amdvmd/audiovideoMDschemas.html</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ApertureSetting" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BitDepth" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BitRate" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BlockSizeMax" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="BlockSizeMin" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Channels" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="CreatingApplicationName" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="DataFormatType" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="DigitalCameraManufacturer" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="DigitalCameraModelName" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Duration" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureTime" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ExposureProgram" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="FNumber" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="Focus" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="FrameRate" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="Gain" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAltitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAltitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsAreaInformation" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDateStamp" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestBearing" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestBearingRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestDistance" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestDistanceRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLatitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLatitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLongitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDestLongitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDifferential" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsDOP" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsImgDirection" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsImgDirectionRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLatitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLatitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLongitude" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsLongitudeRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsMapDatum" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsMeasureMode" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsProcessingMethod" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSatellites" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSpeed" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsSpeedRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsStatus" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTimeStamp" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTrack" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsTrackRef" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="GpsVersionID" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ImageHeight" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ImageStabilization" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ImageWidth" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="SampleRate" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="ShutterSpeedValue" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="VideoStreamType" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="WhiteBalance" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="XSamplingFrequency" type="UnknownType" minOccurs="0"/>
+            <xsd:element name="YSamplingFrequency" type="UnknownType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CoreVideoTechnicalMetadata">
+        <xsd:annotation>
+            <xsd:documentation>See
+                http://www.jisc.ac.uk/media/documents/programmes/preservation/spmovimages_report.pdf</xsd:documentation>
+            <xsd:documentation>See
+                http://www.loc.gov/standards/amdvmd/audiovideoMDschemas.html</xsd:documentation>
+            <xsd:documentation>Below FITS as of 0.8.1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ImageHeight" type="xsd:positiveInteger" minOccurs="1"/>
+            <xsd:element name="ImageWidth" type="xsd:positiveInteger" minOccurs="1"/>
+            <xsd:element name="ColorSpace" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>RGB CMYK YCbCr ICCBased ...</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BitsPerSample" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>1 4 8 8,8,8 8,2,2 16,16,16 8,8,8,8</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SamplesPerPixel" type="xsd:positiveInteger" minOccurs="0"/>
+            <xsd:element name="Gps" type="GpsType" minOccurs="0"/>
+
+            <xsd:element name="AspectRatio" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>potentially different than Width/Heidth ratio</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FrameRate" type="xsd:double" minOccurs="1"/>
+            <xsd:element name="Duration" type="aes60:editUnitNumberType" minOccurs="1"/>
+            <xsd:element name="Codec" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="CodecQuality" type="xsd:NMTOKEN" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>lossy lossless</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="Audio" type="CoreAudioTechnicalMetadata" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

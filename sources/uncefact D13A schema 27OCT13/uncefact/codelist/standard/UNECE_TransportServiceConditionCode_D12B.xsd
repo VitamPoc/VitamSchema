@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+<!-- ===== 64065_TransportServiceConditionCode - Code List Schema Module ===== -->
+<!-- ====================================================================== -->
+<!--
+Schema agency:      UN/CEFACT
+Schema version:     1.1
+Schema date:        22 August 2013
+
+Code list name:     Transport Service Condition Code
+Code list agency:   UNECE
+Code list version:  D12B
+
+Copyright (C) UN/CEFACT (2013). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not be modified in any way, such as by removing the copyright notice or references to UN/CEFACT, except as needed for the purpose of developing UN/CEFACT specifications, in which case the procedures for copyrights defined in the UN/CEFACT Intellectual Property Rights document must be followed, or as required to translate it into languages other than English.
+
+The limited permissions granted above are perpetual and will not be revoked by UN/CEFACT or its successors or assigns.
+
+This document and the information contained herein is provided on an "AS IS" basis and UN/CEFACT DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:clm64065TransportServiceConditionCode="urn:un:unece:uncefact:codelist:standard:UNECE:TransportServiceConditionCode:D12B" xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" targetNamespace="urn:un:unece:uncefact:codelist:standard:UNECE:TransportServiceConditionCode:D12B" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+<!-- ======================================================================= -->
+<!-- ===== Element Declarations                                        ===== -->
+<!-- ======================================================================= -->
+<!-- ===== Root Element                                                ===== -->
+<!-- ======================================================================= -->
+  <xsd:element name="TransportServiceConditionCode" type="clm64065TransportServiceConditionCode:TransportServiceConditionCodeContentType"/>
+<!-- ================================================================== -->
+<!-- ===== Type Definitions                                       ===== -->
+<!-- ================================================================== -->
+<!-- ===== Type Definition: TransportServiceConditionCodeContentType ===== -->
+<!-- ================================================================== -->
+  <xsd:simpleType name="TransportServiceConditionCodeContentType">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="1">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>AVC conditions</ccts:Name>
+            <ccts:Description>General conditions of transport 1983, latest revision laid down by the Stichting Vervoeradres The Hague.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Special agreement for parcels transport</ccts:Name>
+            <ccts:Description>Appliance of a non published special agreement signed between a customer and the carrier (mandatory requested by the consignor) for parcels transport.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Special agreement for full loading transport</ccts:Name>
+            <ccts:Description>Appliance of a non published special agreement signed between a customer and the carrier (mandatory requested by the consignor) for full load transport.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Combined transport</ccts:Name>
+            <ccts:Description>A transport which involves more than one mode of transportation.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>FIATA combined transport bill of lading</ccts:Name>
+            <ccts:Description>Standard conditions of a combined transport bill of lading issued by FIATA.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="6">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Freight forwarders national conditions</ccts:Name>
+            <ccts:Description>The contract and carriage conditions as established by freight forwarders on a national basis.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="7">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Normal tariff, parcels transport</ccts:Name>
+            <ccts:Description>Appliance of the published legal tariff in case of parcels transport (required or not by the consignor.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="8">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Normal tariff, full loading transport</ccts:Name>
+            <ccts:Description>Appliance of the published legal tariff in case of full load transport (required or not by the consignor).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="9">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Ordinary</ccts:Name>
+            <ccts:Description>Carrier will choose the cheapest tariff in the legally published tariffs for parcels or full load transports (no tariff required by the consignor).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="10">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Port to port</ccts:Name>
+            <ccts:Description>The transport will only be port to port, no inland transport would have to be provided under the contract.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="11">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>CMR carnet</ccts:Name>
+            <ccts:Description>Conditions in accordance with the convention of the contract for the international carriage of goods by road.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Special tariff, parcels transport</ccts:Name>
+            <ccts:Description>Appliance of the legally published "special" tariff in case or parcels transport (tariff requested by the consignor).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Special tariff, full transport</ccts:Name>
+            <ccts:Description>Appliance of the legally published "special tariff" in case of full load transport (tariff requested by the consignor).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Through transport</ccts:Name>
+            <ccts:Description>The transport that is contracted not only from port to port, but from one inland location to another inland location.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="15">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Cancel space allocation</ccts:Name>
+            <ccts:Description>Indication that space previously allocated on a flight is to be cancelled.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Report sale of space</ccts:Name>
+            <ccts:Description>Indication that a sale has been made against a space allocation on a specific flight.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Alternative space allocation</ccts:Name>
+            <ccts:Description>Indication that space is being requested for a specific flight and that an alternative is acceptable.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="18">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>No alternative space allocation</ccts:Name>
+            <ccts:Description>Indication that space is being requested for a specific flight and that an alternative is not acceptable.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="19">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Allotment sale</ccts:Name>
+            <ccts:Description>Indication that space is being sold against a space allocation allotment on a specific flight.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="20">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Confirmation of space</ccts:Name>
+            <ccts:Description>Indication that space requested has been confirmed on a specific flight.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Unable to confirm</ccts:Name>
+            <ccts:Description>Indication that airline is unable to confirm the space allocation on a specific flight.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Non-operative flight</ccts:Name>
+            <ccts:Description>Indication that airline is unable to confirm space on a specific flight since the flight does not operate.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Wait list</ccts:Name>
+            <ccts:Description>Indication that the space allocation request has been assigned to a wait list.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="24">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Prior space allocation request</ccts:Name>
+            <ccts:Description>Indication that a space allocation on a specific flight has already been requested.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="25">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Holding confirmed space allocation</ccts:Name>
+            <ccts:Description>Indication that space is being held as confirmed on a specific flight.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="26">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Holding wait list</ccts:Name>
+            <ccts:Description>Indication that space allocation request on a specific flight has been assigned to a wait list.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="27">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Door-to-door</ccts:Name>
+            <ccts:Description>The carrier is responsible for the intermodal carriage of cargo including both the pre-carriage and the on-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="28">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Door-to-pier</ccts:Name>
+            <ccts:Description>The carrier is responsible for the intermodal carriage of cargo including the pre-carriage, but excluding the on-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="29">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Pier-to-door</ccts:Name>
+            <ccts:Description>The carrier is responsible for the intermodal carriage of cargo including the on-carriage, but excluding the pre-carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="30">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Pier-to-pier</ccts:Name>
+            <ccts:Description>The carrier of intermodal cargo is only responsible for the main carriage.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="31">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Space cancellation noted</ccts:Name>
+            <ccts:Description>Indication that space previously allocated on a means of transport has been cancelled.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="32">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Mini landbridge service</ccts:Name>
+            <ccts:Description>Cargo moving from a coastal port for delivery at an inland location or cargo received at an inland location moving to a coastal port for subsequent ocean transportation.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="34">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Speed level - required</ccts:Name>
+            <ccts:Description>Maximum speed required on an itinerary or part of this itinerary to be able to assume some services.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="35">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Speed level - adopted</ccts:Name>
+            <ccts:Description>Real speed used on an itinerary or part of this itinerary (for technical reasons, some limitation can be imposed or some higher speed could be used).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="36">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Normal tariff, less than full load transport</ccts:Name>
+            <ccts:Description>Application of the published legal tariff in case of less than full load transport (required or not by the consignor).</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="37">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Re-expedition special tariff</ccts:Name>
+            <ccts:Description>Indication that a special tariff must be used in the case of a re-expedition.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="38">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport arrangement by the requester</ccts:Name>
+            <ccts:Description>The service requester has the responsibility of making transport arrangement.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="39">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport arrangement by the provider</ccts:Name>
+            <ccts:Description>The service provider has the responsibility of making transport arrangement.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="40">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <ccts:Name>Transport arrangement by the patient</ccts:Name>
+            <ccts:Description>The patient has the responsibility of making transport arrangement.</ccts:Description>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

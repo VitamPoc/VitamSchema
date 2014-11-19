@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="org:afnor:medona:1.0"
+    xmlns="org:afnor:medona:1.0" elementFormDefault="qualified"
+    xmlns:xlink="http://www.w3.org/1999/xlink" attributeFormDefault="unqualified" version="1.0">
+    <!-- VITAM: Fix schemaLocation -->
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    <!-- VITAM: Fix schemaLocation -->
+    <xsd:import namespace="http://www.w3.org/1999/xlink"
+        schemaLocation="http://www.w3.org/1999/xlink.xsd"/>
+
+    <xsd:include schemaLocation="vitam-types.xsd"/>
+    <xsd:include schemaLocation="descriptive-vitam.xsd"/>
+    <xsd:include schemaLocation="technical-vitam.xsd"/>
+
+    <!-- *****************************
+         ******* Types de base *******
+         ***************************** -->
+    <!-- Code retour et commentaire associe -->
+    <xsd:simpleType name="ReplyCodeType">
+        <xsd:annotation>
+            <xsd:documentation>ReplyCode type which the list is expressed in the ReplyCodeList</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType"/>
+    </xsd:simpleType>
+    <xsd:group name="ReplyCodeGroup">
+        <xsd:annotation>
+            <xsd:documentation>A reply code, from the list of reply code, and a description of the reason of this reply code, potentially with multiple entries </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ReplyCode" type="ReplyCodeType">
+                <xsd:annotation>
+                    <xsd:documentation>Code value from the ReplyCodeList</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ReplyDescription" type="xsd:string" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Description of the Reply Code, as detailed feedback. Maybe multiple</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <!-- Paquet d'objets de donnees -->
+    <xsd:complexType name="DataObjectPackageType">
+        <xsd:annotation>
+            <xsd:documentation>A list of Data objects</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice maxOccurs="unbounded" minOccurs="0">
+                <xsd:element name="BinaryDataObject" type="BinaryDataObjectType"/>
+                <xsd:element name="PhysicalDataObject" type="PhysicalDataObjectType"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Paquet de références d'objets de donnees validés -->
+    <xsd:complexType name="ApprovedDataObjectPackageType">
+        <xsd:annotation>
+            <xsd:documentation>A list of approved Data objects references</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice maxOccurs="unbounded" minOccurs="0">
+                <xsd:element name="BinaryDataObject">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RefId" type="RefIdType"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PhysicalDataObject">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RefId" type="RefIdType"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Paquet de références d'objets de donnees rejetes -->
+    <xsd:complexType name="RejectedDataObjectPackageType">
+        <xsd:annotation>
+            <xsd:documentation>A list of rejected Data objects references and their related Reply code
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice maxOccurs="unbounded">
+                <xsd:element name="BinaryDataObject">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RefId" type="RefIdType"/>
+                            <xsd:group ref="ReplyCodeGroup"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PhysicalDataObject">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RefId" type="RefIdType"/>
+                            <xsd:group ref="ReplyCodeGroup"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Liste des versions des referentiels utilises -->
+    <xsd:complexType name="TransportCodeListsType">
+        <xsd:annotation>
+            <xsd:documentation>Digest algorithm list used by the sender and ReplyCode list whishes by the sender to have as answer </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:group ref="DigestAlgorithmCodeListGroup"/>
+            <xsd:group ref="ReplyCodeListGroup"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:group name="ReplyCodeListGroup">
+        <xsd:sequence>
+            <xsd:element name="ReplyCodeListVersion" type="CodeType">
+                <xsd:annotation>
+                    <xsd:documentation>ReplyCodeList to be used or used</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <!-- Organisation -->
+    <xsd:complexType name="OrganizationType">
+        <xsd:annotation>
+            <xsd:documentation>Organization identifier and optional description</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Identifier" type="IdentifierType"/>
+            <xsd:element name="OrganizationDescriptiveMetadata" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- bloc de management global : proposition de VITAM = le retirer car en doublon -->
+    <xsd:complexType name="ManagementMetadataType">
+        <xsd:sequence>
+            <!-- Proposition VITAM : retrait car possiblement en doublon avec le code ArchivalAgreement qui peut indiquer la même chose -->
+            <xsd:element name="ArchivalProfile" type="IdentifierType" minOccurs="0"/>
+            <!-- Proposition VITAM : retrait car nous ne voyons pas à quoi cela correspond ? -->
+            <xsd:element name="ServiceLevel" type="IdentifierType" minOccurs="0"/>
+            <!-- Proposition de VITAM : retrait car présent dans le bloc gestion des métadonnées descriptives pour chaque Unité d'archives (y compris le premier) 
+            <xsd:element name="AccessRule" type="AccessRuleType" minOccurs="0"/>
+            <xsd:element name="AppraisalRule" type="AppraisalRuleType" minOccurs="0"/>
+             -->
+        </xsd:sequence>
+        <xsd:attribute ref="xml:id" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="TransferDataObjectPackageType">
+        <xsd:complexContent>
+            <xsd:extension base="DataObjectPackageType">
+                <xsd:sequence>
+                    <xsd:element name="DescriptiveMetadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:choice>
+                                    <xsd:element name="TechnicalFilePackage" type="TechnicalFilePackageType"
+                                        minOccurs="1" maxOccurs="unbounded">
+                                        <xsd:annotation>
+                                            <xsd:documentation>Reference to one or more files containing all the technical metadata, root being TechnicalMetadataType</xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="TechnicalMetadata" type="TechnicalMetadataType">
+                                        <xsd:annotation>
+                                            <xsd:documentation>To allow direct inclusion of individual TechnicalMetadata</xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:choice>
+                                <xsd:choice>
+                                    <xsd:element name="DescriptiveFilePackage" type="DescriptiveFilePackageType"
+                                        minOccurs="1" maxOccurs="unbounded">
+                                        <xsd:annotation>
+                                            <xsd:documentation>Reference to one or more files containing all the descriptive (and archive management) metadata, root being DescriptiveMetadataType</xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="DescriptiveMetadata" type="DescriptiveMetadataType">
+                                        <xsd:annotation>
+                                            <xsd:documentation>To allow direct inclusion of individual DescriptiveMedatada</xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:choice>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="ManagementMetadata" type="ManagementMetadataType"
+                        minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Metadonnees descriptives et de gestion pour un paquet d'Objets de donnees => stockes dans un fichier a part -->
+    <xsd:complexType name="DescriptiveFilePackageType">
+        <xsd:annotation>
+            <xsd:documentation>Descriptive and Management Metadata file with as root a DescriptionMetadata of type DescriptionMetadataType</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="DescriptiveMetadataFile" type="RefIdType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Metadonnees techniques pour un paquet d'Objets de donnees => stockes dans un fichier a part -->
+    <xsd:complexType name="TechnicalFilePackageType">
+        <xsd:annotation>
+            <xsd:documentation>Technical Metadata file with as root a TechnicalMetadata of type TechnicalMetadataType</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="TechnicalMetadataFile" type="RefIdType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ****************************************
+         *** Declaration des types de message ***
+         **************************************** -->
+    <!-- Message -->
+    <xsd:complexType name="MessageType">
+        <xsd:annotation>
+            <xsd:documentation>Date and Message identifier of this message and an optional signature
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Date" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>Date of the creation of this message</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MessageIdentifier" type="IdentifierType">
+                <xsd:annotation>
+                    <xsd:documentation>Unique ID of this message, from Sender point of view (uniqueness)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ArchivalAgreement" type="IdentifierType">
+                <xsd:annotation>
+                    <xsd:documentation>Contract archival agreement reference ID</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Signature" type="SignatureType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Optional content to specify a signature or whatever</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Message metier -->
+    <xsd:complexType name="BusinessMessageType">
+        <xsd:annotation>
+            <xsd:documentation>Must contains a CodeLists, some management metadata, the reference of archival and transferring agencies </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="MessageType">
+                <xsd:sequence>
+                    <xsd:element name="CodeListVersions" type="TransportCodeListsType">
+                        <xsd:annotation>
+                            <xsd:documentation>Specify the various codeLists that will be used or to be used in reply message</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ArchivalAgency" type="OrganizationType" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>Identification of the archival agency</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="TransferringAgency" type="OrganizationType" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>Identification of the transferring agency</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="OperatorAgency" type="OrganizationType" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>Identification of the operator agency, in charge of the transport operation in the ArchiveTransfer process</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Message de demande -->
+    <xsd:complexType name="BusinessRequestMessageType">
+        <xsd:complexContent>
+            <xsd:extension base="BusinessMessageType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Message de reponse a une demande -->
+    <xsd:complexType name="BusinessReplyMessageType">
+        <xsd:annotation>
+            <xsd:documentation>Contains in addition the message request identifier plus the reply code </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BusinessMessageType">
+                <xsd:sequence>
+                    <xsd:element name="MessageRequestIdentifier" type="IdentifierType">
+                        <xsd:annotation>
+                            <xsd:documentation>Identification of the request message for which this message is a reply</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:group ref="ReplyCodeGroup">
+                        <xsd:annotation>
+                            <xsd:documentation>The overall reply code of this message</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:group>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- ****************************************
+         *** Le message d'accuse de reception ***
+         **************************************** -->
+    <xsd:complexType name="AcknowledgementType">
+        <xsd:annotation>
+            <xsd:documentation>Simple acknowledge message containing the referenced message ID plus the send and receiver IDs </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="MessageType">
+                <xsd:sequence>
+                    <xsd:element name="MessageReceivedIdentifier" type="IdentifierType">
+                        <xsd:annotation>
+                            <xsd:documentation>Identification of the original message for which this message is an acknowledgement</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Sender" type="OrganizationType">
+                        <xsd:annotation>
+                            <xsd:documentation>Original sender of the original message: a request meaning transferringAgency, a reply meaning archivalAgency</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Receiver" type="OrganizationType">
+                        <xsd:annotation>
+                            <xsd:documentation>Original receiver of the original message: reverse of sender definition</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- *******************************
+         *** Les messages de requete ***
+         ******************************* -->
+    <!-- Message de transfert (attention le paquet de donnees est facultatif) -->
+    <xsd:complexType name="ArchiveTransferType">
+        <xsd:annotation>
+            <xsd:documentation>Implies the data object package, the descriptive Metadata and the technical Metadata contents and may contain a transferRequestReply id
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BusinessRequestMessageType">
+                <xsd:sequence>
+                    <xsd:element name="TransferRequestReplyIdentifier" type="IdentifierType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Request Reply Id if any (from ArchiveTransferReplyType)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DataObjectPackage" type="TransferDataObjectPackageType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Contains all information of DataObject, including Descriptive and Technical Metadata files references</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Message de demande de transfert -->
+    <xsd:complexType name="ArchiveTransferRequestType">
+        <xsd:annotation>
+            <xsd:documentation>The request of archive transfer may contains a proposal of date for transfer and the data object package </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BusinessRequestMessageType">
+                <xsd:sequence>
+                    <xsd:element name="TransferDate" type="xsd:dateTime" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Proposal of a date to accomplish the transfer</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DataObjectPackage" type="DataObjectPackageType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>The associated data object package - mainly for the size and number controls -</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- *********************************************
+         *** Les messages de reponse a une requete ***
+         ********************************************* -->
+    <!-- Message de reponse a un transfert -->
+    <xsd:complexType name="ArchiveTransferReplyType">
+        <xsd:annotation>
+            <xsd:documentation>The reply of an archive transfer may contains a date for approval (if approved) and the data object package (accepted or rejected) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BusinessReplyMessageType">
+                <xsd:sequence>
+                    <xsd:element name="GrantDate" type="xsd:dateTime" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>Date of the approval (if any)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ApprovedDataObjectPackage"
+                        type="ApprovedDataObjectPackageType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>The approved Data Objects: the reply code is unique and is the one on the top level of this message</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="RejectedDataObjectPackage"
+                        type="RejectedDataObjectPackageType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>The rejected Data Objects references and the reply code associated: might be also non rejected Data Objects references but with a different reply code than the global one</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Message de reponse a une demande de transfert -->
+    <xsd:complexType name="ArchiveTransferRequestReplyType">
+        <xsd:annotation>
+            <xsd:documentation>The reply of a request of archive transfer may contains a proposal of date for transfer (if approved) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BusinessReplyMessageType">
+                <xsd:sequence>
+                    <xsd:element name="TransferDate" type="xsd:dateTime" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation>The date - if any - for the future transfer</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Racines des messages possibles -->
+    <xsd:element name="Acknowledgement" type="AcknowledgementType">
+        <xsd:annotation>
+            <xsd:documentation>Acknowledgement message root</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ArchiveTransfer" type="ArchiveTransferType">
+        <xsd:annotation>
+            <xsd:documentation>ArchiveTransfer message root</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ArchiveTransferReply" type="ArchiveTransferReplyType">
+        <xsd:annotation>
+            <xsd:documentation>ArchiveTransferReply message root</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ArchiveTransferRequest" type="ArchiveTransferRequestType">
+        <xsd:annotation>
+            <xsd:documentation>ArchiveTransferRequest message root</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ArchiveTransferRequestReply" type="ArchiveTransferRequestReplyType">
+        <xsd:annotation>
+            <xsd:documentation>ArchiveTransferRequestReply message root</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <!-- *****************************
+         ****** Objets a specifier ***
+         ***************************** -->
+    <!-- Signature -->
+    <xsd:complexType name="SignatureType">
+        <xsd:annotation>
+            <xsd:documentation>A signature, if necessary, with message</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:any namespace="##other" processContents="lax" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

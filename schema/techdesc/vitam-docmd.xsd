@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Editor: Florida Center for Library Automation (FCLA) and Harvard University Library (HUL) Released: March 17, 2009 June 2, 2010 Change: Make PageCount 
+    element optional to account for PDFs whose pageCount cannot be determined. Oct 29, 2012 Change: Per request from National Library of France, 1. Add optional 
+    Reference element for URLs declared in the document. 2. Add hasFixedLayout, hasAudio, hasVideo and hasScripts features. 3. Add optional documentMetadataExtension 
+    section for extending DocumentMD. November 16, 2012 Change: Make documentMetadataExtension repeatable -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:docmd="http://www.fcla.edu/dls/md/docmd" elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>targetNamespace="http://www.fcla.edu/docmd"</xs:documentation>
+    </xs:annotation>
+    <xs:complexType name="DocMdType">
+        <xs:sequence>
+            <xs:element name="PageCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of pages in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="WordCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of words in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="CharacterCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of characters in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="ParagraphCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of paragraphs in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="LineCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of lines in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="TableCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of tables in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="GraphicsCount" minOccurs="0" type="xs:nonNegativeInteger">
+                <xs:annotation><xs:documentation>Total number of graphics (* andrea) in the document
+                </xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="Font" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation><xs:documentation>A list of fonts used in the document
+                </xs:documentation></xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="FontName" type="xs:string">
+                            <xs:annotation><xs:documentation>Name of a font
+                            </xs:documentation></xs:annotation>
+                        </xs:element>
+                        <xs:element name="IsEmbedded" type="xs:boolean">
+                            <xs:annotation><xs:documentation>An indication of whether or not a font is embedded in a document.
+                            </xs:documentation></xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="IsTagged" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>structure</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasOutline" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>behavior, appearance</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasThumbnails" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>appearance</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasLayers" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>appearance</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasForms" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>content</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasAnnotations" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>content</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasAttachments" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>structure, behavior</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="UseTransparency" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>appearance</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasFixedLayout" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>appearance</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasAudio" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>content</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasVideo" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>content</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="HasScripts" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>appearance, behavior</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="IsProtected" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>Is this document protected by a password</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="KeyProtection" type="xs:string" minOccurs="0">
+                <xs:annotation><xs:documentation>If the document is password protected, the password</xs:documentation></xs:annotation>
+            </xs:element>
+            <xs:element name="IsRightsManaged" type="xs:boolean" minOccurs="0">
+                <xs:annotation><xs:documentation>Is this document containing some DRM</xs:documentation></xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

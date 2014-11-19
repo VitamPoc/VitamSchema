@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="org:afnor:medona:1.0" xmlns="org:afnor:medona:1.0" 
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xsd:include schemaLocation="vitam-types.xsd" />
+    
+    <xsd:complexType name="BooleanQueryType">
+        <xsd:sequence>
+            <xsd:element name="Operator" type="BooleanOperatorType"/>
+            <xsd:choice maxOccurs="unbounded">
+                <xsd:element name="Query" type="OperatorQueryType" />
+                <xsd:element name="BooleanQuery" type="BooleanQueryType" />
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="XpathType">
+        <xsd:annotation>
+            <xsd:documentation>an XPATH 2.0 expression</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value=".+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="OperatorQueryType">
+        <xsd:sequence>
+            <xsd:element name="Operator" type="OperatorType">
+                <xsd:annotation><xsd:documentation>Operator used in the query</xsd:documentation></xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Key" type="NonEmptyTokenType" minOccurs="0">
+                <xsd:annotation><xsd:documentation>Field name to compare with (first operand), from EAS data structure.
+                    Ex: Key lt value
+                </xsd:documentation></xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="ValuePath" type="XpathType" minOccurs="0">
+                    <xsd:annotation><xsd:documentation>Value from descriptive data structure using xpath query</xsd:documentation></xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Value" type="xsd:anySimpleType" minOccurs="0">
+                    <xsd:annotation><xsd:documentation>Fixed value if value not from Field reference</xsd:documentation></xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="BooleanOperatorType">
+        <xsd:annotation>
+            <xsd:documentation>And, Or, Not</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType">
+            <xsd:enumeration value="and"/>
+            <xsd:enumeration value="or"/>
+            <xsd:enumeration value="not" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="OperatorType">
+        <xsd:union memberTypes="SimpleOperatorType DoubleOperatorType"></xsd:union>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="SimpleOperatorType">
+        <xsd:annotation>
+            <xsd:documentation>Exists, Not Exists, ...</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType">
+            <xsd:enumeration value="exists">
+                <xsd:annotation>
+                    <xsd:documentation>Field must exist</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="missing">
+                <xsd:annotation>
+                    <xsd:documentation>Field must not exist</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="isNull">
+                <xsd:annotation>
+                    <xsd:documentation>Field exists but empty or null</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="DoubleOperatorType">
+        <xsd:annotation>
+            <xsd:documentation>=, not =, Less Than, More Than, ...</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType">
+            <xsd:enumeration value="eq">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field equals the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="ne">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field not equals the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="lt">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field less than the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="lte">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field less than or equals the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="gt">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field greater than the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="gte">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field greater than or equals the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="size">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field equals the size of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="in">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field is IN the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="nin">
+                <xsd:annotation>
+                    <xsd:documentation>Value or Field is not IN the value of the Node Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="match">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches some words from Value or Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="matchPhrase">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches a phrase from Value or Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="matchPhrasePrefix">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches a phrase as prefix from Value or Field</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="search">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches a search request from Value or Field.
+                        Search request contains wildcards (? *), and grouping (), exact "", +/- must/must not be present
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="regex">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches a regular expression request from Value or Field.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="term">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field contains an exact term from Value or Field (can contain more).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="wildcard">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field matches a wildcard request from Value or Field.
+                        Wildcard request contains wildcards (? *) and is only for TERM (not words in a phrase, but all in one)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="path">
+                <xsd:annotation>
+                    <xsd:documentation>the Node Field is exactly the result of the path from Value or Field (multiple Path are to be used in order).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
