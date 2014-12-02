@@ -346,6 +346,45 @@
         </xsd:complexContent>
     </xsd:complexType>
 
+    <xsd:simpleType name="FinalActionCodeType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Peut être: 
+                - pour une DUA classique : Conserver / Détruire
+                - pour une durée de stockage (conservation) : Acces Réservé / Transférer(Réversibilité) / Copier
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NonEmptyTokenType">
+            <!-- Appraisal Code -->
+            <xsd:enumeration value="Keep">
+                <xsd:annotation>
+                    <xsd:documentation>Appraisal Only</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Destroy">
+                <xsd:annotation>
+                    <xsd:documentation>Appraisal Only</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <!-- Storage Code -->
+            <xsd:enumeration value="RestrictAccess">
+                <xsd:annotation>
+                    <xsd:documentation>Storage Only</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Transferr">
+                <xsd:annotation>
+                    <xsd:documentation>Storage Only</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Copy">
+                <xsd:annotation>
+                    <xsd:documentation>Storage Only</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
     <xsd:complexType name="GeneralRetentionRuleType">
         <xsd:annotation>
             <xsd:documentation>Final status starts when all Retention Durations are over.
@@ -358,7 +397,7 @@
         <xsd:complexContent>
             <xsd:extension base="ConstraintRuleIdType">
                 <xsd:sequence>
-                    <xsd:element name="RefFinalActionRule" type="NonEmptyTokenType">
+                    <xsd:element name="FinalActionCode" type="FinalActionCodeType">
                         <xsd:annotation>
                             <xsd:documentation>
                             Peut être: 
