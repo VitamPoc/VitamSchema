@@ -15,3 +15,5 @@ In Schema is the schema based on MEDONA (AFNOR NF Z44-022) and SEDA 1.0, as a ba
 In Schema/techdesc is a partial schema for technical metadata (not validated).
 In Schema/Sae is a partial schema for technical metadata in the SAE, from SIP.
 In sources is various documentations, schema and example from previous projects or norms or institutions.
+
+The XML documentation could be found here: [http://vitampoc.github.io/VitamSchema](http://vitampoc.github.io/VitamSchema)
