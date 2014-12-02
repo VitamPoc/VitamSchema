@@ -1,0 +1,861 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component Date</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_DescriptiveMetadataType_Date', 
+				'properties_DescriptiveMetadataType_CodeListVersions', 
+				'properties_DescriptiveMetadataType_UnitDescriptiveMetadata');
+var usedByBoxes= new Array('usedBy_DescriptiveMetadataType');
+var sourceBoxes= new Array('source_DescriptiveMetadataType_Date', 
+				'source_DescriptiveMetadataType_CodeListVersions', 
+				'source_DescriptiveMetadataType_UnitDescriptiveMetadata', 
+				'source_DescriptiveMetadataType');
+var instanceBoxes= new Array('instance_DescriptiveMetadataType_CodeListVersions', 
+				'instance_DescriptiveMetadataType_UnitDescriptiveMetadata');
+var diagramBoxes= new Array('diagram_DescriptiveMetadataType_Date', 
+				'diagram_DescriptiveMetadataType_CodeListVersions', 
+				'diagram_DescriptiveMetadataType_UnitDescriptiveMetadata', 
+				'diagram_DescriptiveMetadataType');
+var annotationBoxes= new Array('annotations_DescriptiveMetadataType_Date', 
+				'annotations_DescriptiveMetadataType_CodeListVersions', 
+				'annotations_DescriptiveMetadataType_UnitDescriptiveMetadata', 
+				'annotations_DescriptiveMetadataType');
+var modelBoxes= new Array('model_DescriptiveMetadataType_CodeListVersions', 
+				'model_DescriptiveMetadataType_UnitDescriptiveMetadata', 
+				'model_DescriptiveMetadataType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DescriptiveMetadataType_Date"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DescriptiveMetadataType')">DescriptiveMetadataType</a></b> / Date</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DescriptiveMetadataType_Date" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DescriptiveMetadataType_Date');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DescriptiveMetadataType_Date" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date of the creation of this metadata file</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DescriptiveMetadataType_Date" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DescriptiveMetadataType_Date');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DescriptiveMetadataType_Date" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_Date.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DescriptiveMetadataType_Date" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DescriptiveMetadataType_Date');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DescriptiveMetadataType_Date" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptiveMetadataType_Date" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DescriptiveMetadataType_Date');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptiveMetadataType_Date" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Date"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date of the creation of this metadata file</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DescriptiveMetadataType_CodeListVersions"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DescriptiveMetadataType')">DescriptiveMetadataType</a></b> / CodeListVersions</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DescriptiveMetadataType_CodeListVersions" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">CodeLists used in Management description</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DescriptiveMetadataType_CodeListVersions" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_CodeListVersions.png" usemap="#descriptive-vitam_xsd_Element_CodeListVersions" /><map name="descriptive-vitam_xsd_Element_CodeListVersions" id="descriptive-vitam_xsd_Element_CodeListVersions">
+                                 <area alt="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.tmp#StorageRuleCodeListGroup_StorageRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.html#StorageRuleCodeListGroup_StorageRuleCodeListVersion" coords="335,88,505,113" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.tmp#StorageRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.html#StorageRuleCodeListGroup" coords="253,43,439,69" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.tmp#AppraisalRuleCodeListGroup_AppraisalRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.html#AppraisalRuleCodeListGroup_AppraisalRuleCodeListVersion" coords="335,223,513,248" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.tmp#AppraisalRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.html#AppraisalRuleCodeListGroup" coords="253,178,447,204" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.tmp#AccessRestrictionRuleCodeListGroup_AccessRestrictionRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.html#AccessRestrictionRuleCodeListGroup_AccessRestrictionRuleCodeListVersion" coords="335,344,556,369" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.tmp#AccessRestrictionRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.html#AccessRestrictionRuleCodeListGroup" coords="253,299,490,325" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.tmp#DisseminationRestrictionRuleCodeListGroup_DisseminationRestrictionRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.html#DisseminationRestrictionRuleCodeListGroup_DisseminationRestrictionRuleCodeListVersion" coords="335,465,584,490" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.tmp#DisseminationRestrictionRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.html#DisseminationRestrictionRuleCodeListGroup" coords="253,420,518,446" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.tmp#ReuseRestrictionRuleCodeListGroup_ReuseRestrictionRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.html#ReuseRestrictionRuleCodeListGroup_ReuseRestrictionRuleCodeListVersion" coords="335,586,549,611" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.tmp#ReuseRestrictionRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.html#ReuseRestrictionRuleCodeListGroup" coords="253,541,483,567" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.tmp#ClassificationRuleCodeListGroup_ClassificationRestrictionRuleCodeListVersion" href="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.html#ClassificationRuleCodeListGroup_ClassificationRestrictionRuleCodeListVersion" coords="335,707,582,732" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.tmp#ClassificationRuleCodeListGroup" href="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.html#ClassificationRuleCodeListGroup" coords="253,662,465,688" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DescriptiveCodeListsType.tmp#DescriptiveCodeListsType" href="descriptive-vitam_xsd_Complex_Type_DescriptiveCodeListsType.html#DescriptiveCodeListsType" coords="168,3,345,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveCodeListsType.html#DescriptiveCodeListsType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DescriptiveCodeListsType')">DescriptiveCodeListsType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DescriptiveMetadataType_CodeListVersions" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DescriptiveMetadataType_CodeListVersions" style="display:block"><b><a href="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.html#StorageRuleCodeListGroup_StorageRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRuleCodeListVersion')">StorageRuleCodeListVersion</a></b> , <b><a href="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.html#AppraisalRuleCodeListGroup_AppraisalRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRuleCodeListVersion')">AppraisalRuleCodeListVersion</a></b> , <b><a href="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.html#AccessRestrictionRuleCodeListGroup_AccessRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRuleCodeListVersion')">AccessRestrictionRuleCodeListVersion</a></b> , <b><a href="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.html#DisseminationRestrictionRuleCodeListGroup_DisseminationRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRuleCodeListVersion')">DisseminationRestrictionRuleCodeListVersion</a></b> , <b><a href="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.html#ReuseRestrictionRuleCodeListGroup_ReuseRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRuleCodeListVersion')">ReuseRestrictionRuleCodeListVersion</a></b> , <b><a href="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.html#ClassificationRuleCodeListGroup_ClassificationRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRestrictionRuleCodeListVersion')">ClassificationRestrictionRuleCodeListVersion</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Element_Group_AccessRestrictionRuleCodeListGroup.html#AccessRestrictionRuleCodeListGroup_AccessRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRuleCodeListVersion')">AccessRestrictionRuleCodeListVersion</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_AppraisalRuleCodeListGroup.html#AppraisalRuleCodeListGroup_AppraisalRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRuleCodeListVersion')">AppraisalRuleCodeListVersion</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_ClassificationRuleCodeListGroup.html#ClassificationRuleCodeListGroup_ClassificationRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRestrictionRuleCodeListVersion')">ClassificationRestrictionRuleCodeListVersion</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_DisseminationRestrictionRuleCodeListGroup.html#DisseminationRestrictionRuleCodeListGroup_DisseminationRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRuleCodeListVersion')">DisseminationRestrictionRuleCodeListVersion</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_ReuseRestrictionRuleCodeListGroup.html#ReuseRestrictionRuleCodeListGroup_ReuseRestrictionRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRuleCodeListVersion')">ReuseRestrictionRuleCodeListVersion</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_StorageRuleCodeListGroup.html#StorageRuleCodeListGroup_StorageRuleCodeListVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRuleCodeListVersion')">StorageRuleCodeListVersion</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DescriptiveMetadataType_CodeListVersions" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;CodeListVersions</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;StorageRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/StorageRuleCodeListVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AppraisalRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AppraisalRuleCodeListVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;AccessRestrictionRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/AccessRestrictionRuleCodeListVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DisseminationRestrictionRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/DisseminationRestrictionRuleCodeListVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ReuseRestrictionRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ReuseRestrictionRuleCodeListVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ClassificationRestrictionRuleCodeListVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ClassificationRestrictionRuleCodeListVersion&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/CodeListVersions&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptiveMetadataType_CodeListVersions" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DescriptiveMetadataType_CodeListVersions');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptiveMetadataType_CodeListVersions" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CodeListVersions"</span><span class="tAN"> type=</span><span class="tAV">"DescriptiveCodeListsType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">CodeLists used in Management description</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DescriptiveMetadataType_UnitDescriptiveMetadata"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DescriptiveMetadataType')">DescriptiveMetadataType</a></b> / UnitDescriptiveMetadata</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">List of descriptive metadata in tree format (multiple trees being a DAG)</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_UnitDescriptiveMetadata_1.png" usemap="#descriptive-vitam_xsd_Element_UnitDescriptiveMetadata_1" /><map name="descriptive-vitam_xsd_Element_UnitDescriptiveMetadata_1" id="descriptive-vitam_xsd_Element_UnitDescriptiveMetadata_1">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_XmlRefId" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlRefId" coords="280,40,353,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitDescriptiveMetadataFile" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataFile" coords="280,134,443,159" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup_MessageIdentifier" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" coords="436,258,552,283" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" coords="436,324,632,349" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup" coords="354,217,532,243" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_XmlId" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlId" coords="351,442,407,467" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitManagementMetadataContent" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitManagementMetadataContent" coords="351,536,542,561" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitDescriptiveMetadataContent" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataContent" coords="351,602,535,627" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitRestrictedDescriptiveMetadataContent" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitRestrictedDescriptiveMetadataContent" coords="351,668,584,693" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitDescriptiveMetadata" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadata" coords="513,734,660,759" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_UnitDescriptiveMetadataReference" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataReference" coords="513,800,711,825" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_DataObjectReference" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_DataObjectReference" coords="513,880,648,905" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType_NullObject" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_NullObject" coords="442,960,510,985" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.tmp#UnitDescriptiveMetadataType" href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType" coords="198,3,389,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataType')">UnitDescriptiveMetadataType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlRefId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component XmlRefId')">XmlRefId</a></b> | <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataFile" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataFile')">UnitDescriptiveMetadataFile</a></b> | (<b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MessageIdentifier')">MessageIdentifier</a></b> , <b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ArchiveTransferMessageIdentifier')">ArchiveTransferMessageIdentifier</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component XmlId')">XmlId</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitManagementMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContent{0,1}')">UnitManagementMetadataContent{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataContent')">UnitDescriptiveMetadataContent</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitRestrictedDescriptiveMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitRestrictedDescriptiveMetadataContent{0,1}')">UnitRestrictedDescriptiveMetadataContent{0,1}</a></b> , (<b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadata')">UnitDescriptiveMetadata</a></b> | <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataReference" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataReference')">UnitDescriptiveMetadataReference</a></b> | <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_DataObjectReference" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DataObjectReference')">DataObjectReference</a></b> | <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_NullObject" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NullObject')">NullObject</a></b>))
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ArchiveTransferMessageIdentifier')">ArchiveTransferMessageIdentifier</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_DataObjectReference" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DataObjectReference')">DataObjectReference</a></b>, <b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MessageIdentifier')">MessageIdentifier</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_NullObject" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NullObject')">NullObject</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadata')">UnitDescriptiveMetadata</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataContent')">UnitDescriptiveMetadataContent</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataFile" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataFile')">UnitDescriptiveMetadataFile</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitDescriptiveMetadataReference" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadataReference')">UnitDescriptiveMetadataReference</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitManagementMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContent')">UnitManagementMetadataContent</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_UnitRestrictedDescriptiveMetadataContent" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitRestrictedDescriptiveMetadataContent')">UnitRestrictedDescriptiveMetadataContent</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component XmlId')">XmlId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitDescriptiveMetadataType.html#UnitDescriptiveMetadataType_XmlRefId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component XmlRefId')">XmlRefId</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;UnitDescriptiveMetadata</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;XmlRefId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/XmlRefId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitDescriptiveMetadataFile</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/UnitDescriptiveMetadataFile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;MessageIdentifier</span><span class="tT"> </span><span class="tAN">schemeAgencyID=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeAgencyName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeDataURI=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeID=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeURI=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeVersionID=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/MessageIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ArchiveTransferMessageIdentifier</span><span class="tT"> </span><span class="tAN">schemeAgencyID=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeAgencyName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeDataURI=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeID=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeURI=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">schemeVersionID=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ArchiveTransferMessageIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;XmlId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/XmlId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitManagementMetadataContent</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/UnitManagementMetadataContent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitDescriptiveMetadataContent</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/UnitDescriptiveMetadataContent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitRestrictedDescriptiveMetadataContent</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/UnitRestrictedDescriptiveMetadataContent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitDescriptiveMetadata</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/UnitDescriptiveMetadata&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;UnitDescriptiveMetadataReference</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/UnitDescriptiveMetadataReference&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DataObjectReference</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/DataObjectReference&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NullObject</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/NullObject&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/UnitDescriptiveMetadata&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptiveMetadataType_UnitDescriptiveMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DescriptiveMetadataType_UnitDescriptiveMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptiveMetadataType_UnitDescriptiveMetadata" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"UnitDescriptiveMetadata"</span><span class="tAN"> type=</span><span class="tAV">"UnitDescriptiveMetadataType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">List of descriptive metadata in tree format (multiple trees being a DAG)</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DescriptiveMetadataType"></a><div class="componentTitle">Complex Type <span class="qname">DescriptiveMetadataType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DescriptiveMetadataType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DescriptiveMetadataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DescriptiveMetadataType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date and Message identifier of this message, the referenced archive transfer message id, the tools list used and the descriptive metadata dag</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DescriptiveMetadataType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DescriptiveMetadataType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DescriptiveMetadataType" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.png" usemap="#descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType" /><map name="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType" id="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.tmp#DescriptiveMetadataType_Date" href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_Date" coords="316,0,369,25" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup_MessageIdentifier" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" coords="401,110,517,135" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" coords="401,176,597,201" />
+                                 <area alt="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.tmp#SubXmlFileIdentifierGroup" href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup" coords="319,69,497,95" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.tmp#DescriptiveMetadataType_CodeListVersions" href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_CodeListVersions" coords="316,294,433,319" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.tmp#DescriptiveMetadataType_UnitDescriptiveMetadata" href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_UnitDescriptiveMetadata" coords="316,360,463,385" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DescriptiveMetadataType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DescriptiveMetadataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DescriptiveMetadataType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Elements </td>
+                                    <td><b><a href="descriptive-vitam_xsd_Element_DescriptiveMetadata.html#DescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DescriptiveMetadata')">DescriptiveMetadata</a></b>, <b><a href="transport-vitam-medona_xsd_Complex_Type_TransferDataObjectPackageType.html#TransferDataObjectPackageType_TransferDataObjectPackageType_DescriptiveMetadata_DescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component TransferDataObjectPackageType/DescriptiveMetadata/DescriptiveMetadata')">TransferDataObjectPackageType/DescriptiveMetadata/DescriptiveMetadata</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DescriptiveMetadataType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DescriptiveMetadataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DescriptiveMetadataType" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_Date" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Date{0,1}')">Date{0,1}</a></b> , <b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MessageIdentifier')">MessageIdentifier</a></b> , <b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ArchiveTransferMessageIdentifier')">ArchiveTransferMessageIdentifier</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_CodeListVersions" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CodeListVersions')">CodeListVersions</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_UnitDescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadata+')">UnitDescriptiveMetadata+</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_ArchiveTransferMessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ArchiveTransferMessageIdentifier')">ArchiveTransferMessageIdentifier</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_CodeListVersions" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CodeListVersions')">CodeListVersions</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_Date" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Date')">Date</a></b>, <b><a href="vitam-types_xsd_Element_Group_SubXmlFileIdentifierGroup.html#SubXmlFileIdentifierGroup_MessageIdentifier" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MessageIdentifier')">MessageIdentifier</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_DescriptiveMetadataType.html#DescriptiveMetadataType_UnitDescriptiveMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitDescriptiveMetadata')">UnitDescriptiveMetadata</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptiveMetadataType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DescriptiveMetadataType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptiveMetadataType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"DescriptiveMetadataType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and Message identifier of this message, the referenced archive transfer message id, the tools list used and the descriptive metadata dag</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Date"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date of the creation of this metadata file</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"SubXmlFileIdentifierGroup"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CodeListVersions"</span><span class="tAN"> type=</span><span class="tAV">"DescriptiveCodeListsType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">CodeLists used in Management description</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"UnitDescriptiveMetadata"</span><span class="tAN"> type=</span><span class="tAV">"UnitDescriptiveMetadataType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">List of descriptive metadata in tree format (multiple trees being a DAG)</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

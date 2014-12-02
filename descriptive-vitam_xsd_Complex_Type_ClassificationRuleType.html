@@ -1,0 +1,1025 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component ClassificationLevel</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_ClassificationRuleType_ClassificationLevel', 
+				'properties_ClassificationRuleType_Mention', 
+				'properties_ClassificationRuleType_ClassificationOwner', 
+				'properties_ClassificationRuleType_ClassificationReassessingDate', 
+				'properties_ClassificationRuleType_NeedReassessingAuthorization');
+var facetsBoxes= new Array('facets_ClassificationRuleType_ClassificationLevel', 
+				'facets_ClassificationRuleType_Mention', 
+				'facets_ClassificationRuleType_ClassificationOwner');
+var usedByBoxes= new Array('usedBy_ClassificationRuleType');
+var sourceBoxes= new Array('source_ClassificationRuleType_ClassificationLevel', 
+				'source_ClassificationRuleType_Mention', 
+				'source_ClassificationRuleType_ClassificationOwner', 
+				'source_ClassificationRuleType_ClassificationReassessingDate', 
+				'source_ClassificationRuleType_NeedReassessingAuthorization', 
+				'source_ClassificationRuleType');
+var diagramBoxes= new Array('diagram_ClassificationRuleType_ClassificationLevel', 
+				'diagram_ClassificationRuleType_Mention', 
+				'diagram_ClassificationRuleType_ClassificationOwner', 
+				'diagram_ClassificationRuleType_ClassificationReassessingDate', 
+				'diagram_ClassificationRuleType_NeedReassessingAuthorization', 
+				'diagram_ClassificationRuleType');
+var annotationBoxes= new Array('annotations_ClassificationRuleType_ClassificationLevel', 
+				'annotations_ClassificationRuleType_Mention', 
+				'annotations_ClassificationRuleType_ClassificationOwner', 
+				'annotations_ClassificationRuleType_ClassificationReassessingDate', 
+				'annotations_ClassificationRuleType');
+var modelBoxes= new Array('model_ClassificationRuleType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ClassificationRuleType_ClassificationLevel"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b> / ClassificationLevel</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ClassificationRuleType_ClassificationLevel" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ClassificationRuleType_ClassificationLevel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ClassificationRuleType_ClassificationLevel" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Code describing the classification level</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType_ClassificationLevel" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType_ClassificationLevel');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType_ClassificationLevel" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_ClassificationLevel.png" usemap="#descriptive-vitam_xsd_Element_ClassificationLevel" /><map name="descriptive-vitam_xsd_Element_ClassificationLevel" id="descriptive-vitam_xsd_Element_ClassificationLevel">
+                                 <area alt="vitam-types_xsd_Simple_Type_NonEmptyTokenType.tmp#NonEmptyTokenType" href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" coords="169,0,325,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NonEmptyTokenType')">NonEmptyTokenType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ClassificationRuleType_ClassificationLevel" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ClassificationRuleType_ClassificationLevel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ClassificationRuleType_ClassificationLevel" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ClassificationRuleType_ClassificationLevel" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ClassificationRuleType_ClassificationLevel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ClassificationRuleType_ClassificationLevel" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minLength</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType_ClassificationLevel" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType_ClassificationLevel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType_ClassificationLevel" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationLevel"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Code describing the classification level</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ClassificationRuleType_Mention"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b> / Mention</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ClassificationRuleType_Mention" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ClassificationRuleType_Mention');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ClassificationRuleType_Mention" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Mention France/xxx</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType_Mention" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType_Mention');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType_Mention" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_Mention.png" usemap="#descriptive-vitam_xsd_Element_Mention" /><map name="descriptive-vitam_xsd_Element_Mention" id="descriptive-vitam_xsd_Element_Mention">
+                                 <area alt="vitam-types_xsd_Simple_Type_NonEmptyTokenType.tmp#NonEmptyTokenType" href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" coords="116,0,272,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NonEmptyTokenType')">NonEmptyTokenType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ClassificationRuleType_Mention" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ClassificationRuleType_Mention');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ClassificationRuleType_Mention" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ClassificationRuleType_Mention" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ClassificationRuleType_Mention');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ClassificationRuleType_Mention" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minLength</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType_Mention" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType_Mention');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType_Mention" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Mention"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Mention France/xxx</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ClassificationRuleType_ClassificationOwner"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b> / ClassificationOwner</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ClassificationRuleType_ClassificationOwner" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ClassificationRuleType_ClassificationOwner');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ClassificationRuleType_ClassificationOwner" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Propriétaire de la classification</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType_ClassificationOwner" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType_ClassificationOwner');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType_ClassificationOwner" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_ClassificationOwner.png" usemap="#descriptive-vitam_xsd_Element_ClassificationOwner" /><map name="descriptive-vitam_xsd_Element_ClassificationOwner" id="descriptive-vitam_xsd_Element_ClassificationOwner">
+                                 <area alt="vitam-types_xsd_Simple_Type_NonEmptyTokenType.tmp#NonEmptyTokenType" href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" coords="177,0,333,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="vitam-types_xsd_Simple_Type_NonEmptyTokenType.html#NonEmptyTokenType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NonEmptyTokenType')">NonEmptyTokenType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ClassificationRuleType_ClassificationOwner" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ClassificationRuleType_ClassificationOwner');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ClassificationRuleType_ClassificationOwner" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ClassificationRuleType_ClassificationOwner" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ClassificationRuleType_ClassificationOwner');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ClassificationRuleType_ClassificationOwner" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minLength</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType_ClassificationOwner" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType_ClassificationOwner');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType_ClassificationOwner" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationOwner"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Propriétaire de la classification</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ClassificationRuleType_ClassificationReassessingDate"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b> / ClassificationReassessingDate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ClassificationRuleType_ClassificationReassessingDate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ClassificationRuleType_ClassificationReassessingDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ClassificationRuleType_ClassificationReassessingDate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date de réévaluation d'une classification</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType_ClassificationReassessingDate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType_ClassificationReassessingDate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType_ClassificationReassessingDate" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_ClassificationReassessingDate.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:date</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ClassificationRuleType_ClassificationReassessingDate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ClassificationRuleType_ClassificationReassessingDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ClassificationRuleType_ClassificationReassessingDate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType_ClassificationReassessingDate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType_ClassificationReassessingDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType_ClassificationReassessingDate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationReassessingDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de réévaluation d'une classification</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ClassificationRuleType_NeedReassessingAuthorization"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b> / NeedReassessingAuthorization</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType_NeedReassessingAuthorization" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType_NeedReassessingAuthorization');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType_NeedReassessingAuthorization" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_NeedReassessingAuthorization.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:boolean</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ClassificationRuleType_NeedReassessingAuthorization" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ClassificationRuleType_NeedReassessingAuthorization');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ClassificationRuleType_NeedReassessingAuthorization" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType_NeedReassessingAuthorization" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType_NeedReassessingAuthorization');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType_NeedReassessingAuthorization" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"NeedReassessingAuthorization"</span><span class="tAN"> type=</span><span class="tAV">"xsd:boolean"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ClassificationRuleType"></a><div class="componentTitle">Complex Type <span class="qname">ClassificationRuleType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ClassificationRuleType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ClassificationRuleType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ClassificationRuleType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Classification restriction to status on classification level and status</span><span class="tI">
+</span><span class="tT">- High Authorized context is allowed to bypass, depending of the configuration of the EAS</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ClassificationRuleType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ClassificationRuleType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ClassificationRuleType" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.png" usemap="#descriptive-vitam_xsd_Complex_Type_ClassificationRuleType" /><map name="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType" id="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="317,40,369,65" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="422,119,543,144" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="422,199,518,224" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="320,78,468,104" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="215,3,453,25" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationLevel" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" coords="283,338,404,363" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_Mention" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" coords="283,404,351,429" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationOwner" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" coords="283,470,412,495" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationReassessingDate" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" coords="283,536,463,561" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_NeedReassessingAuthorization" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" coords="283,602,466,627" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ClassificationRuleType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_ClassificationRuleType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ClassificationRuleType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ClassificationRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType/ClassificationRule')">UnitManagementMetadataContentType/ClassificationRule</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ClassificationRuleType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ClassificationRuleType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ClassificationRuleType" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationLevel')">ClassificationLevel</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Mention')">Mention</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationOwner')">ClassificationOwner</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationReassessingDate{0,1}')">ClassificationReassessingDate{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedReassessingAuthorization{0,1}')">NeedReassessingAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationLevel')">ClassificationLevel</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationOwner')">ClassificationOwner</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationReassessingDate')">ClassificationReassessingDate</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Mention')">Mention</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedReassessingAuthorization')">NeedReassessingAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ClassificationRuleType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ClassificationRuleType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ClassificationRuleType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"ClassificationRuleType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Classification restriction to status on classification level and status - High Authorized context is allowed to bypass, depending of the configuration of the EAS</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:extension</span><span class="tAN"> base=</span><span class="tAV">"ConstraintRuleIdType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationLevel"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Code describing the classification level</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Mention"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Mention France/xxx</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationOwner"</span><span class="tAN"> type=</span><span class="tAV">"NonEmptyTokenType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Propriétaire de la classification</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationReassessingDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de réévaluation d'une classification</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"NeedReassessingAuthorization"</span><span class="tAN"> type=</span><span class="tAV">"xsd:boolean"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

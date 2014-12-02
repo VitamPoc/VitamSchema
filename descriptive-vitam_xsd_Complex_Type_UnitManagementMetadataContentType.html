@@ -1,0 +1,1501 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component StorageRule</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_UnitManagementMetadataContentType_StorageRule', 
+				'properties_UnitManagementMetadataContentType_AppraisalRule', 
+				'properties_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'properties_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'properties_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'properties_UnitManagementMetadataContentType_ClassificationRule', 
+				'properties_UnitManagementMetadataContentType_Other');
+var usedByBoxes= new Array('usedBy_UnitManagementMetadataContentType');
+var sourceBoxes= new Array('source_UnitManagementMetadataContentType_StorageRule', 
+				'source_UnitManagementMetadataContentType_AppraisalRule', 
+				'source_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'source_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'source_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'source_UnitManagementMetadataContentType_ClassificationRule', 
+				'source_UnitManagementMetadataContentType_Other', 
+				'source_UnitManagementMetadataContentType');
+var instanceBoxes= new Array('instance_UnitManagementMetadataContentType_StorageRule', 
+				'instance_UnitManagementMetadataContentType_AppraisalRule', 
+				'instance_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'instance_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'instance_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'instance_UnitManagementMetadataContentType_ClassificationRule');
+var diagramBoxes= new Array('diagram_UnitManagementMetadataContentType_StorageRule', 
+				'diagram_UnitManagementMetadataContentType_AppraisalRule', 
+				'diagram_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'diagram_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'diagram_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'diagram_UnitManagementMetadataContentType_ClassificationRule', 
+				'diagram_UnitManagementMetadataContentType_Other', 
+				'diagram_UnitManagementMetadataContentType');
+var annotationBoxes= new Array('annotations_UnitManagementMetadataContentType_StorageRule', 
+				'annotations_UnitManagementMetadataContentType_AppraisalRule', 
+				'annotations_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'annotations_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'annotations_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'annotations_UnitManagementMetadataContentType_ClassificationRule', 
+				'annotations_UnitManagementMetadataContentType');
+var modelBoxes= new Array('model_UnitManagementMetadataContentType_StorageRule', 
+				'model_UnitManagementMetadataContentType_AppraisalRule', 
+				'model_UnitManagementMetadataContentType_AccessRestrictionRule', 
+				'model_UnitManagementMetadataContentType_DisseminationRestrictionRule', 
+				'model_UnitManagementMetadataContentType_ReuseRestrictionRule', 
+				'model_UnitManagementMetadataContentType_ClassificationRule', 
+				'model_UnitManagementMetadataContentType_Other', 
+				'model_UnitManagementMetadataContentType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="UnitManagementMetadataContentType_StorageRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / StorageRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_StorageRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Shall this item change of storage after a delay (restricted access, copied, transferred)</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_StorageRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_StorageRule.png" usemap="#descriptive-vitam_xsd_Element_StorageRule" /><map name="descriptive-vitam_xsd_Element_StorageRule" id="descriptive-vitam_xsd_Element_StorageRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="271,120,323,145" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="376,199,497,224" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="376,279,472,304" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="274,158,422,184" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="169,83,407,105" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType_FinalActionCode" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" coords="237,418,346,443" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType_NeedAuthorization" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" coords="237,512,357,537" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType" coords="155,43,419,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_StorageRuleType.tmp#StorageRuleType" href="descriptive-vitam_xsd_Complex_Type_StorageRuleType.html#StorageRuleType" coords="141,3,275,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_StorageRuleType.html#StorageRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRuleType')">StorageRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component GeneralRetentionRuleType')">GeneralRetentionRuleType</a></b><ul>
+                                          <li><b><a href="descriptive-vitam_xsd_Complex_Type_StorageRuleType.html#StorageRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRuleType')">StorageRuleType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_StorageRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_StorageRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FinalActionCode')">FinalActionCode</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization{0,1}')">NeedAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FinalActionCode')">FinalActionCode</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization')">NeedAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_StorageRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;StorageRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;FinalActionCode</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/FinalActionCode&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NeedAuthorization</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/NeedAuthorization&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/StorageRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_StorageRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_StorageRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_StorageRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"StorageRule"</span><span class="tAN"> type=</span><span class="tAV">"StorageRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Shall this item change of storage after a delay (restricted access, copied, transferred)</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_AppraisalRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / AppraisalRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_AppraisalRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Shall this item be Keep or Detroy after the delay</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_AppraisalRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_AppraisalRule.png" usemap="#descriptive-vitam_xsd_Element_AppraisalRule" /><map name="descriptive-vitam_xsd_Element_AppraisalRule" id="descriptive-vitam_xsd_Element_AppraisalRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="279,120,331,145" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="384,199,505,224" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="384,279,480,304" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="282,158,430,184" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="177,83,415,105" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType_FinalActionCode" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" coords="245,418,354,443" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType_NeedAuthorization" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" coords="245,512,365,537" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.tmp#GeneralRetentionRuleType" href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType" coords="163,43,427,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_AppraisalRuleType.tmp#AppraisalRuleType" href="descriptive-vitam_xsd_Complex_Type_AppraisalRuleType.html#AppraisalRuleType" coords="149,3,291,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_AppraisalRuleType.html#AppraisalRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRuleType')">AppraisalRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component GeneralRetentionRuleType')">GeneralRetentionRuleType</a></b><ul>
+                                          <li><b><a href="descriptive-vitam_xsd_Complex_Type_AppraisalRuleType.html#AppraisalRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRuleType')">AppraisalRuleType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_AppraisalRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_AppraisalRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FinalActionCode')">FinalActionCode</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization{0,1}')">NeedAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_FinalActionCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FinalActionCode')">FinalActionCode</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_GeneralRetentionRuleType.html#GeneralRetentionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization')">NeedAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_AppraisalRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;AppraisalRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;FinalActionCode</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/FinalActionCode&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NeedAuthorization</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/NeedAuthorization&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/AppraisalRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_AppraisalRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_AppraisalRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_AppraisalRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AppraisalRule"</span><span class="tAN"> type=</span><span class="tAV">"AppraisalRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Shall this item be Keep or Detroy after the delay</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_AccessRestrictionRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / AccessRestrictionRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">How long the standard restriction access will act</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_AccessRestrictionRule.png" usemap="#descriptive-vitam_xsd_Element_AccessRestrictionRule" /><map name="descriptive-vitam_xsd_Element_AccessRestrictionRule" id="descriptive-vitam_xsd_Element_AccessRestrictionRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="308,80,360,105" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="413,159,534,184" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="413,239,509,264" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="311,118,459,144" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="206,43,444,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.tmp#AccessRestrictionRuleType_NeedAuthorization" href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType_NeedAuthorization" coords="274,382,394,407" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.tmp#AccessRestrictionRuleType" href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType" coords="192,3,377,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRuleType')">AccessRestrictionRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRuleType')">AccessRestrictionRuleType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization{0,1}')">NeedAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_AccessRestrictionRuleType.html#AccessRestrictionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization')">NeedAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;AccessRestrictionRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NeedAuthorization</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/NeedAuthorization&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/AccessRestrictionRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_AccessRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_AccessRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_AccessRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AccessRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"AccessRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the standard restriction access will act</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_DisseminationRestrictionRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / DisseminationRestrictionRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">How long the dissemination restriction access will act</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_DisseminationRestrictionRule.png" usemap="#descriptive-vitam_xsd_Element_DisseminationRestrictionRule" /><map name="descriptive-vitam_xsd_Element_DisseminationRestrictionRule" id="descriptive-vitam_xsd_Element_DisseminationRestrictionRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="336,80,388,105" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="441,159,562,184" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="441,239,537,264" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="339,118,487,144" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="234,43,472,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.tmp#DisseminationRestrictionRuleType_NeedAuthorization" href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType_NeedAuthorization" coords="302,382,422,407" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.tmp#DisseminationRestrictionRuleType" href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType" coords="220,3,433,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRuleType')">DisseminationRestrictionRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRuleType')">DisseminationRestrictionRuleType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization{0,1}')">NeedAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_DisseminationRestrictionRuleType.html#DisseminationRestrictionRuleType_NeedAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedAuthorization')">NeedAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;DisseminationRestrictionRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NeedAuthorization</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/NeedAuthorization&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/DisseminationRestrictionRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_DisseminationRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_DisseminationRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_DisseminationRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DisseminationRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"DisseminationRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the dissemination restriction access will act</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_ReuseRestrictionRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / ReuseRestrictionRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">How long the capacity of reusing this item will be limited</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_ReuseRestrictionRule.png" usemap="#descriptive-vitam_xsd_Element_ReuseRestrictionRule" /><map name="descriptive-vitam_xsd_Element_ReuseRestrictionRule" id="descriptive-vitam_xsd_Element_ReuseRestrictionRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="301,80,353,105" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="406,159,527,184" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="406,239,502,264" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="304,118,452,144" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="199,43,437,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ReuseRestrictionRuleType.tmp#ReuseRestrictionRuleType" href="descriptive-vitam_xsd_Complex_Type_ReuseRestrictionRuleType.html#ReuseRestrictionRuleType" coords="185,3,363,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_ReuseRestrictionRuleType.html#ReuseRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRuleType')">ReuseRestrictionRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_ReuseRestrictionRuleType.html#ReuseRestrictionRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRuleType')">ReuseRestrictionRuleType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>)
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;ReuseRestrictionRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/ReuseRestrictionRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_ReuseRestrictionRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_ReuseRestrictionRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_ReuseRestrictionRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ReuseRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"ReuseRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the capacity of reusing this item will be limited</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_ClassificationRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / ClassificationRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType_ClassificationRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">How long this item shall be highly restricted in access</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_ClassificationRule" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_ClassificationRule.png" usemap="#descriptive-vitam_xsd_Element_ClassificationRule" /><map name="descriptive-vitam_xsd_Element_ClassificationRule" id="descriptive-vitam_xsd_Element_ClassificationRule">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType_Rule" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" coords="283,80,335,105" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_PreventInheritance" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" coords="388,159,509,184" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup_RefNonRuleId" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" coords="388,239,484,264" />
+                                 <area alt="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.tmp#NegateRuleIdGroup" href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup" coords="286,118,434,144" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.tmp#ConstraintRuleIdType" href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" coords="181,43,419,65" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationLevel" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" coords="249,378,370,403" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_Mention" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" coords="249,444,317,469" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationOwner" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" coords="249,510,378,535" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_ClassificationReassessingDate" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" coords="249,576,429,601" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType_NeedReassessingAuthorization" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" coords="249,642,432,667" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.tmp#ClassificationRuleType" href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" coords="167,3,327,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul>
+                              <li><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ConstraintRuleIdType')">ConstraintRuleIdType</a></b><ul>
+                                    <li><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRuleType')">ClassificationRuleType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_ClassificationRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_ClassificationRule" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule*')">Rule*</a></b> , (<b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance{0,1}')">PreventInheritance{0,1}</a></b> | <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId*')">RefNonRuleId*</a></b>) , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationLevel')">ClassificationLevel</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Mention')">Mention</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationOwner')">ClassificationOwner</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationReassessingDate{0,1}')">ClassificationReassessingDate{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedReassessingAuthorization{0,1}')">NeedReassessingAuthorization{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationLevel" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationLevel')">ClassificationLevel</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationOwner" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationOwner')">ClassificationOwner</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_ClassificationReassessingDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationReassessingDate')">ClassificationReassessingDate</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_Mention" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Mention')">Mention</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ClassificationRuleType.html#ClassificationRuleType_NeedReassessingAuthorization" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component NeedReassessingAuthorization')">NeedReassessingAuthorization</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_PreventInheritance" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PreventInheritance')">PreventInheritance</a></b>, <b><a href="descriptive-vitam_xsd_Element_Group_NegateRuleIdGroup.html#NegateRuleIdGroup_RefNonRuleId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RefNonRuleId')">RefNonRuleId</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_ConstraintRuleIdType.html#ConstraintRuleIdType_Rule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Rule')">Rule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_UnitManagementMetadataContentType_ClassificationRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;ClassificationRule</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Rule</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Rule&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PreventInheritance</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PreventInheritance&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;RefNonRuleId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/RefNonRuleId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ClassificationLevel</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ClassificationLevel&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Mention</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Mention&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ClassificationOwner</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ClassificationOwner&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ClassificationReassessingDate</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/ClassificationReassessingDate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;NeedReassessingAuthorization</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/NeedReassessingAuthorization&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/ClassificationRule&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_ClassificationRule" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_ClassificationRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_ClassificationRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationRule"</span><span class="tAN"> type=</span><span class="tAV">"ClassificationRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long this item shall be highly restricted in access</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType_Other"></a><div class="componentTitle">Element <span class="qname"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component UnitManagementMetadataContentType')">UnitManagementMetadataContentType</a></b> / Other</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType_Other" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType_Other');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType_Other" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Element_Other.png" usemap="#descriptive-vitam_xsd_Element_Other" /><map name="descriptive-vitam_xsd_Element_Other" id="descriptive-vitam_xsd_Element_Other">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_OtherManagementType.tmp#OtherManagementType" href="descriptive-vitam_xsd_Complex_Type_OtherManagementType.html#OtherManagementType" coords="89,3,252,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_OtherManagementType.html#OtherManagementType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component OtherManagementType')">OtherManagementType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_UnitManagementMetadataContentType_Other" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_UnitManagementMetadataContentType_Other');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_UnitManagementMetadataContentType_Other" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType_Other" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType_Other');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType_Other" style="display:block"><b>ANY element from ANY namespace</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType_Other" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType_Other');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType_Other" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Other"</span><span class="tAN"> type=</span><span class="tAV">"OtherManagementType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="UnitManagementMetadataContentType"></a><div class="componentTitle">Complex Type <span class="qname">UnitManagementMetadataContentType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UnitManagementMetadataContentType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_UnitManagementMetadataContentType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UnitManagementMetadataContentType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">This contains the management metadata from this Unit</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UnitManagementMetadataContentType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_UnitManagementMetadataContentType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UnitManagementMetadataContentType" style="display:block"><img alt="Diagram" border="0" src="img/descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.png" usemap="#descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType" /><map name="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType" id="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType">
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_StorageRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_StorageRule" coords="358,0,448,25" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_AppraisalRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AppraisalRule" coords="358,80,456,105" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_AccessRestrictionRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AccessRestrictionRule" coords="358,146,499,171" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_DisseminationRestrictionRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_DisseminationRestrictionRule" coords="358,212,527,237" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_ReuseRestrictionRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ReuseRestrictionRule" coords="358,278,492,303" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_ClassificationRule" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ClassificationRule" coords="358,344,474,369" />
+                                 <area alt="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.tmp#UnitManagementMetadataContentType_Other" href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_Other" coords="358,410,416,435" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_UnitManagementMetadataContentType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_UnitManagementMetadataContentType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_UnitManagementMetadataContentType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="descriptive-vitam_xsd_Complex_Type_VitamUnitManagementMetadataContentType.html#VitamUnitManagementMetadataContentType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component VitamUnitManagementMetadataContentType')">VitamUnitManagementMetadataContentType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_UnitManagementMetadataContentType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_UnitManagementMetadataContentType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_UnitManagementMetadataContentType" style="display:block"><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_StorageRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRule{0,1}')">StorageRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AppraisalRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRule{0,1}')">AppraisalRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AccessRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRule{0,1}')">AccessRestrictionRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_DisseminationRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRule{0,1}')">DisseminationRestrictionRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ReuseRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRule{0,1}')">ReuseRestrictionRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ClassificationRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRule{0,1}')">ClassificationRule{0,1}</a></b> , <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_Other" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Other{0,1}')">Other{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AccessRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AccessRestrictionRule')">AccessRestrictionRule</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_AppraisalRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component AppraisalRule')">AppraisalRule</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ClassificationRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ClassificationRule')">ClassificationRule</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_DisseminationRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DisseminationRestrictionRule')">DisseminationRestrictionRule</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_Other" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Other')">Other</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_ReuseRestrictionRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReuseRestrictionRule')">ReuseRestrictionRule</a></b>, <b><a href="descriptive-vitam_xsd_Complex_Type_UnitManagementMetadataContentType.html#UnitManagementMetadataContentType_StorageRule" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component StorageRule')">StorageRule</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UnitManagementMetadataContentType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_UnitManagementMetadataContentType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UnitManagementMetadataContentType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:complexType</span><span class="tAN"> name=</span><span class="tAV">"UnitManagementMetadataContentType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">This contains the management metadata from this Unit</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"StorageRule"</span><span class="tAN"> type=</span><span class="tAV">"StorageRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Shall this item change of storage after a delay (restricted access, copied, transferred)</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AppraisalRule"</span><span class="tAN"> type=</span><span class="tAV">"AppraisalRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Shall this item be Keep or Detroy after the delay</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"AccessRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"AccessRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the standard restriction access will act</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DisseminationRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"DisseminationRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the dissemination restriction access will act</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ReuseRestrictionRule"</span><span class="tAN"> type=</span><span class="tAV">"ReuseRestrictionRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long the capacity of reusing this item will be limited</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ClassificationRule"</span><span class="tAN"> type=</span><span class="tAV">"ClassificationRuleType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How long this item shall be highly restricted in access</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Other"</span><span class="tAN"> type=</span><span class="tAV">"OtherManagementType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/descriptive-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

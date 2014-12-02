@@ -1,0 +1,984 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component TechnicalIdentificationDate</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate', 
+				'properties_BinaryTechnicalDescriptionGroup_Identification', 
+				'properties_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'properties_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');
+var usedByBoxes= new Array('usedBy_BinaryTechnicalDescriptionGroup');
+var sourceBoxes= new Array('source_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate', 
+				'source_BinaryTechnicalDescriptionGroup_Identification', 
+				'source_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'source_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata', 
+				'source_BinaryTechnicalDescriptionGroup');
+var instanceBoxes= new Array('instance_BinaryTechnicalDescriptionGroup_Identification', 
+				'instance_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'instance_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');
+var diagramBoxes= new Array('diagram_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate', 
+				'diagram_BinaryTechnicalDescriptionGroup_Identification', 
+				'diagram_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'diagram_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata', 
+				'diagram_BinaryTechnicalDescriptionGroup');
+var annotationBoxes= new Array('annotations_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate', 
+				'annotations_BinaryTechnicalDescriptionGroup_Identification', 
+				'annotations_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'annotations_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata', 
+				'annotations_BinaryTechnicalDescriptionGroup');
+var modelBoxes= new Array('model_BinaryTechnicalDescriptionGroup_Identification', 
+				'model_BinaryTechnicalDescriptionGroup_FileInfo', 
+				'model_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata', 
+				'model_BinaryTechnicalDescriptionGroup');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate"></a><div class="componentTitle">Element <span class="qname"><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BinaryTechnicalDescriptionGroup')">BinaryTechnicalDescriptionGroup</a></b> / TechnicalIdentificationDate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date when this technical identification was done if different than the global date creation of this XML file</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" style="display:block"><img alt="Diagram" border="0" src="img/technical-vitam_xsd_Element_TechnicalIdentificationDate.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TechnicalIdentificationDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date when this technical identification was done if different than the global date creation of this XML file</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/technical-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="BinaryTechnicalDescriptionGroup_Identification"></a><div class="componentTitle">Element <span class="qname"><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BinaryTechnicalDescriptionGroup')">BinaryTechnicalDescriptionGroup</a></b> / Identification</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_BinaryTechnicalDescriptionGroup_Identification" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Identification of a Data Object</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_BinaryTechnicalDescriptionGroup_Identification" style="display:block"><img alt="Diagram" border="0" src="img/technical-vitam_xsd_Element_Identification.png" usemap="#technical-vitam_xsd_Element_Identification" /><map name="technical-vitam_xsd_Element_Identification" id="technical-vitam_xsd_Element_Identification">
+                                 <area alt="technical-vitam_xsd_Complex_Type_IdentificationType.tmp#IdentificationType_FormatLitteral" href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatLitteral" coords="224,40,320,65" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_IdentificationType.tmp#IdentificationType_MimeType" href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_MimeType" coords="224,106,303,131" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_IdentificationType.tmp#IdentificationType_FormatId" href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatId" coords="224,200,296,225" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_IdentificationType.tmp#IdentificationType" href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType" coords="142,3,277,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component IdentificationType')">IdentificationType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_BinaryTechnicalDescriptionGroup_Identification" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('model_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_BinaryTechnicalDescriptionGroup_Identification" style="display:block"><b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatLitteral" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FormatLitteral{0,1}')">FormatLitteral{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_MimeType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MimeType{0,1}')">MimeType{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FormatId')">FormatId</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FormatId')">FormatId</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_FormatLitteral" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FormatLitteral')">FormatLitteral</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_IdentificationType.html#IdentificationType_MimeType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component MimeType')">MimeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_BinaryTechnicalDescriptionGroup_Identification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;Identification</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;FormatLitteral</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/FormatLitteral&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;MimeType</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/MimeType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;FormatId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/FormatId&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/Identification&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_BinaryTechnicalDescriptionGroup_Identification" type="image" src="img/btM.gif" value="-" onclick="switchState('source_BinaryTechnicalDescriptionGroup_Identification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_BinaryTechnicalDescriptionGroup_Identification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Identification"</span><span class="tAN"> type=</span><span class="tAV">"IdentificationType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identification of a Data Object</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/technical-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="BinaryTechnicalDescriptionGroup_FileInfo"></a><div class="componentTitle">Element <span class="qname"><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BinaryTechnicalDescriptionGroup')">BinaryTechnicalDescriptionGroup</a></b> / FileInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">General information of a Data Object</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block"><img alt="Diagram" border="0" src="img/technical-vitam_xsd_Element_FileInfo.png" usemap="#technical-vitam_xsd_Element_FileInfo" /><map name="technical-vitam_xsd_Element_FileInfo" id="technical-vitam_xsd_Element_FileInfo">
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_Size" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Size" coords="198,40,250,65" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_Filename" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Filename" coords="198,106,271,131" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_Created" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Created" coords="198,186,267,211" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_CreatingApplicationName" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationName" coords="198,252,349,277" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_CreatingApplicationVersion" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationVersion" coords="198,318,360,343" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_CreatingOs" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingOs" coords="198,384,283,409" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType_LastModified" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_LastModified" coords="198,464,290,489" />
+                                 <area alt="technical-vitam_xsd_Complex_Type_FileInfoType.tmp#FileInfoType" href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType" coords="116,3,225,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FileInfoType')">FileInfoType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('model_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block"><b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Size" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Size{0,1}')">Size{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Filename" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Filename')">Filename</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Created" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Created')">Created</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingApplicationName{0,1}')">CreatingApplicationName{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingApplicationVersion{0,1}')">CreatingApplicationVersion{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingOs" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingOs{0,1}')">CreatingOs{0,1}</a></b> , <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_LastModified" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component LastModified{0,1}')">LastModified{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Created" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Created')">Created</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingApplicationName')">CreatingApplicationName</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingApplicationVersion" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingApplicationVersion')">CreatingApplicationVersion</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_CreatingOs" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CreatingOs')">CreatingOs</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Filename" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Filename')">Filename</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_LastModified" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component LastModified')">LastModified</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_FileInfoType.html#FileInfoType_Size" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Size')">Size</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;FileInfo</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Size</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Size&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Filename</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Filename&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Created</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Created&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;CreatingApplicationName</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/CreatingApplicationName&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;CreatingApplicationVersion</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/CreatingApplicationVersion&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;CreatingOs</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/CreatingOs&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;LastModified</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/LastModified&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/FileInfo&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_BinaryTechnicalDescriptionGroup_FileInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('source_BinaryTechnicalDescriptionGroup_FileInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_BinaryTechnicalDescriptionGroup_FileInfo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"FileInfo"</span><span class="tAN"> type=</span><span class="tAV">"FileInfoType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">General information of a Data Object</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/technical-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata"></a><div class="componentTitle">Element <span class="qname"><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BinaryTechnicalDescriptionGroup')">BinaryTechnicalDescriptionGroup</a></b> / CoreTechnicalMetadata</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Core metadata for a Data Object. This should be minimal standard metadata... Some more works have to be done to filter the below types.</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block"><img alt="Diagram" border="0" src="img/technical-vitam_xsd_Element_CoreTechnicalMetadata.png" usemap="#technical-vitam_xsd_Element_CoreTechnicalMetadata" /><map name="technical-vitam_xsd_Element_CoreTechnicalMetadata" id="technical-vitam_xsd_Element_CoreTechnicalMetadata">
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Text" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Text" coords="277,40,329,65" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Document" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Document" coords="277,75,356,100" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Image" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Image" coords="277,110,336,135" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Audio" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Audio" coords="277,145,336,170" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Video" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Video" coords="277,180,336,205" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType_Undefined" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Undefined" coords="277,215,346,240" />
+                                 <area alt="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.tmp#CoreMetadataType" href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType" coords="195,3,361,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component CoreMetadataType')">CoreMetadataType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('model_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block"><b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Text" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Text')">Text</a></b> | <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Document" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Document')">Document</a></b> | <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Image" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Image')">Image</a></b> | <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Audio" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Audio')">Audio</a></b> | <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Video" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Video')">Video</a></b> | <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Undefined" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Undefined')">Undefined</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Audio" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Audio')">Audio</a></b>, <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Document" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Document')">Document</a></b>, <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Image" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Image')">Image</a></b>, <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Text" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Text')">Text</a></b>, <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Undefined" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Undefined')">Undefined</a></b>, <b><a href="subtechnical-vitam_xsd_Complex_Type_CoreMetadataType.html#CoreMetadataType_Video" target="mainFrame" title="fr.gouv.vitam.technique" onclick="updatePageTitle('Schema documentation for component Video')">Video</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;CoreTechnicalMetadata</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tT"> </span><span class="tAN">xmlns:tech=</span><span class="tAV">"fr.gouv.vitam.technique"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Text</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Text&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Document</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Document&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Image</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Image&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Audio</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Audio&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Video</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Video&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tech:Undefined</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tech:Undefined&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/CoreTechnicalMetadata&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" type="image" src="img/btM.gif" value="-" onclick="switchState('source_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CoreTechnicalMetadata"</span><span class="tAN"> type=</span><span class="tAV">"tech:CoreMetadataType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Core metadata for a Data Object. This should be minimal standard metadata... Some more works have to be done to filter the below types.</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/technical-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="BinaryTechnicalDescriptionGroup"></a><div class="componentTitle">Element Group <span class="qname">BinaryTechnicalDescriptionGroup</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_BinaryTechnicalDescriptionGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_BinaryTechnicalDescriptionGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_BinaryTechnicalDescriptionGroup" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">For Binary DataObject</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_BinaryTechnicalDescriptionGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_BinaryTechnicalDescriptionGroup');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_BinaryTechnicalDescriptionGroup" style="display:block"><img alt="Diagram" border="0" src="img/technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.png" usemap="#technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup" /><map name="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup" id="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup">
+                                 <area alt="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.tmp#BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" coords="335,0,494,25" />
+                                 <area alt="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.tmp#BinaryTechnicalDescriptionGroup_Identification" href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_Identification" coords="335,80,426,105" />
+                                 <area alt="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.tmp#BinaryTechnicalDescriptionGroup_FileInfo" href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_FileInfo" coords="335,146,400,171" />
+                                 <area alt="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.tmp#BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" coords="335,212,479,237" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_BinaryTechnicalDescriptionGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_BinaryTechnicalDescriptionGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_BinaryTechnicalDescriptionGroup" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Types </td>
+                                    <td><b><a href="technical-vitam_xsd_Complex_Type_TechnicalIdentityType.html#TechnicalIdentityType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component TechnicalIdentityType')">TechnicalIdentityType</a></b>, <b><a href="technical-vitam_xsd_Complex_Type_TechnicalMetadataObjectType.html#TechnicalMetadataObjectType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component TechnicalMetadataObjectType')">TechnicalMetadataObjectType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_BinaryTechnicalDescriptionGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('model_BinaryTechnicalDescriptionGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_BinaryTechnicalDescriptionGroup" style="display:block"><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component TechnicalIdentificationDate{0,1}')">TechnicalIdentificationDate{0,1}</a></b> , <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_Identification" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Identification')">Identification</a></b> , <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_FileInfo" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FileInfo{0,1}')">FileInfo{0,1}</a></b> , <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CoreTechnicalMetadata{0,1}')">CoreTechnicalMetadata{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_CoreTechnicalMetadata" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CoreTechnicalMetadata')">CoreTechnicalMetadata</a></b>, <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_FileInfo" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component FileInfo')">FileInfo</a></b>, <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_Identification" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Identification')">Identification</a></b>, <b><a href="technical-vitam_xsd_Element_Group_BinaryTechnicalDescriptionGroup.html#BinaryTechnicalDescriptionGroup_TechnicalIdentificationDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component TechnicalIdentificationDate')">TechnicalIdentificationDate</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_BinaryTechnicalDescriptionGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('source_BinaryTechnicalDescriptionGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_BinaryTechnicalDescriptionGroup" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:group</span><span class="tAN"> name=</span><span class="tAV">"BinaryTechnicalDescriptionGroup"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">For Binary DataObject</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"TechnicalIdentificationDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date when this technical identification was done if different than the global date creation of this XML file</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Identification"</span><span class="tAN"> type=</span><span class="tAV">"IdentificationType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identification of a Data Object</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"FileInfo"</span><span class="tAN"> type=</span><span class="tAV">"FileInfoType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">General information of a Data Object</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"CoreTechnicalMetadata"</span><span class="tAN"> type=</span><span class="tAV">"tech:CoreMetadataType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Core metadata for a Data Object. This should be minimal standard metadata... Some more works have to be done to filter the below types.</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:group&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/technical-vitam.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

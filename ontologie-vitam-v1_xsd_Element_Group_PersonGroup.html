@@ -1,0 +1,1428 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component Firstname</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_PersonGroup_Firstname', 
+				'properties_PersonGroup_Givenname', 
+				'properties_PersonGroup_BirthName', 
+				'properties_PersonGroup_Gender', 
+				'properties_PersonGroup_BirthDate', 
+				'properties_PersonGroup_BirthPlace', 
+				'properties_PersonGroup_DeathDate', 
+				'properties_PersonGroup_DeathPlace', 
+				'properties_PersonGroup_Nationality');
+var usedByBoxes= new Array('usedBy_PersonGroup');
+var sourceBoxes= new Array('source_PersonGroup_Firstname', 
+				'source_PersonGroup_Givenname', 
+				'source_PersonGroup_BirthName', 
+				'source_PersonGroup_Gender', 
+				'source_PersonGroup_BirthDate', 
+				'source_PersonGroup_BirthPlace', 
+				'source_PersonGroup_DeathDate', 
+				'source_PersonGroup_DeathPlace', 
+				'source_PersonGroup_Nationality', 
+				'source_PersonGroup');
+var instanceBoxes= new Array('instance_PersonGroup_BirthPlace', 
+				'instance_PersonGroup_DeathPlace');
+var diagramBoxes= new Array('diagram_PersonGroup_Firstname', 
+				'diagram_PersonGroup_Givenname', 
+				'diagram_PersonGroup_BirthName', 
+				'diagram_PersonGroup_Gender', 
+				'diagram_PersonGroup_BirthDate', 
+				'diagram_PersonGroup_BirthPlace', 
+				'diagram_PersonGroup_DeathDate', 
+				'diagram_PersonGroup_DeathPlace', 
+				'diagram_PersonGroup_Nationality', 
+				'diagram_PersonGroup');
+var annotationBoxes= new Array('annotations_PersonGroup_Firstname', 
+				'annotations_PersonGroup_Givenname', 
+				'annotations_PersonGroup_BirthName', 
+				'annotations_PersonGroup_Gender', 
+				'annotations_PersonGroup_BirthDate', 
+				'annotations_PersonGroup_DeathDate', 
+				'annotations_PersonGroup_Nationality');
+var modelBoxes= new Array('model_PersonGroup_BirthPlace', 
+				'model_PersonGroup_DeathPlace', 
+				'model_PersonGroup');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="PersonGroup_Firstname"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / Firstname</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_Firstname" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_Firstname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_Firstname" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Prénom de la personne</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_Firstname" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_Firstname');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_Firstname" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_Firstname.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_Firstname" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_Firstname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_Firstname" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_Firstname" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_Firstname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_Firstname" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Firstname"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Prénom de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_Givenname"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / Givenname</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_Givenname" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_Givenname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_Givenname" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Nom d'usage</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_Givenname" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_Givenname');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_Givenname" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_Givenname.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_Givenname" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_Givenname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_Givenname" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_Givenname" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_Givenname');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_Givenname" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Givenname"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nom d'usage</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_BirthName"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / BirthName</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_BirthName" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_BirthName');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_BirthName" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Nom de naissance</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_BirthName" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_BirthName');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_BirthName" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_BirthName.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_BirthName" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_BirthName');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_BirthName" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_BirthName" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_BirthName');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_BirthName" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthName"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nom de naissance</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_Gender"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / Gender</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_Gender" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_Gender');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_Gender" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Genre de la personne</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_Gender" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_Gender');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_Gender" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_Gender.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_Gender" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_Gender');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_Gender" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_Gender" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_Gender');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_Gender" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Gender"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Genre de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_BirthDate"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / BirthDate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_BirthDate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_BirthDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_BirthDate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date de naissance de la personne</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_BirthDate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_BirthDate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_BirthDate" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_BirthDate.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:date</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_BirthDate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_BirthDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_BirthDate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_BirthDate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_BirthDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_BirthDate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de naissance de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_BirthPlace"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / BirthPlace</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_BirthPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_BirthPlace');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_BirthPlace" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_BirthPlace.png" usemap="#ontologie-vitam-v1_xsd_Element_BirthPlace" /><map name="ontologie-vitam-v1_xsd_Element_BirthPlace" id="ontologie-vitam-v1_xsd_Element_BirthPlace">
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Geogname" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" coords="192,46,275,71" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Address" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" coords="192,126,265,151" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_PostalCode" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" coords="192,206,277,231" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_City" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" coords="192,272,243,297" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Region" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" coords="192,338,256,363" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Country" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" coords="192,404,261,429" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup" coords="110,5,236,31" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_BirthPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_BirthPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_BirthPlace" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PersonGroup_BirthPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PersonGroup_BirthPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PersonGroup_BirthPlace" style="display:block">ALL(<b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Geogname{0,1}')">Geogname{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Address{0,1}')">Address{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PostalCode{0,1}')">PostalCode{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component City{0,1}')">City{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Region{0,1}')">Region{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Country{0,1}')">Country{0,1}</a></b>)
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Address')">Address</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component City')">City</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Country')">Country</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Geogname')">Geogname</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PostalCode')">PostalCode</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Region')">Region</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_PersonGroup_BirthPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_PersonGroup_BirthPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_PersonGroup_BirthPlace" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;BirthPlace</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Geogname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Geogname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Address</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Address&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PostalCode</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PostalCode&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;City</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/City&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Region</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Region&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Country</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Country&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/BirthPlace&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_BirthPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_BirthPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_BirthPlace" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthPlace"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"LocationGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_DeathDate"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / DeathDate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_DeathDate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_DeathDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_DeathDate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date de décès de la personne</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_DeathDate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_DeathDate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_DeathDate" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_DeathDate.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:date</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_DeathDate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_DeathDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_DeathDate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_DeathDate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_DeathDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_DeathDate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DeathDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de décès de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_DeathPlace"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / DeathPlace</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_DeathPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_DeathPlace');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_DeathPlace" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_DeathPlace.png" usemap="#ontologie-vitam-v1_xsd_Element_DeathPlace" /><map name="ontologie-vitam-v1_xsd_Element_DeathPlace" id="ontologie-vitam-v1_xsd_Element_DeathPlace">
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Geogname" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" coords="198,46,281,71" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Address" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" coords="198,126,271,151" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_PostalCode" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" coords="198,206,283,231" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_City" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" coords="198,272,249,297" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Region" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" coords="198,338,262,363" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup_Country" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" coords="198,404,267,429" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.tmp#LocationGroup" href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup" coords="116,5,242,31" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_DeathPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_DeathPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_DeathPlace" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PersonGroup_DeathPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PersonGroup_DeathPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PersonGroup_DeathPlace" style="display:block">ALL(<b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Geogname{0,1}')">Geogname{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Address{0,1}')">Address{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PostalCode{0,1}')">PostalCode{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component City{0,1}')">City{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Region{0,1}')">Region{0,1}</a></b> <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Country{0,1}')">Country{0,1}</a></b>)
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Address" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Address')">Address</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_City" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component City')">City</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Country" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Country')">Country</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Geogname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Geogname')">Geogname</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_PostalCode" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PostalCode')">PostalCode</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_LocationGroup.html#LocationGroup_Region" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Region')">Region</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_PersonGroup_DeathPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_PersonGroup_DeathPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_PersonGroup_DeathPlace" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;DeathPlace</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Geogname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Geogname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Address</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Address&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;PostalCode</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/PostalCode&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;City</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/City&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Region</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Region&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Country</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Country&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/DeathPlace&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_DeathPlace" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_DeathPlace');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_DeathPlace" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DeathPlace"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"LocationGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup_Nationality"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonGroup')">PersonGroup</a></b> / Nationality</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PersonGroup_Nationality" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PersonGroup_Nationality');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PersonGroup_Nationality" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Nationalité de la personne</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup_Nationality" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup_Nationality');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup_Nationality" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_Nationality.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PersonGroup_Nationality" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PersonGroup_Nationality');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PersonGroup_Nationality" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup_Nationality" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup_Nationality');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup_Nationality" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Nationality"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nationalité de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PersonGroup"></a><div class="componentTitle">Element Group <span class="qname">PersonGroup</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PersonGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PersonGroup');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PersonGroup" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_xsd_Element_Group_PersonGroup.png" usemap="#ontologie-vitam-v1_xsd_Element_Group_PersonGroup" /><map name="ontologie-vitam-v1_xsd_Element_Group_PersonGroup" id="ontologie-vitam-v1_xsd_Element_Group_PersonGroup">
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Firstname" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" coords="218,0,296,25" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Givenname" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" coords="218,66,303,91" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthName" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" coords="218,132,298,157" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Gender" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" coords="218,198,285,223" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthDate" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" coords="218,264,293,289" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthPlace" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" coords="218,330,297,355" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathDate" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" coords="218,365,299,390" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathPlace" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" coords="218,431,303,456" />
+                                 <area alt="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Nationality" href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" coords="218,466,298,491" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_PersonGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_PersonGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_PersonGroup" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element Group </td>
+                                    <td><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonOrEntityGroup.html#PersonOrEntityGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component PersonOrEntityGroup')">PersonOrEntityGroup</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="ontologie-vitam-v1_xsd_Element_Group_WriterGroup.html#WriterGroup_Writer" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component WriterGroup/Writer')">WriterGroup/Writer</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PersonGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PersonGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PersonGroup" style="display:block"><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName{0,1}')">BirthName{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender{0,1}')">Gender{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate{0,1}')">BirthDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace{0,1}')">BirthPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate{0,1}')">DeathDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace{0,1}')">DeathPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality{0,1}')">Nationality{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate')">BirthDate</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName')">BirthName</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace')">BirthPlace</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate')">DeathDate</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace')">DeathPlace</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender')">Gender</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b>, <b><a href="ontologie-vitam-v1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality')">Nationality</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PersonGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PersonGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PersonGroup" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:group</span><span class="tAN"> name=</span><span class="tAV">"PersonGroup"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Firstname"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Prénom de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Givenname"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nom d'usage</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthName"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nom de naissance</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Gender"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Genre de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de naissance de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"BirthPlace"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"LocationGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DeathDate"</span><span class="tAN"> type=</span><span class="tAV">"xsd:date"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de décès de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DeathPlace"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"LocationGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Nationality"</span><span class="tAN"> type=</span><span class="tAV">"xsd:string"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Nationalité de la personne</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:group&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

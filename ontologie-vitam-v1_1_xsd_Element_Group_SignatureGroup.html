@@ -1,0 +1,1173 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component DateSignature</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_SignatureGroup_DateSignature', 
+				'properties_SignatureGroup_Signer', 
+				'properties_SignatureGroup_Validator', 
+				'properties_SignatureGroup_Referential', 
+				'properties_SignatureGroup_ReferencedObject');
+var usedByBoxes= new Array('usedBy_SignatureGroup');
+var sourceBoxes= new Array('source_SignatureGroup_DateSignature', 
+				'source_SignatureGroup_Signer', 
+				'source_SignatureGroup_Validator', 
+				'source_SignatureGroup_Referential', 
+				'source_SignatureGroup_ReferencedObject', 
+				'source_SignatureGroup');
+var instanceBoxes= new Array('instance_SignatureGroup_Signer', 
+				'instance_SignatureGroup_Validator', 
+				'instance_SignatureGroup_Referential', 
+				'instance_SignatureGroup_ReferencedObject');
+var diagramBoxes= new Array('diagram_SignatureGroup_DateSignature', 
+				'diagram_SignatureGroup_Signer', 
+				'diagram_SignatureGroup_Validator', 
+				'diagram_SignatureGroup_Referential', 
+				'diagram_SignatureGroup_ReferencedObject', 
+				'diagram_SignatureGroup');
+var annotationBoxes= new Array('annotations_SignatureGroup_DateSignature', 
+				'annotations_SignatureGroup_Signer', 
+				'annotations_SignatureGroup_Validator', 
+				'annotations_SignatureGroup_Referential', 
+				'annotations_SignatureGroup_ReferencedObject', 
+				'annotations_SignatureGroup');
+var modelBoxes= new Array('model_SignatureGroup_Signer', 
+				'model_SignatureGroup_Validator', 
+				'model_SignatureGroup_Referential', 
+				'model_SignatureGroup_ReferencedObject', 
+				'model_SignatureGroup');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="SignatureGroup_DateSignature"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignatureGroup')">SignatureGroup</a></b> / DateSignature</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup_DateSignature" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup_DateSignature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup_DateSignature" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Date de l'objet signature</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup_DateSignature" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup_DateSignature');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup_DateSignature" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_DateSignature.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xsd:dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SignatureGroup_DateSignature" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_SignatureGroup_DateSignature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SignatureGroup_DateSignature" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup_DateSignature" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup_DateSignature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup_DateSignature" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DateSignature"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de l'objet signature</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SignatureGroup_Signer"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignatureGroup')">SignatureGroup</a></b> / Signer</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup_Signer" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Signataire</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup_Signer" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_Signer.png" usemap="#ontologie-vitam-v1_1_xsd_Element_Signer" /><map name="ontologie-vitam-v1_1_xsd_Element_Signer" id="ontologie-vitam-v1_1_xsd_Element_Signer">
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Firstname" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" coords="365,134,443,159" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Givenname" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" coords="365,200,450,225" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthName" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" coords="365,266,445,291" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Gender" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" coords="365,332,432,357" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthDate" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" coords="365,398,440,423" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthPlace" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" coords="365,464,444,489" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathDate" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" coords="365,499,446,524" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathPlace" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" coords="365,565,450,590" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Nationality" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" coords="365,600,445,625" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup" coords="283,93,402,119" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.tmp#EntityGroup_Corpname" href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" coords="365,721,445,746" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.tmp#EntityGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup" coords="283,676,394,702" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonOrEntityGroup.tmp#PersonOrEntityGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonOrEntityGroup.html#PersonOrEntityGroup" coords="198,49,355,75" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.tmp#SignerGroup_SigningTime" href="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.html#SignerGroup_SigningTime" coords="195,801,283,826" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Function" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" coords="300,880,372,905" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Activity" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" coords="300,946,367,971" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Position" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" coords="300,1012,368,1037" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Role" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" coords="300,1078,352,1103" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup" coords="198,839,328,865" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.tmp#SignerGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.html#SignerGroup" coords="113,5,229,31" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SignatureGroup_Signer" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SignatureGroup_Signer" style="display:block">((<b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName{0,1}')">BirthName{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender{0,1}')">Gender{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate{0,1}')">BirthDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace{0,1}')">BirthPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate{0,1}')">DeathDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace{0,1}')">DeathPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality{0,1}')">Nationality{0,1}</a></b>) | (<b><a href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Corpname')">Corpname</a></b>)) , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.html#SignerGroup_SigningTime" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SigningTime')">SigningTime</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Function{0,1}')">Function{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Activity{0,1}')">Activity{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Position{0,1}')">Position{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Role*')">Role*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Activity')">Activity</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate')">BirthDate</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName')">BirthName</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace')">BirthPlace</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Corpname')">Corpname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate')">DeathDate</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace')">DeathPlace</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Function')">Function</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender')">Gender</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality')">Nationality</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Position')">Position</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Role')">Role</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignerGroup.html#SignerGroup_SigningTime" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SigningTime')">SigningTime</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SignatureGroup_Signer" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;Signer</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Firstname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Firstname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Givenname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Givenname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthName</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthName&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Gender</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Gender&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthDate</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthDate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthPlace</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthPlace&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DeathDate</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/DeathDate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DeathPlace</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/DeathPlace&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Nationality</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Nationality&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Corpname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Corpname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;SigningTime</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/SigningTime&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Function</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Function&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Activity</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Activity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Position</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Position&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Role&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/Signer&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup_Signer" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup_Signer');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup_Signer" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Signer"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Signataire</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"SignerGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SignatureGroup_Validator"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignatureGroup')">SignatureGroup</a></b> / Validator</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup_Validator" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Validateur de la signature</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup_Validator" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_Validator.png" usemap="#ontologie-vitam-v1_1_xsd_Element_Validator" /><map name="ontologie-vitam-v1_1_xsd_Element_Validator" id="ontologie-vitam-v1_1_xsd_Element_Validator">
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Firstname" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" coords="377,134,455,159" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Givenname" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" coords="377,200,462,225" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthName" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" coords="377,266,457,291" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Gender" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" coords="377,332,444,357" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthDate" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" coords="377,398,452,423" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_BirthPlace" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" coords="377,464,456,489" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathDate" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" coords="377,499,458,524" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_DeathPlace" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" coords="377,565,462,590" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup_Nationality" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" coords="377,600,457,625" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.tmp#PersonGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup" coords="295,93,414,119" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.tmp#EntityGroup_Corpname" href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" coords="377,721,457,746" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.tmp#EntityGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup" coords="295,676,406,702" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_PersonOrEntityGroup.tmp#PersonOrEntityGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_PersonOrEntityGroup.html#PersonOrEntityGroup" coords="210,49,367,75" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.tmp#ValidatorGroup_ValidationTime" href="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.html#ValidatorGroup_ValidationTime" coords="207,801,307,826" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Function" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" coords="312,880,384,905" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Activity" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" coords="312,946,379,971" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Position" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" coords="312,1012,380,1037" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup_Role" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" coords="312,1078,364,1103" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.tmp#BusinessGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup" coords="210,839,340,865" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.tmp#ValidatorGroup" href="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.html#ValidatorGroup" coords="125,5,253,31" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SignatureGroup_Validator" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SignatureGroup_Validator" style="display:block">((<b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName{0,1}')">BirthName{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender{0,1}')">Gender{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate{0,1}')">BirthDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace{0,1}')">BirthPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate{0,1}')">DeathDate{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace{0,1}')">DeathPlace{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality{0,1}')">Nationality{0,1}</a></b>) | (<b><a href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Corpname')">Corpname</a></b>)) , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.html#ValidatorGroup_ValidationTime" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ValidationTime')">ValidationTime</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Function{0,1}')">Function{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Activity{0,1}')">Activity{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Position{0,1}')">Position{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Role*')">Role*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Activity" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Activity')">Activity</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthDate')">BirthDate</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthName')">BirthName</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_BirthPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component BirthPlace')">BirthPlace</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_EntityGroup.html#EntityGroup_Corpname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Corpname')">Corpname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathDate" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathDate')">DeathDate</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_DeathPlace" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DeathPlace')">DeathPlace</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Firstname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Firstname')">Firstname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Function" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Function')">Function</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Gender" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Gender')">Gender</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Givenname" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Givenname')">Givenname</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_PersonGroup.html#PersonGroup_Nationality" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Nationality')">Nationality</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Position" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Position')">Position</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_BusinessGroup.html#BusinessGroup_Role" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Role')">Role</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_ValidatorGroup.html#ValidatorGroup_ValidationTime" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ValidationTime')">ValidationTime</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SignatureGroup_Validator" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;Validator</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Firstname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Firstname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Givenname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Givenname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthName</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthName&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Gender</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Gender&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthDate</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthDate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;BirthPlace</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/BirthPlace&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DeathDate</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/DeathDate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;DeathPlace</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/DeathPlace&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Nationality</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Nationality&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Corpname</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/Corpname&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ValidationTime</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/ValidationTime&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Function</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Function&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Activity</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Activity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Position</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/Position&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;Role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/Role&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/Validator&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup_Validator" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup_Validator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup_Validator" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Validator"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Validateur de la signature</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"ValidatorGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SignatureGroup_Referential"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignatureGroup')">SignatureGroup</a></b> / Referential</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup_Referential" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Référentiel des personnes et des organisations au moment de la vérification de la signature et sa validation</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup_Referential" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_Referential.png" usemap="#ontologie-vitam-v1_1_xsd_Element_Referential" /><map name="ontologie-vitam-v1_1_xsd_Element_Referential" id="ontologie-vitam-v1_1_xsd_Element_Referential">
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listID" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listID" coords="216,40,269,65" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listAgencyID" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyID" coords="216,106,307,131" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listAgencyName" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyName" coords="216,141,325,166" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listName" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listName" coords="216,176,287,201" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listVersionID" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listVersionID" coords="216,242,307,267" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_name" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_name" coords="216,308,273,333" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_languageID" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_languageID" coords="216,343,300,368" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listURI" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listURI" coords="216,378,276,403" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType_listSchemeURI" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listSchemeURI" coords="216,413,315,438" />
+                                 <area alt="vitam-types_xsd_Complex_Type_CodeType.tmp#CodeType" href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType" coords="134,3,234,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component CodeType')">CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SignatureGroup_Referential" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SignatureGroup_Referential" style="display:block"><b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listID')">listID</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listAgencyID{0,1}')">listAgencyID{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listAgencyName{0,1}')">listAgencyName{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listName{0,1}')">listName{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listVersionID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listVersionID{0,1}')">listVersionID{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_name" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component name{0,1}')">name{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_languageID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component languageID{0,1}')">languageID{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listURI" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listURI{0,1}')">listURI{0,1}</a></b> , <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listSchemeURI" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listSchemeURI{0,1}')">listSchemeURI{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_languageID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component languageID')">languageID</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listAgencyID')">listAgencyID</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listAgencyName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listAgencyName')">listAgencyName</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listID')">listID</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listName" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listName')">listName</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listSchemeURI" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listSchemeURI')">listSchemeURI</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listURI" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listURI')">listURI</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_listVersionID" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component listVersionID')">listVersionID</a></b>, <b><a href="vitam-types_xsd_Complex_Type_CodeType.html#CodeType_name" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component name')">name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SignatureGroup_Referential" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;Referential</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listID</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/listID&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listAgencyID</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listAgencyID&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listAgencyName</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listAgencyName&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listName</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listName&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listVersionID</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listVersionID&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;name</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;languageID</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/languageID&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listURI</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listURI&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;listSchemeURI</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/listSchemeURI&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/Referential&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup_Referential" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup_Referential');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup_Referential" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Referential"</span><span class="tAN"> type=</span><span class="tAV">"CodeType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Référentiel des personnes et des organisations au moment de la vérification de la signature et sa validation</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SignatureGroup_ReferencedObject"></a><div class="componentTitle">Element <span class="qname"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignatureGroup')">SignatureGroup</a></b> / ReferencedObject</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup_ReferencedObject" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Référence à l'objet signé</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup_ReferencedObject" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_ReferencedObject.png" usemap="#ontologie-vitam-v1_1_xsd_Element_ReferencedObject" /><map name="ontologie-vitam-v1_1_xsd_Element_ReferencedObject" id="ontologie-vitam-v1_1_xsd_Element_ReferencedObject">
+                                 <area alt="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.tmp#ReferencedObjectType_SignedObjectId" href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectId" coords="252,40,355,65" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.tmp#ReferencedObjectType_SignedObjectDigest" href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectDigest" coords="252,75,377,100" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.tmp#ReferencedObjectType" href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType" coords="170,3,333,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReferencedObjectType')">ReferencedObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SignatureGroup_ReferencedObject" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SignatureGroup_ReferencedObject" style="display:block"><b><a href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignedObjectId')">SignedObjectId</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectDigest" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignedObjectDigest')">SignedObjectDigest</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectDigest" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignedObjectDigest')">SignedObjectDigest</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Complex_Type_ReferencedObjectType.html#ReferencedObjectType_SignedObjectId" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component SignedObjectId')">SignedObjectId</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SignatureGroup_ReferencedObject" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;ReferencedObject</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"org:afnor:medona:1.0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;SignedObjectId</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/SignedObjectId&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;SignedObjectDigest</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/SignedObjectDigest&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/ReferencedObject&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup_ReferencedObject" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup_ReferencedObject');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup_ReferencedObject" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ReferencedObject"</span><span class="tAN"> type=</span><span class="tAV">"ReferencedObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Référence à l'objet signé</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:element&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SignatureGroup"></a><div class="componentTitle">Element Group <span class="qname">SignatureGroup</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>org:afnor:medona:1.0</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SignatureGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_SignatureGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SignatureGroup" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Ce groupe contient les éléments relatifs à la signature</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SignatureGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_SignatureGroup');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SignatureGroup" style="display:block"><img alt="Diagram" border="0" src="img/ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.png" usemap="#ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup" /><map name="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup" id="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup">
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.tmp#SignatureGroup_DateSignature" href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_DateSignature" coords="250,0,349,25" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.tmp#SignatureGroup_Signer" href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Signer" coords="250,66,312,91" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.tmp#SignatureGroup_Validator" href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Validator" coords="250,132,324,157" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.tmp#SignatureGroup_Referential" href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Referential" coords="250,198,333,223" />
+                                 <area alt="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.tmp#SignatureGroup_ReferencedObject" href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_ReferencedObject" coords="250,292,369,317" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SignatureGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_SignatureGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SignatureGroup" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Elements </td>
+                                    <td><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_ObjectGroup.html#ObjectGroup_Signature" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ObjectGroup/Signature')">ObjectGroup/Signature</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_RestrictedObjectGroup.html#RestrictedObjectGroup_Signature" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component RestrictedObjectGroup/Signature')">RestrictedObjectGroup/Signature</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SignatureGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('model_SignatureGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SignatureGroup" style="display:block"><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_DateSignature" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DateSignature')">DateSignature</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Signer" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Signer')">Signer</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Validator" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Validator')">Validator</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Referential" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Referential{0,1}')">Referential{0,1}</a></b> , <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_ReferencedObject" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReferencedObject')">ReferencedObject</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_DateSignature" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component DateSignature')">DateSignature</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_ReferencedObject" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component ReferencedObject')">ReferencedObject</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Referential" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Referential')">Referential</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Signer" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Signer')">Signer</a></b>, <b><a href="ontologie-vitam-v1_1_xsd_Element_Group_SignatureGroup.html#SignatureGroup_Validator" target="mainFrame" title="org:afnor:medona:1.0" onclick="updatePageTitle('Schema documentation for component Validator')">Validator</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SignatureGroup" type="image" src="img/btM.gif" value="-" onclick="switchState('source_SignatureGroup');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SignatureGroup" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xsd:group</span><span class="tAN"> name=</span><span class="tAV">"SignatureGroup"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Ce groupe contient les éléments relatifs à la signature</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xsd:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"DateSignature"</span><span class="tAN"> type=</span><span class="tAV">"xsd:dateTime"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date de l'objet signature</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Signer"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Signataire</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"SignerGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Validator"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Validateur de la signature</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:complexType</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:group</span><span class="tAN"> ref=</span><span class="tAV">"ValidatorGroup"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:complexType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"Referential"</span><span class="tAN"> type=</span><span class="tAV">"CodeType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Référentiel des personnes et des organisations au moment de la vérification de la signature et sa validation</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xsd:element</span><span class="tAN"> name=</span><span class="tAV">"ReferencedObject"</span><span class="tAN"> type=</span><span class="tAV">"ReferencedObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xsd:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xsd:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Référence à l'objet signé</span><span class="tEl">&lt;/xsd:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xsd:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xsd:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xsd:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xsd:group&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Schema location</b></td>
+                        <td>file:/C:/Users/bregier/Documents/OxygenXMLEditor/Vitam-Schema/Seda2.0/ontologie-vitam-v1.1.xsd</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
