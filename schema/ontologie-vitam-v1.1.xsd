@@ -10,6 +10,37 @@
         </xsd:annotation>
         <xsd:group ref="ObjectGroup"/>
     </xsd:complexType>
+    <xsd:group name="RestrictedObjectGroup">
+        <xsd:sequence>
+            <xsd:group ref="TitleGroup" minOccurs="0"/>
+            <xsd:group ref="IdentifierGroup"/>
+            <xsd:group ref="DescriptionGroup"/>
+            <xsd:group ref="TypeGroup"/>
+            <xsd:group ref="LanguageGroup"/>
+            <xsd:group ref="StatusGroup"/>
+            <xsd:group ref="VersionGroup"/>
+            <xsd:group ref="KeywordsGroup"/>
+            <xsd:group ref="CoverageGroup" minOccurs="0"/>
+            <xsd:group ref="RecordsCreatorGroup" minOccurs="0"/>
+            <xsd:group ref="WriterGroup" minOccurs="0"/>
+            <xsd:group ref="AudienceGroup"/>
+            <xsd:group ref="SourceGroup"/>
+            <xsd:group ref="RelationGroup"/>
+            <xsd:element name="Signature" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:group ref="SignatureGroup"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:group ref="DateGroup"/>
+            <xsd:group ref="LevelGroup" minOccurs="0"/>
+            <xsd:element name="RestrictedReason" type="NonEmptyTokenType">
+                <xsd:annotation>
+                    <xsd:documentation>Reason for restriction on metadata</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:group>
     <xsd:group name="ObjectGroup">
         <xsd:sequence>
             <xsd:group ref="TitleGroup" minOccurs="1"/>

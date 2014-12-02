@@ -4,7 +4,7 @@
     version="1.0">
     <xsd:include schemaLocation="vitam-types.xsd"/>
     <xsd:include schemaLocation="query-vitam.xsd"/>
-    <xsd:include schemaLocation="ontologie-vitam-v1.xsd"/>
+    <xsd:include schemaLocation="ontologie-vitam-v1.1.xsd"/>
 
     <xsd:complexType name="DescriptiveMetadataType">
         <xsd:annotation>
@@ -582,29 +582,17 @@
             <xsd:element name="BooleanQuery" type="BooleanQueryType"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="SedaObjectType">
-        <xsd:annotation>
-            <xsd:documentation>Exemple of extension of ObjectType</xsd:documentation>
-        </xsd:annotation>
-        <xsd:complexContent>
-            <xsd:extension base="ObjectType">
-                <xsd:sequence>
-                    <xsd:element name="Owner" type="AgentType"/>
-                </xsd:sequence>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
     <xsd:complexType name="UnitDescriptiveMetadataContentType">
         <xsd:annotation>
             <xsd:documentation>Could be of ObjectType or an extension of it</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="ObjectGroup"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="UnitDescriptiveMetadataRestrictedContentType">
         <xsd:sequence>
-            <xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="RestrictedObjectGroup"/>
         </xsd:sequence>
     </xsd:complexType>
 
